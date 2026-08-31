@@ -1,0 +1,36 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+type Reference = { id: string; name: string };
+type InitialQuestion = { id?: string; subject_id?: string; class_id?: string | null; term_id?: string | null; topic_id?: string | null; question_text?: string; explanation?: string | null; points?: number; difficulty?: string | null; question_type?: string | null; question_options?: { option_label: string; option_text: string; is_correct: boolean }[] };
+const labels = ["A", "B", "C", "D", "E", "F"];
+
+export function QuestionEditor({ initial }: { initial?: InitialQuestion }) {
+    const [references, setReferences] = useState<{ subjects: Reference[]; classes: Reference[]; terms: Reference[]; topics: (Reference & { subject_id: string })[] }>({ subjects: [], classes: [], terms: [], topics: [] });
+    const [question, setQuestion] = useState(initial?.question_text ?? "");
+    const [subjectId, setSubjectId] = useState(initial?.subject_id ?? "");
+    const [classId, setClassId] = useState(initial?.class_id ?? "");
+    const [termId, setTermId] = useState(initial?.term_id ?? "");
+    const [topicId, setTopicId] = useState(initial?.topic_id ?? "");
+    const [difficulty, setDifficulty] = useState(initial?.difficulty ?? "medium");
+    const [questionType, setQuestionType] = useState(initial?.question_type ?? "multiple_choice");
+    const [explanation, setExplanation] = useState(initial?.explanation ?? "");
+    const [points, setPoints] = useState(String(initial?.points ?? 1));
+    const [shortAnswer, setShortAnswer] = useState(initial?.question_options?.find(option => option.is_correct)?.option_text ?? "");
+    const [options, setOptions] = useState(initial?.question_options?.map(option => ({ label: option.option_label, text: option.option_text, correct: option.is_correct })) ?? labels.slice(0, 4).map((label, index) => ({ label, text: "", correct: index === 0 })));
+    const [message, setMessage] = useState("");
+    useEffect(() => { fetch("/api/admin/reference").then(response => response.json()).then(setReferences); }, []);
+    function changeQuestionType(nextType: string) {
+        setQuestionType(nextType);
+        if (nextType === "true_false") setOptions([{ label: "True", text: "True", correct: true }, { label: "False", text: "False", correct: false }]);
+        if (nextType === "short_answer") setOptions([]);
+        if (nextType === "multiple_choice" && options.length < 2) setOptions(labels.slice(0, 4).map((label, index) => ({ label, text: "", correct: index === 0 })));
+    }
+    const payload = { subject: references.subjects.find(item => item.id === subjectId)?.name ?? "", subjectId, classId: classId || null, termId: termId || null, topicId: topicId || null, questionText: question, options: questionType === "short_answer" ? [{ label: "ANSWER", text: shortAnswer }] : options.map(option => ({ label: option.label, text: option.text })), correctOption: questionType === "short_answer" ? "ANSWER" : options.find(option => option.correct)?.label ?? "", difficulty, questionType, points, explanation };
+    async function save() { const response = await fetch(initial?.id ? `/api/admin/questions/${initial.id}` : "/api/admin/questions", { method: initial?.id ? "PATCH" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }); const result = await response.json() as { error?: string }; setMessage(response.ok ? "Question saved." : result.error ?? "Unable to save question."); }
+    function addOption() { if (options.length < 6) setOptions([...options, { label: labels[options.length], text: "", correct: false }]); }
+    function removeOption(index: number) { if (options.length <= 2) return; const next = options.filter((_, itemIndex) => itemIndex !== index); if (!next.some(option => option.correct)) next[0].correct = true; setOptions(next.map((option, itemIndex) => ({ ...option, label: labels[itemIndex] }))); }
+    return <section className="admin-editor"><p className="eyebrow">Admin</p><h1>{initial?.id ? "Edit question" : "Add question"}</h1><div className="form-grid"><label>Subject<select value={subjectId} onChange={event => setSubjectId(event.target.value)}><option value="">Select subject</option>{references.subjects.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label><label>Class<select value={classId} onChange={event => setClassId(event.target.value)}><option value="">Select class</option>{references.classes.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label><label>Term<select value={termId} onChange={event => setTermId(event.target.value)}><option value="">Select term</option>{references.terms.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label><label>Topic<select value={topicId} onChange={event => setTopicId(event.target.value)}><option value="">No topic</option>{references.topics.filter(item => !subjectId || item.subject_id === subjectId).map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label><label>Difficulty<select value={difficulty} onChange={event => setDifficulty(event.target.value)}><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></label><label>Question type<select value={questionType} onChange={event => changeQuestionType(event.target.value)}><option value="multiple_choice">Multiple choice</option><option value="true_false">True/false</option><option value="short_answer">Short answer</option></select></label><label>Points<input type="number" min="0.01" step="0.01" value={points} onChange={event => setPoints(event.target.value)} /></label><label className="wide">Question text<textarea value={question} onChange={event => setQuestion(event.target.value)} rows={5} /></label>{questionType === "short_answer" ? <label className="wide">Correct answer<input value={shortAnswer} onChange={event => setShortAnswer(event.target.value)} /></label> : options.map((option, index) => <label key={option.label}>Option {option.label}<input value={option.text} onChange={event => setOptions(options.map((item, itemIndex) => itemIndex === index ? { ...item, text: event.target.value } : item))} /><span><input type="radio" name="correct-option" checked={option.correct} onChange={() => setOptions(options.map(item => ({ ...item, correct: item.label === option.label })))} /> Correct</span>{questionType === "multiple_choice" ? <button type="button" className="btn btn-secondary" onClick={() => removeOption(index)} disabled={options.length <= 2}>Remove</button> : null}</label>)}{questionType === "multiple_choice" && options.length < 6 ? <button type="button" className="btn btn-secondary" onClick={addOption}>Add option</button> : null}<label className="wide">Explanation<textarea value={explanation} onChange={event => setExplanation(event.target.value)} rows={3} /></label></div><button className="btn btn-primary" onClick={() => void save()}>Save question</button> <Link className="button button-secondary" href="/admin/questions">Cancel</Link>{message ? <p className="form-success" role="status">{message}</p> : null}</section>;
+}

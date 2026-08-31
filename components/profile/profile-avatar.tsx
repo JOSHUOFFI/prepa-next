@@ -1,0 +1,3 @@
+"use client";
+import { useState } from "react";
+export function ProfileAvatar({ name, url, size = 44 }: { name: string; url?: string | null; size?: number }) { const [failed,setFailed]=useState(false); const initials=name.split(/\s+/).filter(Boolean).slice(0,2).map(part=>part[0]).join("").toUpperCase()||"P"; return <span aria-label={`${name}'s avatar`} style={{width:size,height:size,borderRadius:"50%",display:"inline-flex",alignItems:"center",justifyContent:"center",overflow:"hidden",background:"#a41849",color:"white",fontWeight:700,flexShrink:0}}>{url&&!failed?<img src={url} alt="" width={size} height={size} onError={()=>setFailed(true)} style={{width:"100%",height:"100%",objectFit:"cover"}}/>:initials}</span>; }
