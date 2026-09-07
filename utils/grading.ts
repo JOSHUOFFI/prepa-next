@@ -6,7 +6,7 @@ const gradeScale = [
   { min: 60, grade: "B", message: "Very good job" },
   { min: 50, grade: "C", message: "Good effort" },
   { min: 40, grade: "D", message: "Pass" },
-  { min: 0, grade: "F", message: "Needs improvement" }
+  { min: 0, grade: "F", message: "Needs improvement, better luck buddy..." }
 ];
 
 export function calculateExamResult(state: ExamState): ExamResult {

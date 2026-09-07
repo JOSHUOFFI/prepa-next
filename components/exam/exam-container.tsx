@@ -34,7 +34,7 @@ function AnswerOption({
   onSelect: () => void;
 }) {
   return (
-    <button className={`answer-option${selected ? " selected" : ""}`} onClick={onSelect}>
+    <button className={`answer-option${selected ? " selected" : ""}`} onClick={onSelect} aria-pressed={selected}>
       <span className="radio-dot" />
       <span>{option.text}</span>
     </button>
@@ -242,7 +242,7 @@ export function ExamContainer() {
 
       <div className="exam-grid">
         <div>
-          <div className="exam-progress">
+        <div className="exam-progress" aria-label={`${answeredCount} of ${state.questions.length} questions answered`}>
             <span>{answeredCount}/{state.questions.length} answered</span>
             <span>Question {state.currentQuestionIndex + 1} of {state.questions.length}</span>
           </div>

@@ -70,6 +70,22 @@ export interface SafeExamResult {
   expiresAt: string;
   submittedAt: string;
   performanceMessage: string;
+  studentName?: string;
+  subject?: string;
+  classLevel?: string;
+  term?: string;
+  incorrectAnswers?: number;
+  reviews?: SafeResultReview[];
+}
+
+export interface SafeResultReview {
+  number: number;
+  questionText: string;
+  studentAnswer: string;
+  correctAnswer: string;
+  isCorrect: boolean;
+  explanation: string;
+  points?: number;
 }
 
 export interface Question {

@@ -47,7 +47,7 @@ export function ExamSetup({
       const remoteAttempt = await safeExamStorage.createRemoteAttempt({ firstName, lastName, classLevel, term, subject, durationMinutes: legacyExamDurationMinutes }, questions);
       safeExamStorage.createExam({ firstName, lastName, classLevel, term, subject, durationMinutes: legacyExamDurationMinutes }, questions, remoteAttempt.attemptId, remoteAttempt.startedAt, remoteAttempt.expiresAt);
     } catch {
-      setError("We could not start the SAFE exam. Please try again.");
+      setError("We could not start the SAFE exam. Check internet connection and try again.");
       setLoading(false);
       return;
     }
@@ -104,7 +104,7 @@ export function ExamSetup({
       </div>
 
       <div className="exam-setup-footer">
-        <p>Up to 40 questions are available for this subject.</p>
+        <p>Up to 40 questions available for this subject.</p>
         <button className="btn btn-primary" onClick={startExam} disabled={loading}>{loading ? "Loading questions..." : "Start exam"}</button>
       </div>
       {error ? <p className="form-error">{error}</p> : null}
