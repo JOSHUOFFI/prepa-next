@@ -5,12 +5,14 @@ import type { SafeExamQuestion } from "@/types";
 
 const QUESTION_PAGE_SIZE = 200;
 const OPTION_PAGE_SIZE = 400;
-const DEFAULT_EXAM_QUESTION_COUNT = 40;
+export const DEFAULT_EXAM_QUESTION_COUNT = 40;
 
 type QuestionRow = {
   id: string;
   question_text: string;
   points: number | string;
+  class_id?: string | null;
+  term_id?: string | null;
 };
 
 type OptionRow = {
@@ -22,8 +24,10 @@ type OptionRow = {
 
 /** A question shape that is safe to send to an active exam browser. */
 export type SafeExamQuestionRequest = {
-  /** Matches public.subjects.name exactly. Class and term are intentionally unsupported. */
+  /** Matches public.subjects.name exactly. */
   subject: string;
+  classLevel?: string;
+  term?: string;
   /** Capped at 40, the current CBT maximum. */
   questionCount?: number;
 };
@@ -58,26 +62,57 @@ async function getSubjectId(subject: string): Promise<string | null> {
   return data?.id ?? null;
 }
 
-async function getQuestionRows(subjectId: string): Promise<QuestionRow[]> {
+async function getQuestionRows(
+  subjectId: string,
+  classLevel?: string,
+  term?: string,
+): Promise<QuestionRow[]> {
   const supabase = createSupabaseAdminClient();
+  let classId: string | null = null;
+  let termId: string | null = null;
+  if (classLevel && term) {
+    const [{ data: classRow }, { data: termRow }] = await Promise.all([
+      supabase
+        .from("classes")
+        .select("id")
+        .eq("name", classLevel)
+        .maybeSingle(),
+      supabase.from("terms").select("id").eq("name", term).maybeSingle(),
+    ]);
+    classId = classRow?.id ?? null;
+    termId = termRow?.id ?? null;
+    if (!classId || !termId) return [];
+  }
   const questions: QuestionRow[] = [];
 
-  for (let from = 0; ; from += QUESTION_PAGE_SIZE) {
-    const { data, error } = await supabase
-      .from("questions")
-      .select("id, question_text, points")
-      .eq("subject_id", subjectId)
-      .eq("is_active", true)
-      .order("id")
-      .range(from, from + QUESTION_PAGE_SIZE - 1);
+  async function loadScope(scoped: boolean): Promise<QuestionRow[]> {
+    const scopedQuestions: QuestionRow[] = [];
+    for (let from = 0; ; from += QUESTION_PAGE_SIZE) {
+      let query = supabase
+        .from("questions")
+        .select("id, question_text, points, class_id, term_id")
+        .eq("subject_id", subjectId)
+        .eq("is_active", true);
+      query = scoped
+        ? query.eq("class_id", classId!).eq("term_id", termId!)
+        : query.is("class_id", null).is("term_id", null);
+      const { data, error } = await query
+        .order("id")
+        .range(from, from + QUESTION_PAGE_SIZE - 1);
 
-    if (error) throw new Error(`Unable to load questions: ${error.message}`);
-    const page = (data ?? []) as QuestionRow[];
-    questions.push(...page);
-    if (page.length < QUESTION_PAGE_SIZE) break;
+      if (error) throw new Error(`Unable to load questions: ${error.message}`);
+      const page = (data ?? []) as QuestionRow[];
+      scopedQuestions.push(...page);
+      if (page.length < QUESTION_PAGE_SIZE) break;
+    }
+    return scopedQuestions;
   }
 
-  return questions;
+  if (classId && termId) {
+    const scopedQuestions = await loadScope(true);
+    if (scopedQuestions.length > 0) return scopedQuestions;
+  }
+  return loadScope(false);
 }
 
 async function getOptionRows(questionIds: string[]): Promise<OptionRow[]> {
@@ -111,6 +146,8 @@ async function getOptionRows(questionIds: string[]): Promise<OptionRow[]> {
  */
 export async function loadSafeExamQuestions({
   subject,
+  classLevel,
+  term,
   questionCount = DEFAULT_EXAM_QUESTION_COUNT,
 }: SafeExamQuestionRequest): Promise<SafeExamQuestion[]> {
   const subjectId = await getSubjectId(subject);
@@ -123,11 +160,8 @@ export async function loadSafeExamQuestions({
     Math.max(normalizedCount, 0),
     DEFAULT_EXAM_QUESTION_COUNT,
   );
-  const selectedQuestions = shuffle(await getQuestionRows(subjectId)).slice(
-    0,
-    requestedCount,
-  );
-  const optionRows = await getOptionRows(selectedQuestions.map(({ id }) => id));
+  const questionRows = await getQuestionRows(subjectId, classLevel, term);
+  const optionRows = await getOptionRows(questionRows.map(({ id }) => id));
   const optionsByQuestionId = new Map<string, OptionRow[]>();
 
   for (const option of optionRows) {
@@ -135,6 +169,12 @@ export async function loadSafeExamQuestions({
     options.push(option);
     optionsByQuestionId.set(option.question_id, options);
   }
+
+  const selectedQuestions = shuffle(
+    questionRows.filter(
+      (question) => (optionsByQuestionId.get(question.id)?.length ?? 0) > 0,
+    ),
+  ).slice(0, requestedCount);
 
   return selectedQuestions.map((question) => ({
     id: question.id,

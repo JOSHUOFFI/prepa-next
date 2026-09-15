@@ -18,12 +18,20 @@ export async function POST(request: Request) {
       { status: 401 },
     );
 
-  const body = (await request.json()) as {
+  let body: {
     subject?: string;
     classLevel?: string;
     term?: string;
     questions?: AttemptQuestionInput[];
   };
+  try {
+    body = (await request.json()) as typeof body;
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid exam attempt." },
+      { status: 400 },
+    );
+  }
   if (
     !body.subject ||
     !body.classLevel ||
@@ -39,21 +47,39 @@ export async function POST(request: Request) {
   }
 
   const admin = createSupabaseAdminClient();
-  const [{ data: subject }, { data: classRow }, { data: termRow }] =
-    await Promise.all([
-      admin
-        .from("subjects")
-        .select("id")
-        .eq("name", body.subject)
-        .eq("is_active", true)
-        .maybeSingle(),
-      admin
-        .from("classes")
-        .select("id, name")
-        .eq("name", body.classLevel)
-        .maybeSingle(),
-      admin.from("terms").select("id").eq("name", body.term).maybeSingle(),
-    ]);
+  const [subjectResult, classResult, termResult] = await Promise.all([
+    admin
+      .from("subjects")
+      .select("id")
+      .eq("name", body.subject)
+      .eq("is_active", true)
+      .maybeSingle(),
+    admin
+      .from("classes")
+      .select("id, name")
+      .eq("name", body.classLevel)
+      .maybeSingle(),
+    admin.from("terms").select("id").eq("name", body.term).maybeSingle(),
+  ]);
+  const { data: subject, error: subjectError } = subjectResult;
+  const { data: classRow, error: classError } = classResult;
+  const { data: termRow, error: termError } = termResult;
+  if (subjectError || classError || termError) {
+    console.error("SAFE exam reference lookup failed", {
+      operation: "create_safe_exam_attempt",
+      userId: user.id,
+      subject: body.subject,
+      classLevel: body.classLevel,
+      term: body.term,
+      errors: [subjectError, classError, termError]
+        .filter(Boolean)
+        .map((error) => error?.message),
+    });
+    return NextResponse.json(
+      { error: "Unable to validate exam configuration." },
+      { status: 500 },
+    );
+  }
   if (!subject || !termRow || !classRow)
     return NextResponse.json(
       { error: "Exam reference data is invalid." },
@@ -73,15 +99,44 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   }
-  const { data: questionRows } = await admin
+  const { data: questionRows, error: questionError } = await admin
     .from("questions")
-    .select("id, subject_id, points")
+    .select("id, subject_id, class_id, term_id, points")
     .in("id", questionIds)
     .eq("subject_id", subject.id)
     .eq("is_active", true);
+  if (questionError) {
+    console.error("SAFE exam question validation failed", {
+      operation: "create_safe_exam_attempt",
+      userId: user.id,
+      subject: body.subject,
+      classLevel: body.classLevel,
+      term: body.term,
+      requestedQuestionCount: questionIds.length,
+      error: questionError.message,
+    });
+    return NextResponse.json(
+      { error: "Unable to validate exam questions." },
+      { status: 500 },
+    );
+  }
   if (!questionRows || questionRows.length !== questionIds.length)
     return NextResponse.json(
       { error: "Exam question set is invalid." },
+      { status: 400 },
+    );
+  if (
+    questionRows.some(
+      (question) =>
+        !(
+          (question.class_id === classRow.id &&
+            question.term_id === termRow.id) ||
+          (question.class_id === null && question.term_id === null)
+        ),
+    )
+  )
+    return NextResponse.json(
+      { error: "Exam question set is outside the selected academic scope." },
       { status: 400 },
     );
 
@@ -126,11 +181,27 @@ export async function POST(request: Request) {
         points: pointsById.get(question.id) ?? 1,
       })),
     );
-  if (snapshotError)
+  if (snapshotError) {
+    await admin
+      .from("exam_attempts")
+      .delete()
+      .eq("id", attempt.id)
+      .eq("student_id", user.id);
+    console.error("SAFE exam question snapshot failed", {
+      operation: "create_safe_exam_attempt",
+      userId: user.id,
+      attemptId: attempt.id,
+      subject: body.subject,
+      classLevel: body.classLevel,
+      term: body.term,
+      requestedQuestionCount: questionIds.length,
+      error: snapshotError.message,
+    });
     return NextResponse.json(
       { error: "Unable to save the exam question set." },
       { status: 500 },
     );
+  }
 
   return NextResponse.json({
     attemptId: attempt.id,

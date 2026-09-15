@@ -100,6 +100,19 @@ export async function POST(request: Request) {
     return errorResponse(
       validationErrors.join(" ") || "Subject ID is required.",
     );
+  if (!input.classId || !input.termId || !input.topicId)
+    return errorResponse("Class, term, and topic are required.");
+  const { data: topic } = await access.admin
+    .from("topics")
+    .select("id")
+    .eq("id", input.topicId)
+    .eq("subject_id", input.subjectId)
+    .eq("class_id", input.classId)
+    .eq("term_id", input.termId)
+    .eq("is_active", true)
+    .maybeSingle();
+  if (!topic)
+    return errorResponse("Topic does not match the selected academic scope.");
   const { data: question, error: questionError } = await access.admin
     .from("questions")
     .insert({
@@ -130,10 +143,12 @@ export async function POST(request: Request) {
         is_correct: option.label === input.correctOption,
       })),
     );
-  if (optionsError)
+  if (optionsError) {
+    await access.admin.from("questions").delete().eq("id", question.id);
     return errorResponse(
       "Question created, but options could not be saved.",
       500,
     );
+  }
   return NextResponse.json({ id: question.id }, { status: 201 });
 }

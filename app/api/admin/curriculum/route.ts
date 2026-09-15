@@ -16,6 +16,7 @@ type TopicRow = {
 };
 
 type Reference = { id: string; name: string };
+const EXAM_QUESTION_COUNT = 40;
 
 async function getReferences(admin: SupabaseClient) {
   const [{ data: subjects }, { data: classes }, { data: terms }] =
@@ -62,6 +63,38 @@ export async function GET(request: Request) {
     if (error) throw error;
 
     const references = await getReferences(access.admin);
+    const { data: questions, error: questionError } = await access.admin
+      .from("questions")
+      .select("subject_id, class_id, term_id, question_options(id)")
+      .eq("is_active", true);
+    if (questionError) throw questionError;
+
+    const coverageMap = new Map<
+      string,
+      { topics: number; questions: number; validQuestions: number }
+    >();
+    for (const topic of topics ?? []) {
+      const key = `${topic.class_id ?? ""}|${topic.term_id ?? ""}|${topic.subject_id}`;
+      const current = coverageMap.get(key) ?? {
+        topics: 0,
+        questions: 0,
+        validQuestions: 0,
+      };
+      current.topics += 1;
+      coverageMap.set(key, current);
+    }
+    for (const question of questions ?? []) {
+      const key = `${question.class_id ?? ""}|${question.term_id ?? ""}|${question.subject_id}`;
+      const current = coverageMap.get(key) ?? {
+        topics: 0,
+        questions: 0,
+        validQuestions: 0,
+      };
+      current.questions += 1;
+      if ((question.question_options?.length ?? 0) > 0)
+        current.validQuestions += 1;
+      coverageMap.set(key, current);
+    }
 
     type TopicData = TopicRow & {
       class_id?: string | null;
@@ -85,6 +118,29 @@ export async function GET(request: Request) {
     return NextResponse.json({
       topics: enriched,
       references,
+      coverage: references.classes.flatMap((classRow) =>
+        references.terms.flatMap((termRow) =>
+          references.subjects.map((subjectRow) => {
+            const counts = coverageMap.get(
+              `${classRow.id}|${termRow.id}|${subjectRow.id}`,
+            ) ?? {
+              topics: 0,
+              questions: 0,
+              validQuestions: 0,
+            };
+            return {
+              classId: classRow.id,
+              className: classRow.name,
+              termId: termRow.id,
+              termName: termRow.name,
+              subjectId: subjectRow.id,
+              subjectName: subjectRow.name,
+              ...counts,
+              examReady: counts.validQuestions >= EXAM_QUESTION_COUNT,
+            };
+          }),
+        ),
+      ),
     });
   } catch (error) {
     return NextResponse.json(
@@ -131,18 +187,19 @@ export async function POST(request: Request) {
       .single();
 
     // Safely check for duplicates using the normalized index
-    const { data: existing } = await access.admin
+    const { data: existingTopics, error: existingError } = await access.admin
       .from("topics")
       .select("id, name, class_id, term_id")
-      .eq("subject_id", subjectId)
-      .maybeSingle();
+      .eq("subject_id", subjectId);
+    if (existingError) throw existingError;
+    const existing = (existingTopics ?? []).find(
+      (topic) =>
+        normalizeTopic(topic.name) === normalizedName &&
+        (topic.class_id ?? null) === (classId || null) &&
+        (topic.term_id ?? null) === (termId || null),
+    );
 
-    if (
-      existing &&
-      normalizeTopic(existing.name) === normalizedName &&
-      (existing.class_id ?? null) === (classId || null) &&
-      (existing.term_id ?? null) === (termId || null)
-    ) {
+    if (existing) {
       const classRef =
         classId || termId
           ? ` → ${classId ? classId : ""}${classId && termId ? " → " : ""}${termId || ""}`

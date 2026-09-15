@@ -39,10 +39,21 @@ export function ExamSetup({
     }
     setLoading(true);
     try {
-      const response = await fetch(`/api/exam/questions?subject=${encodeURIComponent(subject)}`, { cache: "no-store" });
+      const params = new URLSearchParams({ subject, classLevel, term });
+      const response = await fetch(`/api/exam/questions?${params.toString()}`, { cache: "no-store" });
+      const payload = await response.json() as { code?: string; questions?: SafeExamQuestion[] };
+      if (response.status === 422 && payload.code === "EXAM_UNAVAILABLE") {
+        setError("This exam is not available yet because there are no questions for this subject.");
+        setLoading(false);
+        return;
+      }
+      if (response.status === 422 && payload.code === "EXAM_INSUFFICIENT_QUESTIONS") {
+        setError("This exam is not available yet because there are not enough questions for this subject.");
+        setLoading(false);
+        return;
+      }
       if (!response.ok) throw new Error("Safe question route failed");
-      const payload = await response.json() as { questions?: SafeExamQuestion[] };
-      if (!payload.questions?.length || payload.questions.some(question => question.options.length === 0)) throw new Error("No safe question pool");
+      if (!payload.questions?.length) throw new Error("No safe question pool");
       const questions = payload.questions.slice(0, 40);
       const remoteAttempt = await safeExamStorage.createRemoteAttempt({ firstName, lastName, classLevel, term, subject, durationMinutes: legacyExamDurationMinutes }, questions);
       safeExamStorage.createExam({ firstName, lastName, classLevel, term, subject, durationMinutes: legacyExamDurationMinutes }, questions, remoteAttempt.attemptId, remoteAttempt.startedAt, remoteAttempt.expiresAt);

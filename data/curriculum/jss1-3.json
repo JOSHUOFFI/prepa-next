@@ -1,0 +1,4316 @@
+{
+  "schemaVersion": 2,
+  "status": "proposed-incomplete",
+  "qualityGate": {
+    "readyForImport": false,
+    "reason": "Official PDFs have been identified, but topic extraction and educator-reviewed term allocation are incomplete. No database import is authorized from this manifest yet."
+  },
+  "documentExtraction": [
+    {
+      "document": "jss1-3_arabic.pdf",
+      "status": "manual_review_required",
+      "affectedHierarchy": [
+        "theme",
+        "sub-theme",
+        "topic",
+        "objectives"
+      ],
+      "reason": "The PDF table structure is not reliably recoverable from automated text extraction."
+    },
+    {
+      "document": "jss1-3_basic_science_technology.pdf",
+      "status": "partially_extracted",
+      "verifiedPages": [
+        1,
+        2,
+        3
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "sub-theme",
+        "topic"
+      ],
+      "affectedHierarchy": [
+        "objectives",
+        "remaining pages"
+      ],
+      "reason": "Rendered first three JSS1 table pages verified visible hierarchy rows; continuation pages and objectives remain open."
+    },
+    {
+      "document": "jss1-3_business_studies.pdf",
+      "status": "partially_extracted",
+      "verifiedPages": [
+        1,
+        2,
+        3
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "sub-theme",
+        "topic"
+      ],
+      "affectedHierarchy": [
+        "objectives",
+        "remaining pages"
+      ],
+      "reason": "Rendered first three JSS1 table pages verified visible hierarchy rows; continuation pages and objectives remain open."
+    },
+    {
+      "document": "jss1-3_crs.pdf",
+      "status": "partially_extracted",
+      "verifiedPages": [
+        2,
+        3
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "topic"
+      ],
+      "affectedHierarchy": [
+        "objectives",
+        "remaining pages"
+      ],
+      "reason": "Rendered JSS1 table pages 2-3 verified visible hierarchy rows; continuation pages and objectives remain open."
+    },
+    {
+      "document": "jss1-3_cca.pdf",
+      "status": "partially_extracted",
+      "verifiedPages": [
+        1,
+        2,
+        3
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "sub-theme",
+        "topic"
+      ],
+      "affectedHierarchy": [
+        "objectives",
+        "remaining pages"
+      ],
+      "reason": "Rendered first three JSS1 table pages verified visible hierarchy rows; continuation pages and objectives remain open."
+    },
+    {
+      "document": "jss1-3_english_studies.pdf",
+      "status": "partially_extracted",
+      "verifiedPages": [
+        1,
+        2,
+        3
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "topic"
+      ],
+      "affectedHierarchy": [
+        "objectives",
+        "remaining pages"
+      ],
+      "reason": "Rendered first three JSS1 table pages verified visible hierarchy rows; continuation pages and objectives remain open."
+    },
+    {
+      "document": "jss1-3_french.pdf",
+      "status": "partially_extracted",
+      "verifiedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "sub-theme",
+        "topic"
+      ],
+      "affectedHierarchy": [
+        "objectives",
+        "pages 19-20"
+      ],
+      "reason": "Rendered PDF review verified class, theme, sub-theme and topic cells on pages 1-18. Objective transcription and the remaining pages require separate review."
+    },
+    {
+      "document": "jss1-3_hausa.pdf",
+      "status": "partially_extracted",
+      "affectedHierarchy": [
+        "remaining pages"
+      ],
+      "reason": "Rendered PDF review verified the listed JSS1 source-language rows and objective cells; remaining pages require language-aware continuation review.",
+      "verifiedPages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "sub-theme",
+        "topic",
+        "objectives"
+      ]
+    },
+    {
+      "document": "jss1-3_history.pdf",
+      "status": "partially_extracted",
+      "verifiedPages": [
+        1,
+        2,
+        3
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "topic"
+      ],
+      "affectedHierarchy": [
+        "objectives",
+        "remaining pages"
+      ],
+      "reason": "Rendered first three JSS1 table pages verified visible hierarchy rows; continuation pages and objectives remain open."
+    },
+    {
+      "document": "jss1-3_igbo.pdf",
+      "status": "partially_extracted",
+      "affectedHierarchy": [
+        "remaining pages"
+      ],
+      "reason": "Rendered PDF review verified the listed JSS1 source-language rows and objective cells; remaining pages require language-aware continuation review.",
+      "verifiedPages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "sub-theme",
+        "topic",
+        "objectives"
+      ]
+    },
+    {
+      "document": "jss1-3_islamic.pdf",
+      "status": "partially_extracted",
+      "verifiedPages": [
+        1,
+        2
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "topic"
+      ],
+      "affectedHierarchy": [
+        "objectives",
+        "remaining pages"
+      ],
+      "reason": "Rendered first two JSS1 table pages verified visible hierarchy rows; continuation pages and objectives remain open."
+    },
+    {
+      "document": "jss1-3_maths.pdf",
+      "status": "partially_extracted",
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "sub-theme",
+        "topic"
+      ],
+      "verifiedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "affectedHierarchy": [
+        "objectives"
+      ],
+      "reason": "Rendered inspection verified the topic rows across all 36 pages; objective transcription remains incomplete for most rows."
+    },
+    {
+      "document": "jss1-3_nvc.pdf",
+      "status": "partially_extracted",
+      "affectedHierarchy": [
+        "remaining pages"
+      ],
+      "reason": "Rendered continuation-page review verified the listed topic and performance-objective rows; remaining pages still require source-by-source review.",
+      "verifiedPages": [
+        2,
+        3,
+        4,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "sub-theme",
+        "topic",
+        "objectives"
+      ]
+    },
+    {
+      "document": "jss1-3_prevoc.pdf",
+      "status": "partially_extracted",
+      "affectedHierarchy": [
+        "remaining pages"
+      ],
+      "reason": "Rendered continuation-page review verified the listed topic and performance-objective rows; remaining pages still require source-by-source review.",
+      "verifiedPages": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17
+      ],
+      "verifiedHierarchy": [
+        "class",
+        "theme",
+        "sub-theme",
+        "topic",
+        "objectives"
+      ]
+    },
+    {
+      "document": "jss1-3_yoruba.pdf",
+      "status": "manual_review_required",
+      "affectedHierarchy": [
+        "theme",
+        "sub-theme",
+        "topic",
+        "objectives"
+      ],
+      "reason": "The PDF requires visual table review."
+    }
+  ],
+  "verifiedHierarchy": [
+    {
+      "classCode": "JSS1",
+      "subjects": [
+        {
+          "subjectCode": "MATHEMATICS",
+          "subjectName": "Mathematics",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_maths.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+          "themes": [
+            {
+              "name": "Numbers and Numeration",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                1,
+                2,
+                3,
+                4
+              ],
+              "subThemes": [
+                {
+                  "name": "Whole Numbers",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "topics": [
+                    {
+                      "name": "Whole Numbers",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        1
+                      ],
+                      "objectives": [
+                        "Count, write and read large numbers in millions, billions and trillions.",
+                        "Apply large-number counting and reading in everyday life.",
+                        "Solve quantitative aptitude problems using large numbers."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_96cab8640b41a43b",
+                      "objectiveSetId": "objectives_453b5ccd27a6b392"
+                    },
+                    {
+                      "name": "LCM",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        1
+                      ],
+                      "objectives": [
+                        "Identify common multiples of two or more whole numbers.",
+                        "Find the LCM of whole numbers using factor, multiple and index methods."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_30d40acfb5b866ef",
+                      "objectiveSetId": "objectives_bc9c12a9f0eda2bf"
+                    },
+                    {
+                      "name": "HCF",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [
+                        "Identify common factors and find the HCF of whole numbers.",
+                        "Distinguish between LCM and HCF.",
+                        "Solve quantitative aptitude problems involving LCM and HCF."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_8e87dd644c182022",
+                      "objectiveSetId": "objectives_638293311c2ae306"
+                    },
+                    {
+                      "name": "Counting in Base 2",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [
+                        "Count in groups of two using base-two bundles and units."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_effe1301b951b98e",
+                      "objectiveSetId": "objectives_d66b905e0bf97d0e"
+                    },
+                    {
+                      "name": "Conversion of base 10 numerals to binary numbers",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [
+                        "Convert base-ten numerals to binary numbers."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_eef831d0350514ec",
+                      "objectiveSetId": "objectives_aeec216ba7153c95"
+                    }
+                  ],
+                  "id": "subtheme_4b046419184e55b7"
+                },
+                {
+                  "name": "Fractions",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    4
+                  ],
+                  "topics": [
+                    {
+                      "name": "Fractions",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        4
+                      ],
+                      "objectives": [
+                        "Identify and apply equivalent fractions.",
+                        "Arrange fractions in ascending or descending order.",
+                        "Convert fractions to decimals and percentages, and convert decimals and percentages to fractions."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_21533eec0e4b0ed7",
+                      "objectiveSetId": "objectives_117f79942def4474"
+                    }
+                  ],
+                  "id": "subtheme_96d14e522c4f681f"
+                }
+              ],
+              "id": "theme_c203698b7c725b25"
+            },
+            {
+              "name": "Basic Operations",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                5
+              ],
+              "subThemes": [
+                {
+                  "name": "Basic Operations",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    5
+                  ],
+                  "topics": [
+                    {
+                      "name": "Addition and subtraction",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        5
+                      ],
+                      "objectives": [
+                        "Add and subtract numbers and state place values.",
+                        "Use a number line to illustrate directed numbers.",
+                        "Add and subtract positive and negative integers."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_23dac593cdf3b786",
+                      "objectiveSetId": "objectives_8db5d7e2ddb7f518"
+                    },
+                    {
+                      "name": "Addition and Subtraction of fractions",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        6
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_a5d7960c5ce5ca42",
+                      "objectiveSetId": "objectives_c76a4f797a7f163f"
+                    },
+                    {
+                      "name": "Multiplication and Division of fractions",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        6
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_d53b8143c538cc56",
+                      "objectiveSetId": "objectives_b02f07991e88a092"
+                    }
+                  ],
+                  "id": "subtheme_b3065429339403db"
+                },
+                {
+                  "name": "Derived Operations",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    7,
+                    8,
+                    9
+                  ],
+                  "topics": [
+                    {
+                      "name": "Estimation",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        7
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_4483b583c5b60263",
+                      "objectiveSetId": "objectives_465ffb4e132b92ec"
+                    },
+                    {
+                      "name": "Approximation",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        8
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_2a5c28f50992f183",
+                      "objectiveSetId": "objectives_d81caafb669b376a"
+                    },
+                    {
+                      "name": "Addition of numbers in base 2 numerals",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        9
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_61bb82683c760e10",
+                      "objectiveSetId": "objectives_447b5fcf9d374ee2"
+                    },
+                    {
+                      "name": "Subtraction of numbers in base 2 numerals",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        9
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_dd18ddc2f1c35af3",
+                      "objectiveSetId": "objectives_a4a6a5a8fa57e5c7"
+                    },
+                    {
+                      "name": "Multiplication of numbers in base 2 numerals",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        9
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_f3931f08e9ddf927",
+                      "objectiveSetId": "objectives_3dd1200b4d2981cd"
+                    }
+                  ],
+                  "id": "subtheme_331d6af598011e31"
+                }
+              ],
+              "id": "theme_2e30fc1adf4b32c9"
+            },
+            {
+              "name": "Algebraic Processes",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                10,
+                11,
+                12,
+                13
+              ],
+              "subThemes": [
+                {
+                  "name": "Algebraic Operations",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    10,
+                    11,
+                    12,
+                    13
+                  ],
+                  "topics": [
+                    {
+                      "name": "Use of symbols",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        10,
+                        11
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_1915fc74909d95ef",
+                      "objectiveSetId": "objectives_fe3ac2c97b2695f4"
+                    },
+                    {
+                      "name": "Simplification of algebraic expressions",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        12
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_65bf7cb76392daec",
+                      "objectiveSetId": "objectives_332ba698c85955ae"
+                    },
+                    {
+                      "name": "Simple equations",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        13
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_7a2be9419565e527",
+                      "objectiveSetId": "objectives_cec99f64d163e2e2"
+                    }
+                  ],
+                  "id": "subtheme_3037e7cd3251c3cf"
+                }
+              ],
+              "id": "theme_05dab822a46191e0"
+            },
+            {
+              "name": "Mensuration and Geometry",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                14,
+                15,
+                16
+              ],
+              "subThemes": [
+                {
+                  "name": "Shapes",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    14,
+                    15,
+                    16
+                  ],
+                  "topics": [
+                    {
+                      "name": "Plane shapes",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        14
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_f3b4350644379584",
+                      "objectiveSetId": "objectives_882201718a679f88"
+                    },
+                    {
+                      "name": "Three-dimensional figures",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        15
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_5d24b78506e08200",
+                      "objectiveSetId": "objectives_7afcf20784efbbf9"
+                    },
+                    {
+                      "name": "Construction",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        16
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_287f11c04ca43736",
+                      "objectiveSetId": "objectives_3ad960b40036daba"
+                    },
+                    {
+                      "name": "Angles",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        16
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_37b34a07b147bfc7",
+                      "objectiveSetId": "objectives_320c1a80df149a2b"
+                    }
+                  ],
+                  "id": "subtheme_373de6dcbb58bc46"
+                }
+              ],
+              "id": "theme_b2aebfb1b13f3458"
+            },
+            {
+              "name": "Everyday Statistics",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                17
+              ],
+              "subThemes": [
+                {
+                  "name": "Data Collection and Presentation",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    17
+                  ],
+                  "topics": [
+                    {
+                      "name": "Need for statistics",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        17
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_fd8b630d0a187715",
+                      "objectiveSetId": "objectives_58644a9831f1f996"
+                    },
+                    {
+                      "name": "Data collection",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        17
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_eb471df667ad9a3c",
+                      "objectiveSetId": "objectives_fe2594fa1e9f9a8d"
+                    },
+                    {
+                      "name": "Data presentation",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        17
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_73739f13ac54cc66",
+                      "objectiveSetId": "objectives_ee551d80ad1141cc"
+                    }
+                  ],
+                  "id": "subtheme_f8df0135911fae25"
+                }
+              ],
+              "id": "theme_90b9abedd48c55fd"
+            }
+          ],
+          "id": "subject_99f74760efd724de"
+        },
+        {
+          "subjectCode": "BASIC_SCIENCE_TECHNOLOGY",
+          "subjectName": "Basic Science and Technology",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_basic_science_technology.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_basic_science_technology.pdf",
+          "themes": [
+            {
+              "name": "Basic Science",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                1,
+                2,
+                3
+              ],
+              "subThemes": [
+                {
+                  "name": "Learning About Our Environment",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "topics": [
+                    {
+                      "name": "Family Health",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_basic_science_technology.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_basic_science_technology.pdf",
+                      "sourcePages": [
+                        1
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_b954d29e2c7219ed",
+                      "objectiveSetId": "objectives_5b1df5ba81e81eda"
+                    },
+                    {
+                      "name": "Environmental Pollution",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_basic_science_technology.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_basic_science_technology.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_032b0e6856e48acd",
+                      "objectiveSetId": "objectives_12aaabc6d018940c"
+                    },
+                    {
+                      "name": "Living and Non-Living Things",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_basic_science_technology.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_basic_science_technology.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_4306b12b0fc5464c",
+                      "objectiveSetId": "objectives_8d3311f8a11e43b6"
+                    }
+                  ],
+                  "id": "subtheme_27e4e5d8e1bc2d10"
+                }
+              ],
+              "id": "theme_c4609a5093ff1e76"
+            }
+          ],
+          "id": "subject_d4305ba9822fb68e"
+        },
+        {
+          "subjectCode": "BUSINESS_STUDIES",
+          "subjectName": "Business Studies",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_business_studies.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_business_studies.pdf",
+          "themes": [
+            {
+              "name": "Overview of Business Studies",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                1
+              ],
+              "subThemes": [
+                {
+                  "name": "Overview",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    1
+                  ],
+                  "topics": [
+                    {
+                      "name": "Introduction to Business Studies",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_business_studies.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_business_studies.pdf",
+                      "sourcePages": [
+                        1
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_4409bc139b5d70a3",
+                      "objectiveSetId": "objectives_4379691ab3e12bf1"
+                    }
+                  ],
+                  "id": "subtheme_1d7afbe4dd32abbb"
+                }
+              ],
+              "id": "theme_c56c5c5f276a589d"
+            },
+            {
+              "name": "Effective Office Practice",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                2,
+                3
+              ],
+              "subThemes": [
+                {
+                  "name": "The Ideal Office",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    2,
+                    3
+                  ],
+                  "topics": [
+                    {
+                      "name": "The Office",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_business_studies.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_business_studies.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_d3905e93a548438f",
+                      "objectiveSetId": "objectives_d188aa10e37428b9"
+                    },
+                    {
+                      "name": "Right Attitude to Work",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_business_studies.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_business_studies.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_29c97a523f22d749",
+                      "objectiveSetId": "objectives_e8206e3a411e89e9"
+                    }
+                  ],
+                  "id": "subtheme_193719e766106414"
+                }
+              ],
+              "id": "theme_e3d95593bce59723"
+            }
+          ],
+          "id": "subject_96eacde436d5c2d1"
+        },
+        {
+          "subjectCode": "CRS",
+          "subjectName": "Christian Religious Studies",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_crs.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_crs.pdf",
+          "themes": [
+            {
+              "name": "God and His Creation",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                2,
+                3
+              ],
+              "subThemes": [
+                {
+                  "name": "God and His Creation",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    2,
+                    3
+                  ],
+                  "topics": [
+                    {
+                      "name": "Who is God",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_crs.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_crs.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_eae331e4e3db5b96",
+                      "objectiveSetId": "objectives_d002fcd892dd60a7"
+                    },
+                    {
+                      "name": "God's Creation",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_crs.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_crs.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_7e6e187807b5f3f3",
+                      "objectiveSetId": "objectives_5aad9fe925b67f63"
+                    }
+                  ],
+                  "id": "subtheme_6603ebe6e36ee1ea"
+                }
+              ],
+              "id": "theme_c90041cd729246e8"
+            }
+          ],
+          "id": "subject_638e0e2e04b53b61"
+        },
+        {
+          "subjectCode": "CCA",
+          "subjectName": "Cultural and Creative Arts",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_cca.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_cca.pdf",
+          "themes": [
+            {
+              "name": "Arts and Crafts",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                1,
+                2,
+                3
+              ],
+              "subThemes": [
+                {
+                  "name": "Arts",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    1
+                  ],
+                  "topics": [
+                    {
+                      "name": "Introduction to Arts: History",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_cca.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_cca.pdf",
+                      "sourcePages": [
+                        1
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_a7a798270a659445",
+                      "objectiveSetId": "objectives_cfc42fcb9c1d0670"
+                    }
+                  ],
+                  "id": "subtheme_79e4be7fe3c5f1ca"
+                },
+                {
+                  "name": "Crafts",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    2,
+                    3
+                  ],
+                  "topics": [
+                    {
+                      "name": "Types of Crafts",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_cca.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_cca.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_7084092408d58217",
+                      "objectiveSetId": "objectives_eb2b7ab58f0b01d7"
+                    },
+                    {
+                      "name": "Practical works in Tie and Dye",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_cca.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_cca.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_eedd228ca03e8094",
+                      "objectiveSetId": "objectives_7bb420e076280d56"
+                    }
+                  ],
+                  "id": "subtheme_2e5106be255a455b"
+                }
+              ],
+              "id": "theme_044772da22740c8e"
+            }
+          ],
+          "id": "subject_6715bb5f0b592936"
+        },
+        {
+          "subjectCode": "ENGLISH_STUDIES",
+          "subjectName": "English Studies",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_english_studies.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_english_studies.pdf",
+          "themes": [
+            {
+              "name": "Reading",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                1,
+                2,
+                3
+              ],
+              "subThemes": [
+                {
+                  "name": "Reading Skills",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "topics": [
+                    {
+                      "name": "Reading for maximum understanding",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_english_studies.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_english_studies.pdf",
+                      "sourcePages": [
+                        1
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_4a052f54a690e6e9",
+                      "objectiveSetId": "objectives_e4bd60a0881d937e"
+                    },
+                    {
+                      "name": "Reading for main and supporting ideas",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_english_studies.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_english_studies.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_305a281e58a11ff1",
+                      "objectiveSetId": "objectives_fc3f9f2f1f566901"
+                    },
+                    {
+                      "name": "Reading to answer specific questions",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_english_studies.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_english_studies.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_566488d43e32b7d0",
+                      "objectiveSetId": "objectives_86b6f720c7dbad49"
+                    }
+                  ],
+                  "id": "subtheme_fa6516f2fe87d162"
+                }
+              ],
+              "id": "theme_09d82d911d65160b"
+            }
+          ],
+          "id": "subject_8fb7381605eb7cf1"
+        },
+        {
+          "subjectCode": "FRENCH",
+          "subjectName": "French",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_french.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+          "themes": [
+            {
+              "name": "Identité/Identification",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                1
+              ],
+              "subThemes": [
+                {
+                  "name": "Traits physiques",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    1
+                  ],
+                  "topics": [
+                    {
+                      "name": "Décrire des traits physiques",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        1
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_19ecdaea9a45e06c",
+                      "objectiveSetId": "objectives_fc48dea72cb0e91f"
+                    },
+                    {
+                      "name": "Parler des caractéristiques personnelles",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        1
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_0a62988b63f17a83",
+                      "objectiveSetId": "objectives_d388859a7324b9ce"
+                    }
+                  ],
+                  "id": "subtheme_ef8a70deb237368d"
+                }
+              ],
+              "id": "theme_053ab592d1978bba"
+            },
+            {
+              "name": "Environnement immédiat",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                2
+              ],
+              "subThemes": [
+                {
+                  "name": "Le temps et la vie rurale",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    2
+                  ],
+                  "topics": [
+                    {
+                      "name": "Parler du temps",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_3674ab3f5dfb0d81",
+                      "objectiveSetId": "objectives_e593bddc852c35c4"
+                    },
+                    {
+                      "name": "Décrire la vie rurale",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_1341b26b57a7d1b3",
+                      "objectiveSetId": "objectives_99ff9486af088ea5"
+                    }
+                  ],
+                  "id": "subtheme_45e17e067b63dc6f"
+                }
+              ],
+              "id": "theme_04c029e05224f5ed"
+            },
+            {
+              "name": "Activités humaines",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                3,
+                4
+              ],
+              "subThemes": [
+                {
+                  "name": "Récréation",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    3
+                  ],
+                  "topics": [
+                    {
+                      "name": "Parler de ce que l’on fait pour se distraire",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [
+                        "L’apprenant devrait être capable d’employer des mots/expressions liés aux loisirs."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_e6c33f6428ecee38",
+                      "objectiveSetId": "objectives_619cde83dd8c6e28"
+                    },
+                    {
+                      "name": "Parler des voyages",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_db9134789b7b1b6d",
+                      "objectiveSetId": "objectives_00732970299a1b26"
+                    }
+                  ],
+                  "id": "subtheme_bb9ad9706489ca31"
+                },
+                {
+                  "name": "Les achats",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    4
+                  ],
+                  "topics": [
+                    {
+                      "name": "Acheter et vendre",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        4
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_4521a668ecfb0fe7",
+                      "objectiveSetId": "objectives_532b8ebefec7e0d5"
+                    }
+                  ],
+                  "id": "subtheme_1ae2a99a760c1055"
+                }
+              ],
+              "id": "theme_6cc7a68587dc053f"
+            }
+          ],
+          "id": "subject_be5645aa36b84221"
+        },
+        {
+          "subjectCode": "HISTORY",
+          "subjectName": "History",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_history.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_history.pdf",
+          "themes": [
+            {
+              "name": "Concept of History",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                1,
+                2,
+                3
+              ],
+              "subThemes": [
+                {
+                  "name": "Concept of History",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "topics": [
+                    {
+                      "name": "Meaning of History",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_history.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_history.pdf",
+                      "sourcePages": [
+                        1
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_1c3901f19ea32e92",
+                      "objectiveSetId": "objectives_d2ba1801c80798c0"
+                    },
+                    {
+                      "name": "Sources of History",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_history.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_history.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_f6db56af66299260",
+                      "objectiveSetId": "objectives_3b323c008c9652ac"
+                    },
+                    {
+                      "name": "Importance of History",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_history.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_history.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_99d5f486a3a9b421",
+                      "objectiveSetId": "objectives_86401a2fbdbd6ba6"
+                    }
+                  ],
+                  "id": "subtheme_5544de003ef90629"
+                }
+              ],
+              "id": "theme_c00b357d6efefc1b"
+            }
+          ],
+          "id": "subject_da2f2201fb90cf7a"
+        },
+        {
+          "subjectCode": "ISLAMIC_RELIGIOUS_STUDIES",
+          "subjectName": "Islamic Religious Studies",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_islamic.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_islamic.pdf",
+          "themes": [
+            {
+              "name": "Qur'an and Qur'anic Text",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                1,
+                2
+              ],
+              "subThemes": [
+                {
+                  "name": "Qur'an and Qur'anic Text",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    1,
+                    2
+                  ],
+                  "topics": [
+                    {
+                      "name": "Suratul-Fatihah",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_islamic.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_islamic.pdf",
+                      "sourcePages": [
+                        1,
+                        2
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_dd68ce086be3879c",
+                      "objectiveSetId": "objectives_400c7c541d96b164"
+                    }
+                  ],
+                  "id": "subtheme_a31b9206271f926b"
+                }
+              ],
+              "id": "theme_8a816db0cd50ad97"
+            }
+          ],
+          "id": "subject_ac6b1f1d43dc4456"
+        },
+        {
+          "subjectCode": "NVC",
+          "subjectName": "National Values Curriculum",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_nvc.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+          "themes": [
+            {
+              "name": "Civic Education",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                2,
+                3,
+                4
+              ],
+              "subThemes": [
+                {
+                  "name": "Our Values",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    2,
+                    3,
+                    4
+                  ],
+                  "topics": [
+                    {
+                      "name": "National Values",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [
+                        "Explain what is meant by values.",
+                        "Mention some values in the society."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_bdbdf67ba94e194e",
+                      "objectiveSetId": "objectives_fcecdfb96441dd27"
+                    },
+                    {
+                      "name": "National Values: Honesty",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [
+                        "Explain the meaning of honesty.",
+                        "State attributes of honesty.",
+                        "Explain the benefits of honesty.",
+                        "Discuss the consequences of dishonesty."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_29fd6bc236fa9ee3",
+                      "objectiveSetId": "objectives_6a3ece48e0a4447d"
+                    },
+                    {
+                      "name": "National Values: Self Reliance",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        4
+                      ],
+                      "objectives": [
+                        "Explain the meaning of self-reliance.",
+                        "Identify the importance of self-reliance.",
+                        "Identify processes of discovering talents and skills."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_352ba7e1c7bac784",
+                      "objectiveSetId": "objectives_86ee2a34cb9729fd"
+                    }
+                  ],
+                  "id": "subtheme_7a17533b52716c00"
+                }
+              ],
+              "id": "theme_53701e63fe4538fc"
+            },
+            {
+              "name": "Social Studies Education",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14
+              ],
+              "subThemes": [
+                {
+                  "name": "Fundamentals of Social Studies Education",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    8
+                  ],
+                  "topics": [
+                    {
+                      "name": "History of Nigerian Social Studies Education",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        8
+                      ],
+                      "objectives": [
+                        "Explain the development of Social Studies Education in Nigeria."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_e42a591ae038739e",
+                      "objectiveSetId": "objectives_422fb1d7ba4782e8"
+                    }
+                  ],
+                  "id": "subtheme_7e09f2bb40bd5161"
+                },
+                {
+                  "name": "Family as the Basic Unit of Society",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    9,
+                    10
+                  ],
+                  "topics": [
+                    {
+                      "name": "Family as a Primary Social Group",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        9
+                      ],
+                      "objectives": [
+                        "Give a simple definition of a primary social group."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_b2aca18f3cf65363",
+                      "objectiveSetId": "objectives_0ca16791e1f6a32d"
+                    },
+                    {
+                      "name": "The Consequences of Large/Small Family Size",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        10
+                      ],
+                      "objectives": [
+                        "Describe the characteristics of large and small family sizes."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_3be2c2436e851394",
+                      "objectiveSetId": "objectives_b1092e448ead6493"
+                    }
+                  ],
+                  "id": "subtheme_7d6ab8277ef8466c"
+                },
+                {
+                  "name": "Culture and Social Values",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    11,
+                    12,
+                    13,
+                    14
+                  ],
+                  "topics": [
+                    {
+                      "name": "Meaning and Characteristics of Culture",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        11
+                      ],
+                      "objectives": [
+                        "Define culture."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_70782fd15d74ff16",
+                      "objectiveSetId": "objectives_d3ec1521e7e57fd1"
+                    },
+                    {
+                      "name": "Similarities and Differences among Cultures",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        12
+                      ],
+                      "objectives": [
+                        "Identify cultural similarities in Nigeria."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_d0a9883a4edd94af",
+                      "objectiveSetId": "objectives_d5793448e3a7a305"
+                    },
+                    {
+                      "name": "Agents and Processes of Socialization",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        13
+                      ],
+                      "objectives": [
+                        "Define socialization."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_b397779111f9e4b6",
+                      "objectiveSetId": "objectives_4109b0b7c77bab98"
+                    },
+                    {
+                      "name": "Road Safety Club as an Agent of Socialization",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        14
+                      ],
+                      "objectives": [
+                        "Describe the structure and process of forming Road Safety Club in schools."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_fd7e5534aa186382",
+                      "objectiveSetId": "objectives_57a6379d1414aad0"
+                    }
+                  ],
+                  "id": "subtheme_c9db19de95a1f0c3"
+                }
+              ],
+              "id": "theme_90f99694e5c8c115"
+            },
+            {
+              "name": "Social Studies",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                15,
+                16,
+                17
+              ],
+              "subThemes": [
+                {
+                  "name": "Social and Health Issues",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    15,
+                    16,
+                    17
+                  ],
+                  "topics": [
+                    {
+                      "name": "Common Social Problems in Nigeria",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        15
+                      ],
+                      "objectives": [
+                        "Identify social problems in Nigeria."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_ff894a00b847c378",
+                      "objectiveSetId": "objectives_edd7f384d73bf679"
+                    },
+                    {
+                      "name": "Ways of Solving Common Social Problems in Nigeria",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        16
+                      ],
+                      "objectives": [
+                        "Explain the effects of social issues and problems in Nigeria."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_ec60a6e639bcaa01",
+                      "objectiveSetId": "objectives_867d7284492624e8"
+                    },
+                    {
+                      "name": "Our Roles in Promoting Safety in Our Community",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        17
+                      ],
+                      "objectives": [
+                        "Explain the need for safety."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_ad8835d1082fbd2e",
+                      "objectiveSetId": "objectives_f417dff3110a0df4"
+                    }
+                  ],
+                  "id": "subtheme_27d021af77fe2dfb"
+                }
+              ],
+              "id": "theme_59d7f58bbb74a912"
+            },
+            {
+              "name": "Security Education",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                18
+              ],
+              "subThemes": [
+                {
+                  "name": "Common Crimes and Security Management 1",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    18
+                  ],
+                  "topics": [
+                    {
+                      "name": "Common Crimes, Causes and Effects",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_nvc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+                      "sourcePages": [
+                        18
+                      ],
+                      "objectives": [
+                        "Identify common crimes."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_0d32217fda27e18f",
+                      "objectiveSetId": "objectives_673c7b2d115fc1e7"
+                    }
+                  ],
+                  "id": "subtheme_1cf7265182e3b524"
+                }
+              ],
+              "id": "theme_8a0f0b4a17e4474a"
+            }
+          ],
+          "id": "subject_c325fe328585c7ba"
+        },
+        {
+          "subjectCode": "PREVOC",
+          "subjectName": "Pre-Vocational Studies",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_prevoc.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+          "themes": [
+            {
+              "name": "Agriculture",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                2,
+                3,
+                4,
+                5
+              ],
+              "subThemes": [
+                {
+                  "name": "Concept and Medium of Agricultural Production",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "topics": [
+                    {
+                      "name": "Classes and Uses of Crops",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [
+                        "Identify crop plant forms.",
+                        "Classify crops according to forms, life span, uses, and types.",
+                        "State the various uses of crops."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_ebb1544f048f3d62",
+                      "objectiveSetId": "objectives_a782d8af702f498a"
+                    },
+                    {
+                      "name": "Classes and Uses of Farm Animals",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [
+                        "Describe different forms of farm animals.",
+                        "Identify the basic characteristics of different farm animals.",
+                        "List farm animals."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_6ea205874d9a7877",
+                      "objectiveSetId": "objectives_e00d84d61277dd92"
+                    },
+                    {
+                      "name": "Methods of Weed and Pests Control",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        4
+                      ],
+                      "objectives": [
+                        "List the characteristics of weeds.",
+                        "Indicate the uses of weeds.",
+                        "Briefly discuss methods of weed control.",
+                        "State the effects of weed control methods on vegetation and soil."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_addeddb6a39cc339",
+                      "objectiveSetId": "objectives_9dc745fcf0533a1f"
+                    },
+                    {
+                      "name": "Factors of Agricultural Production",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        5
+                      ],
+                      "objectives": [
+                        "List the basic factors of production.",
+                        "Describe the uses of each factor in agricultural production."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_6014bbe44eb305ef",
+                      "objectiveSetId": "objectives_f608cc56c9013951"
+                    }
+                  ],
+                  "id": "subtheme_5dffdb9d00d4435b"
+                }
+              ],
+              "id": "theme_67ae6309283a654f"
+            },
+            {
+              "name": "Home Economics",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                6,
+                7
+              ],
+              "subThemes": [
+                {
+                  "name": "Family Living and Resource Management",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    6,
+                    7
+                  ],
+                  "topics": [
+                    {
+                      "name": "Puberty, Adolescence, Sexually Transmitted Infections (STIs), HIV/AIDS and Human Rights",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        6
+                      ],
+                      "objectives": [
+                        "Explain the meaning of puberty and adolescence.",
+                        "Describe the signs of puberty in boys and girls.",
+                        "Discuss the needs and challenges of the adolescent."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_2bdddebc4aa34ccf",
+                      "objectiveSetId": "objectives_95352775b37b2273"
+                    },
+                    {
+                      "name": "Family Needs, Goals and Standards",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        7
+                      ],
+                      "objectives": [
+                        "Explain the meaning of family needs.",
+                        "List family needs.",
+                        "Explain the meaning of family goals and standards."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_dffca1cf33370925",
+                      "objectiveSetId": "objectives_5629839d5e005be5"
+                    }
+                  ],
+                  "id": "subtheme_8c030ac42badb1ba"
+                }
+              ],
+              "id": "theme_30742bfa6740a03e"
+            }
+          ],
+          "id": "subject_7c0050001c8dd550"
+        },
+        {
+          "subjectCode": "HAUSA",
+          "subjectName": "Hausa",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_hausa.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_hausa.pdf",
+          "themes": [
+            {
+              "name": "HARSHE",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                3,
+                4,
+                5
+              ],
+              "subThemes": [
+                {
+                  "name": "SAURARO DA MAGANA",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    3,
+                    4,
+                    5
+                  ],
+                  "topics": [
+                    {
+                      "name": "Tsarin Sassauƙar Jimla",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_hausa.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_hausa.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [
+                        "Tantance sassan sassauƙar jimla.",
+                        "Fito da kalmomin da suke cikin sassan sassauƙar jimla."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_f9f0a6f02c559edd",
+                      "objectiveSetId": "objectives_4814ac120fb71393"
+                    },
+                    {
+                      "name": "Furuci",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_hausa.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_hausa.pdf",
+                      "sourcePages": [
+                        4
+                      ],
+                      "objectives": [
+                        "Bayyana ma’anar furuci.",
+                        "Kawo gaɓoɓin furuci.",
+                        "Bayyana yadda ake samun furuci."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_1717d1ef8ef8ea0c",
+                      "objectiveSetId": "objectives_65f2f3d89b6a11bc"
+                    },
+                    {
+                      "name": "Auna Fahimta",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_hausa.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_hausa.pdf",
+                      "sourcePages": [
+                        5
+                      ],
+                      "objectives": [
+                        "Tantance karanta labarin da kan su.",
+                        "Bayar da labari na kansu.",
+                        "Kawo labarin da suka karanta.",
+                        "Kawo ma’anar muhimman kalmomi cikin labarin."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_9b1f386ec889aeb6",
+                      "objectiveSetId": "objectives_56dc945b3421bf90"
+                    }
+                  ],
+                  "id": "subtheme_ccbc8b1b49ced96b"
+                }
+              ],
+              "id": "theme_bb5d12f3efcf0a22"
+            }
+          ],
+          "id": "subject_e3282bd854e58716"
+        },
+        {
+          "subjectCode": "IGBO",
+          "subjectName": "Igbo",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_igbo.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_igbo.pdf",
+          "themes": [
+            {
+              "name": "ASỤSỤ",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                1,
+                3
+              ],
+              "subThemes": [
+                {
+                  "name": "IGE NTỊ NA IKWU OKWU",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    1,
+                    3
+                  ],
+                  "topics": [
+                    {
+                      "name": "Ụdaasụsụ na Nsoroedide Igbo",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_igbo.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_igbo.pdf",
+                      "sourcePages": [
+                        1
+                      ],
+                      "objectives": [
+                        "Ịkpọpụta ụdaume, mgbochiume na myiriụdaume.",
+                        "Ide mkpụrụedemede ọ bụla.",
+                        "Itinye akara edemede ọ bụla."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_cde10050e61f13a6",
+                      "objectiveSetId": "objectives_de1b42f6cdbdf1fa"
+                    },
+                    {
+                      "name": "Ahịrịmfe",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_igbo.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_igbo.pdf",
+                      "sourcePages": [
+                        3
+                      ],
+                      "objectives": [
+                        "Ikwu ihe bụ ahịrịmfe.",
+                        "Imebe ahịrịmfe.",
+                        "Ide ahịrịmfe."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_f899cb91cb38d165",
+                      "objectiveSetId": "objectives_46cb09320b03f765"
+                    }
+                  ],
+                  "id": "subtheme_b644730b3d66f6dd"
+                }
+              ],
+              "id": "theme_2a6d6ea64c331437"
+            },
+            {
+              "name": "OMENALA",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                2,
+                4
+              ],
+              "subThemes": [
+                {
+                  "name": "NSINIWU NA MBAMURU",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    2,
+                    4
+                  ],
+                  "topics": [
+                    {
+                      "name": "Ịkọwa ndị bụ ndị Igbo na asụsụ ha",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_igbo.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_igbo.pdf",
+                      "sourcePages": [
+                        2
+                      ],
+                      "objectives": [
+                        "Izipụta ebe a na-asụ Igbo.",
+                        "Igosi ụzọ dị iche iche e ji ama ndị Igbo."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_49d13ee7cfac4c26",
+                      "objectiveSetId": "objectives_807c7ade7d73d441"
+                    },
+                    {
+                      "name": "Nrụkọrịta ọrụ na uru ọ bara",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_igbo.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_igbo.pdf",
+                      "sourcePages": [
+                        4
+                      ],
+                      "objectives": [
+                        "Ịkọwa ihe nrụkọrịta ọrụ bụ.",
+                        "Ịkọwa usoro na iwu nrụkọrịta ọrụ.",
+                        "Idepụta ọmụmaatụ ụzọ anọ e nwere ike isi rụkọrịta ọrụ n’ala Igbo."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_d77646beb396aac0",
+                      "objectiveSetId": "objectives_496eb865220aee9b"
+                    }
+                  ],
+                  "id": "subtheme_3579e48288d0d58e"
+                }
+              ],
+              "id": "theme_459e57b3cba12c50"
+            }
+          ],
+          "id": "subject_05a4111b4f6afd6d"
+        }
+      ],
+      "id": "class_c471c5884ec0b2ad"
+    },
+    {
+      "classCode": "JSS2",
+      "subjects": [
+        {
+          "subjectCode": "MATHEMATICS",
+          "subjectName": "Mathematics",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_maths.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+          "themes": [
+            {
+              "name": "Numbers and Numeration",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                19
+              ],
+              "subThemes": [
+                {
+                  "name": "Fraction",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    19
+                  ],
+                  "topics": [
+                    {
+                      "name": "Fractions",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        19
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_330b836104b22e3e",
+                      "objectiveSetId": "objectives_81ca78b198ae6e1a"
+                    }
+                  ],
+                  "id": "subtheme_4fe4dee5b507a00c"
+                }
+              ],
+              "id": "theme_4458137ecb879800"
+            },
+            {
+              "name": "Basic Operations",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                20
+              ],
+              "subThemes": [
+                {
+                  "name": "Derived Operations",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    20
+                  ],
+                  "topics": [
+                    {
+                      "name": "Approximation",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        20
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_c3cae7ec2b44ace5",
+                      "objectiveSetId": "objectives_4fc6d8c40f19a53b"
+                    },
+                    {
+                      "name": "Multiplication and division of directed numbers",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        20
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_955da21ee0514e7c",
+                      "objectiveSetId": "objectives_91aef6a35ff488d9"
+                    }
+                  ],
+                  "id": "subtheme_0283413a1ddab7e6"
+                }
+              ],
+              "id": "theme_c2f191aa420a1807"
+            },
+            {
+              "name": "Algebraic Processes",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                21,
+                22,
+                23
+              ],
+              "subThemes": [
+                {
+                  "name": "Algebraic Operations",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    21,
+                    22,
+                    23
+                  ],
+                  "topics": [
+                    {
+                      "name": "Algebraic expressions",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        21
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_a6ddf0fa9dae2063",
+                      "objectiveSetId": "objectives_f871c3f1e4631112"
+                    },
+                    {
+                      "name": "Simplification of algebraic expressions",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        22
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_25c86edb8e10c2f0",
+                      "objectiveSetId": "objectives_805a6abfc47d6ad6"
+                    },
+                    {
+                      "name": "Linear inequalities",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        22
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_b355dcc32826c5c8",
+                      "objectiveSetId": "objectives_aec3277f795bb0bb"
+                    },
+                    {
+                      "name": "Graphs",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        23
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_cb9275183626cddb",
+                      "objectiveSetId": "objectives_6440553b182da061"
+                    }
+                  ],
+                  "id": "subtheme_6d7be17be18d8f6d"
+                }
+              ],
+              "id": "theme_66ac652e814542b9"
+            },
+            {
+              "name": "Mensuration and Geometry",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                24,
+                25,
+                26
+              ],
+              "subThemes": [
+                {
+                  "name": "Shapes",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    24,
+                    25,
+                    26
+                  ],
+                  "topics": [
+                    {
+                      "name": "Plane figures",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        24
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_a2a4d1ade68a400a",
+                      "objectiveSetId": "objectives_7d916756f388aba2"
+                    },
+                    {
+                      "name": "Angles",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        25
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_2bc8a90e467d0ce1",
+                      "objectiveSetId": "objectives_d91b0a4e8e241075"
+                    },
+                    {
+                      "name": "Bearing",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        26
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_d53be97c3247ae2d",
+                      "objectiveSetId": "objectives_253d10ac89c3f632"
+                    },
+                    {
+                      "name": "Construction",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        26
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_1e3d10e6f97631f4",
+                      "objectiveSetId": "objectives_89ea6585525dd003"
+                    }
+                  ],
+                  "id": "subtheme_563e8a8709feb556"
+                }
+              ],
+              "id": "theme_e1c875433d487767"
+            }
+          ],
+          "id": "subject_8984bbf8ce373902"
+        },
+        {
+          "subjectCode": "FRENCH",
+          "subjectName": "French",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_french.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+          "themes": [
+            {
+              "name": "Identité/Identification",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                5
+              ],
+              "subThemes": [
+                {
+                  "name": "Traits moraux",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    5
+                  ],
+                  "topics": [
+                    {
+                      "name": "Parler du caractère des gens",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        5
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_ade13c3780071d40",
+                      "objectiveSetId": "objectives_6ca02f9fc43bf332"
+                    },
+                    {
+                      "name": "Exprimer les attitudes (jugements/appréciations)",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        5
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_e15c65ab62840cba",
+                      "objectiveSetId": "objectives_2b75888bbd4d3b95"
+                    }
+                  ],
+                  "id": "subtheme_b483a4e3bf9f696c"
+                }
+              ],
+              "id": "theme_e8f928f2e29d4ca0"
+            },
+            {
+              "name": "Environnement immédiat",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                6,
+                7,
+                8
+              ],
+              "subThemes": [
+                {
+                  "name": "La ville et le village",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    6
+                  ],
+                  "topics": [
+                    {
+                      "name": "Dégager les caractéristiques de la vie rurale",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        6
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_b847dc2dddfd326a",
+                      "objectiveSetId": "objectives_36eec7da21f62140"
+                    },
+                    {
+                      "name": "Dégager les caractéristiques de la vie urbaine",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        6
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_e3df908037a5df3f",
+                      "objectiveSetId": "objectives_29b9f29714b6a97a"
+                    },
+                    {
+                      "name": "Parler des ressemblances et différences",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        6
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_d3503a8c42b90ae0",
+                      "objectiveSetId": "objectives_ea2c5d3f6752ee89"
+                    }
+                  ],
+                  "id": "subtheme_75d63cac71764afd"
+                },
+                {
+                  "name": "Les fêtes dans la communauté",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    7
+                  ],
+                  "topics": [
+                    {
+                      "name": "Décrire les fêtes de la communauté",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        7
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_8cfef14a278fb42f",
+                      "objectiveSetId": "objectives_c586640931c14b1f"
+                    }
+                  ],
+                  "id": "subtheme_bbd72a1585bf99fc"
+                },
+                {
+                  "name": "Le bien-être dans la communauté",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    8
+                  ],
+                  "topics": [
+                    {
+                      "name": "Identifier les choses dans la communauté",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        8
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_1e2c5344345aed17",
+                      "objectiveSetId": "objectives_cf08f28898753349"
+                    },
+                    {
+                      "name": "Identifier les étrangers",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        8
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_12f8521d40aaa9a4",
+                      "objectiveSetId": "objectives_10596350c9d43efd"
+                    }
+                  ],
+                  "id": "subtheme_9606f0c2e5563269"
+                }
+              ],
+              "id": "theme_aa62e21d684e7cbb"
+            },
+            {
+              "name": "Activités humaines",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                9,
+                10,
+                11
+              ],
+              "subThemes": [
+                {
+                  "name": "Sports",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    9
+                  ],
+                  "topics": [
+                    {
+                      "name": "Expliquer l’importance du sport",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        9
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_e6616a12ca9f569e",
+                      "objectiveSetId": "objectives_e1a23c288f4d60b8"
+                    },
+                    {
+                      "name": "Nommer les sports principaux",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        9
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_2dfad4701015f50f",
+                      "objectiveSetId": "objectives_21610bdee3bf9ff9"
+                    }
+                  ],
+                  "id": "subtheme_07526feca0779b2e"
+                },
+                {
+                  "name": "Demander poliment",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    10
+                  ],
+                  "topics": [
+                    {
+                      "name": "Demander poliment",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        10
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_15e3a2b1ce12847e",
+                      "objectiveSetId": "objectives_c5e6632088a7a54f"
+                    }
+                  ],
+                  "id": "subtheme_388c43844f26e19b"
+                },
+                {
+                  "name": "Exprimer les sentiments",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    11
+                  ],
+                  "topics": [
+                    {
+                      "name": "Employer les expressions: j’ai honte de…",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        11
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_20e259d81aee62ad",
+                      "objectiveSetId": "objectives_5ff2c52a841cc75f"
+                    }
+                  ],
+                  "id": "subtheme_be6ba53ae9e185d1"
+                }
+              ],
+              "id": "theme_abeeb214fff2c5cb"
+            }
+          ],
+          "id": "subject_f12710e789f79649"
+        },
+        {
+          "subjectCode": "PREVOC",
+          "subjectName": "Pre-Vocational Studies",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_prevoc.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+          "themes": [
+            {
+              "name": "Agriculture",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                11,
+                12,
+                13,
+                14,
+                16,
+                17
+              ],
+              "subThemes": [
+                {
+                  "name": "Processes of Agricultural Production",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    11,
+                    12,
+                    13,
+                    14,
+                    16,
+                    17
+                  ],
+                  "topics": [
+                    {
+                      "name": "Farm Structures and Buildings",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        11
+                      ],
+                      "objectives": [
+                        "Describe and identify various farm structures and buildings."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_213518d2637efc0d",
+                      "objectiveSetId": "objectives_c08eecb6193a4e58"
+                    },
+                    {
+                      "name": "Crop Propagation and Cultural Practices",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        12
+                      ],
+                      "objectives": [
+                        "Define crop propagation.",
+                        "State methods of crop propagation."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_6388b2676ea7ab34",
+                      "objectiveSetId": "objectives_919a33148a793e22"
+                    },
+                    {
+                      "name": "Agricultural Practices",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        13
+                      ],
+                      "objectives": [
+                        "Describe pre-planting, planting, post-planting, harvesting and post-harvesting operations."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_0f117a6b4916a14c",
+                      "objectiveSetId": "objectives_805d44b8dc5b9915"
+                    },
+                    {
+                      "name": "Animal Feeds and Feeding",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        14
+                      ],
+                      "objectives": [
+                        "State the meaning of feeding.",
+                        "List types of feedstuffs.",
+                        "Mention feeding tools."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_066ef64f228a0f62",
+                      "objectiveSetId": "objectives_aac993dca0e648a4"
+                    },
+                    {
+                      "name": "Animal Pests and Diseases",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        14
+                      ],
+                      "objectives": [
+                        "List four farm animal diseases.",
+                        "State methods of transmission of farm animal diseases."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_3cce37c5385f2c23",
+                      "objectiveSetId": "objectives_98fe1f1a2339a184"
+                    },
+                    {
+                      "name": "Fishery",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        16
+                      ],
+                      "objectives": [
+                        "Define fishery.",
+                        "Classify fishes."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_586671dbeb9129d7",
+                      "objectiveSetId": "objectives_0d08c74cf8719d02"
+                    },
+                    {
+                      "name": "Forests and Forest Uses",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_prevoc.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+                      "sourcePages": [
+                        17
+                      ],
+                      "objectives": [
+                        "Describe forests."
+                      ],
+                      "objectivesStatus": "verified",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_4ea0477f85c13e44",
+                      "objectiveSetId": "objectives_4967dccce63ee6f5"
+                    }
+                  ],
+                  "id": "subtheme_e658d9632995647b"
+                }
+              ],
+              "id": "theme_c1ca91ef5bc25d84"
+            }
+          ],
+          "id": "subject_c42365060049bd8b"
+        }
+      ],
+      "id": "class_b878e940b07f381d"
+    },
+    {
+      "classCode": "JSS3",
+      "subjects": [
+        {
+          "subjectCode": "MATHEMATICS",
+          "subjectName": "Mathematics",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_maths.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+          "themes": [
+            {
+              "name": "Numbers and Numeration",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                28,
+                29
+              ],
+              "subThemes": [
+                {
+                  "name": "Whole Numbers",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    28,
+                    29
+                  ],
+                  "topics": [
+                    {
+                      "name": "Whole numbers",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        28
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_425306d1069c76a4",
+                      "objectiveSetId": "objectives_eb0abec5497cbb07"
+                    },
+                    {
+                      "name": "Rational and non-rational numbers",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        29
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_7eae08c90f9ef9d0",
+                      "objectiveSetId": "objectives_fa2aa0725786ea8e"
+                    }
+                  ],
+                  "id": "subtheme_8916d6525d9e5148"
+                }
+              ],
+              "id": "theme_e15a3ef03d3210bf"
+            },
+            {
+              "name": "Basic Operations",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                30
+              ],
+              "subThemes": [
+                {
+                  "name": "Basic Operations",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    30
+                  ],
+                  "topics": [
+                    {
+                      "name": "Addition of numbers in base 2 numerals",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        30
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_4830154ef49e6399",
+                      "objectiveSetId": "objectives_048238815b46449c"
+                    },
+                    {
+                      "name": "Subtraction of numbers in base 2 numerals",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        30
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_97da2452d222cb5e",
+                      "objectiveSetId": "objectives_d721c290f74e8819"
+                    },
+                    {
+                      "name": "Multiplication of numbers in base 2 numerals",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        30
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_13899cd367465d56",
+                      "objectiveSetId": "objectives_5d10be4856b3bbdc"
+                    },
+                    {
+                      "name": "Division of numbers in base 2 numerals",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        30
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_5debef64c3dd0c72",
+                      "objectiveSetId": "objectives_b409addb236e6e1d"
+                    }
+                  ],
+                  "id": "subtheme_303e37fe76684edf"
+                }
+              ],
+              "id": "theme_d62670e01b0c741e"
+            },
+            {
+              "name": "Algebraic Processes",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                31,
+                32
+              ],
+              "subThemes": [
+                {
+                  "name": "Algebraic Operations",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    31,
+                    32
+                  ],
+                  "topics": [
+                    {
+                      "name": "Factorization",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        31
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_1a890af9354cce25",
+                      "objectiveSetId": "objectives_1bdfafed433863a4"
+                    },
+                    {
+                      "name": "Simple equations involving fractions",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        31
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_68f2271aa76adfb1",
+                      "objectiveSetId": "objectives_8dfbdbb69d4a2a3f"
+                    },
+                    {
+                      "name": "Simultaneous linear equations",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        32
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_e1deba37d84db91b",
+                      "objectiveSetId": "objectives_6dbfd60b5baea2ab"
+                    }
+                  ],
+                  "id": "subtheme_03811374f29f42c2"
+                }
+              ],
+              "id": "theme_4b04ff8e1be8c9e6"
+            },
+            {
+              "name": "Mensuration and Geometry",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                33,
+                34,
+                35
+              ],
+              "subThemes": [
+                {
+                  "name": "Shapes",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    33,
+                    34,
+                    35
+                  ],
+                  "topics": [
+                    {
+                      "name": "Similar figures",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        33
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_361b3716c1400109",
+                      "objectiveSetId": "objectives_8ebf515c649e03a2"
+                    },
+                    {
+                      "name": "Trigonometry",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        33
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_e92c3ff77ed6361b",
+                      "objectiveSetId": "objectives_cd57c38b0fde3cc6"
+                    },
+                    {
+                      "name": "Area of plane figures",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        34
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_caf2ed3fdaf61130",
+                      "objectiveSetId": "objectives_36fcf9fab379d89b"
+                    },
+                    {
+                      "name": "Construction",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        35
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_b193f1503a4584e3",
+                      "objectiveSetId": "objectives_43ea30842c12d959"
+                    }
+                  ],
+                  "id": "subtheme_5bb16acbdb73ad06"
+                }
+              ],
+              "id": "theme_f6c1b39e62a819bd"
+            },
+            {
+              "name": "Everyday Statistics",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                36
+              ],
+              "subThemes": [
+                {
+                  "name": "Data Collection and Presentation",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    36
+                  ],
+                  "topics": [
+                    {
+                      "name": "Measure of central tendency",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        36
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_f6a4d5775ba9677c",
+                      "objectiveSetId": "objectives_77768a2e7ea18eaa"
+                    },
+                    {
+                      "name": "Data presentation",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_maths.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+                      "sourcePages": [
+                        36
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_fea9fe286cb0558a",
+                      "objectiveSetId": "objectives_1134ba45005d52b9"
+                    }
+                  ],
+                  "id": "subtheme_7666b922676e0287"
+                }
+              ],
+              "id": "theme_69103bfe67ac996b"
+            }
+          ],
+          "id": "subject_16b71c9266164dce"
+        },
+        {
+          "subjectCode": "FRENCH",
+          "subjectName": "French",
+          "sourceStatus": "verified",
+          "sourceDocument": "jss1-3_french.pdf",
+          "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+          "themes": [
+            {
+              "name": "Identité/Identification",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                12
+              ],
+              "subThemes": [
+                {
+                  "name": "Les professions et les qualités des gens",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    12
+                  ],
+                  "topics": [
+                    {
+                      "name": "Parler des professions variées",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        12
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_042b4c4526fa0109",
+                      "objectiveSetId": "objectives_eec299fed01b34ae"
+                    },
+                    {
+                      "name": "Décrire les qualités admirables",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        12
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_c81a2edf86337a7d",
+                      "objectiveSetId": "objectives_5ed62da6fc095993"
+                    },
+                    {
+                      "name": "Parler des gens qu’on admire beaucoup",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        12
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_b869af458bab8510",
+                      "objectiveSetId": "objectives_f7c6e0f65f2827d8"
+                    }
+                  ],
+                  "id": "subtheme_ec34dbc528a5aa93"
+                }
+              ],
+              "id": "theme_7e9c6b8c5869e552"
+            },
+            {
+              "name": "Environnement immédiat",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                13,
+                14,
+                15
+              ],
+              "subThemes": [
+                {
+                  "name": "La santé",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    13
+                  ],
+                  "topics": [
+                    {
+                      "name": "Nommer les maladies",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        13
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_2b05fdf55688240b",
+                      "objectiveSetId": "objectives_1b0e2b246e783c9e"
+                    },
+                    {
+                      "name": "Discuter les causes de certaines maladies",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        13
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_e16060c471638a2b",
+                      "objectiveSetId": "objectives_3e6834ca7c9800f8"
+                    },
+                    {
+                      "name": "Parler des populations affectées",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        13
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_0e90868517f091d5",
+                      "objectiveSetId": "objectives_55c1b6d1e9251a10"
+                    },
+                    {
+                      "name": "Dire l’importance de l’hygiène",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        13
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_a95ab2d0058be2ec",
+                      "objectiveSetId": "objectives_90420375ade1407a"
+                    }
+                  ],
+                  "id": "subtheme_97118d45f987fb57"
+                },
+                {
+                  "name": "Corps médical",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    14
+                  ],
+                  "topics": [
+                    {
+                      "name": "Parler des professionnels de la santé",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        14
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_0b592316cec4151b",
+                      "objectiveSetId": "objectives_1a8a46a9fe8e658b"
+                    }
+                  ],
+                  "id": "subtheme_4eeeced8404a6dee"
+                },
+                {
+                  "name": "Où aller ?",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    15
+                  ],
+                  "topics": [
+                    {
+                      "name": "Parler de la pharmacie, l’hôpital, chez le dentiste",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        15
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_3a9599e5e61aa315",
+                      "objectiveSetId": "objectives_92bbd4585056511b"
+                    }
+                  ],
+                  "id": "subtheme_614280aeda3a552c"
+                }
+              ],
+              "id": "theme_c2ee0683364d3d84"
+            },
+            {
+              "name": "Activités humaines",
+              "sourceStatus": "verified",
+              "sourcePages": [
+                16,
+                17,
+                18
+              ],
+              "subThemes": [
+                {
+                  "name": "Activités quotidiennes",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    16
+                  ],
+                  "topics": [
+                    {
+                      "name": "Décrire ce qu’on fait tous les jours",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        16
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_45ed1286ba836e40",
+                      "objectiveSetId": "objectives_f3391ec551d8c402"
+                    }
+                  ],
+                  "id": "subtheme_17cc32291574e616"
+                },
+                {
+                  "name": "Narration",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    17
+                  ],
+                  "topics": [
+                    {
+                      "name": "Raconter ce qui s’est passé",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        17
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_d1ec1910d849c3a5",
+                      "objectiveSetId": "objectives_cf863a0ea42d1949"
+                    }
+                  ],
+                  "id": "subtheme_e8b2a5840e64be8c"
+                },
+                {
+                  "name": "Correspondance",
+                  "sourceStatus": "verified",
+                  "sourcePages": [
+                    18
+                  ],
+                  "topics": [
+                    {
+                      "name": "Écrire une lettre d’amitié",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        18
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_723b815c09c2868b",
+                      "objectiveSetId": "objectives_67cf0a0c8b4af902"
+                    },
+                    {
+                      "name": "Téléphoner",
+                      "sourceStatus": "verified",
+                      "sourceDocument": "jss1-3_french.pdf",
+                      "sourceUrl": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+                      "sourcePages": [
+                        18
+                      ],
+                      "objectives": [],
+                      "objectivesStatus": "review_required",
+                      "termAllocation": {
+                        "term": null,
+                        "type": "unassigned",
+                        "reason": "The NERDC document does not specify a universal school-term allocation."
+                      },
+                      "id": "topic_ccc6fb965ef7519c",
+                      "objectiveSetId": "objectives_91b770e7514939da"
+                    }
+                  ],
+                  "id": "subtheme_31db0a5c8bfc8410"
+                }
+              ],
+              "id": "theme_c9bc6eae88851e80"
+            }
+          ],
+          "id": "subject_c2797f11b7f432d7"
+        }
+      ],
+      "id": "class_9f76d8b8c10dd3a9"
+    }
+  ],
+  "authority": {
+    "name": "Nigerian Educational Research and Development Council",
+    "title": "Junior Secondary School (JSS) 1-3 Basic Education Curriculum",
+    "indexUrl": "https://www.nerdc.gov.ng/content_manager/jss1-3.html",
+    "termAllocation": {
+      "type": "implementation-allocation",
+      "officialTermMappingAvailable": false,
+      "policy": "NERDC subject documents are organized by class, theme, sub-theme, topic, objectives and content rather than the three school terms. Topics must be allocated to First Term, Second Term and Third Term by an educator-reviewed implementation plan before import."
+    }
+  },
+  "classes": [
+    "JSS1",
+    "JSS2",
+    "JSS3"
+  ],
+  "terms": [
+    "First Term",
+    "Second Term",
+    "Third Term"
+  ],
+  "subjects": [
+    {
+      "name": "Arabic",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_arabic.pdf",
+      "legacyMappings": [],
+      "topics": []
+    },
+    {
+      "name": "Basic Science and Technology",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_basic_science_technology.pdf",
+      "legacyMappings": [
+        "Basic Science",
+        "Basic Technology"
+      ],
+      "topics": []
+    },
+    {
+      "name": "Business Studies",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_business_studies.pdf",
+      "legacyMappings": [
+        "Business Studies",
+        "Commerce"
+      ],
+      "topics": []
+    },
+    {
+      "name": "Christian Religious Studies",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_crs.pdf",
+      "legacyMappings": [
+        "CRS"
+      ],
+      "topics": []
+    },
+    {
+      "name": "Cultural and Creative Arts",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_cca.pdf",
+      "legacyMappings": [],
+      "topics": []
+    },
+    {
+      "name": "English Studies",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_english_studies.pdf",
+      "legacyMappings": [
+        "English"
+      ],
+      "topics": []
+    },
+    {
+      "name": "French",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_french.pdf",
+      "legacyMappings": [],
+      "topics": []
+    },
+    {
+      "name": "Hausa",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_hausa.pdf",
+      "legacyMappings": [],
+      "topics": []
+    },
+    {
+      "name": "History",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_history.pdf",
+      "legacyMappings": [
+        "History"
+      ],
+      "topics": []
+    },
+    {
+      "name": "Igbo",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_igbo.pdf",
+      "legacyMappings": [],
+      "topics": []
+    },
+    {
+      "name": "Islamic Religious Studies",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_islamic.pdf",
+      "legacyMappings": [],
+      "topics": []
+    },
+    {
+      "name": "Mathematics",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_maths.pdf",
+      "legacyMappings": [
+        "Mathematics"
+      ],
+      "verifiedThemes": [
+        "Numbers and Numeration",
+        "Basic Operations",
+        "Algebraic Processes",
+        "Mensuration and Geometry",
+        "Everyday Statistics"
+      ],
+      "topics": []
+    },
+    {
+      "name": "National Values Curriculum",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_nvc.pdf",
+      "legacyMappings": [
+        "Civic Education",
+        "Social Studies",
+        "Government"
+      ],
+      "topics": []
+    },
+    {
+      "name": "Pre-Vocational Studies",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_prevoc.pdf",
+      "legacyMappings": [
+        "Agricultural Science",
+        "Basic Technology",
+        "Business Studies"
+      ],
+      "topics": []
+    },
+    {
+      "name": "Yoruba",
+      "sourceDocument": "https://www.nerdc.gov.ng/content_manager/jss/jss1-3_yoruba.pdf",
+      "legacyMappings": [],
+      "topics": []
+    }
+  ],
+  "normalization": {
+    "stage": "B6.4",
+    "hierarchy": "subject > class > theme > sub-theme > topic > objective set",
+    "idStrategy": "stable SHA-256-derived IDs from canonical hierarchy identifiers and source text",
+    "objectiveStatuses": [
+      "verified",
+      "review_required"
+    ],
+    "termState": "unassigned"
+  }
+}

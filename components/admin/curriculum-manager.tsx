@@ -22,6 +22,19 @@ type References = {
     terms: Reference[];
 };
 
+type Coverage = {
+    classId: string;
+    className: string;
+    termId: string;
+    termName: string;
+    subjectId: string;
+    subjectName: string;
+    topics: number;
+    questions: number;
+    validQuestions: number;
+    examReady: boolean;
+};
+
 type FormState = {
     name: string;
     subjectId: string;
@@ -32,6 +45,7 @@ type FormState = {
 export function CurriculumManager() {
     const [topics, setTopics] = useState<Topic[]>([]);
     const [references, setReferences] = useState<References>({ subjects: [], classes: [], terms: [] });
+    const [coverage, setCoverage] = useState<Coverage[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
@@ -61,6 +75,7 @@ export function CurriculumManager() {
         } else {
             setTopics(data.topics);
             setReferences(data.references);
+            setCoverage(data.coverage ?? []);
         }
         setLoading(false);
     }, [filters]);
@@ -82,6 +97,10 @@ export function CurriculumManager() {
 
         if (!form.subjectId) {
             setError("Subject is required.");
+            return;
+        }
+        if (!form.classId || !form.termId) {
+            setError("Class and term are required.");
             return;
         }
 
@@ -185,6 +204,12 @@ export function CurriculumManager() {
         setShowForm(false);
     }
 
+    const visibleCoverage = coverage.filter((item) =>
+        (!filters.subjectId || item.subjectId === filters.subjectId) &&
+        (!filters.classId || item.classId === filters.classId) &&
+        (!filters.termId || item.termId === filters.termId)
+    );
+
     return (
         <section className="admin-curriculum">
             <div className="admin-page-heading">
@@ -221,13 +246,13 @@ export function CurriculumManager() {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="class">Class (optional)</label>
+                        <label htmlFor="class">Class</label>
                         <select
                             id="class"
                             value={form.classId}
                             onChange={(e) => setForm({ ...form, classId: e.target.value })}
                         >
-                            <option value="">Not specified</option>
+                            <option value="">Select class</option>
                             {references.classes.map((c) => (
                                 <option key={c.id} value={c.id}>
                                     {c.name}
@@ -237,13 +262,13 @@ export function CurriculumManager() {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="term">Term (optional)</label>
+                        <label htmlFor="term">Term</label>
                         <select
                             id="term"
                             value={form.termId}
                             onChange={(e) => setForm({ ...form, termId: e.target.value })}
                         >
-                            <option value="">Not specified</option>
+                            <option value="">Select term</option>
                             {references.terms.map((t) => (
                                 <option key={t.id} value={t.id}>
                                     {t.name}
@@ -334,6 +359,25 @@ export function CurriculumManager() {
                     />
                     Active only
                 </label>
+            </div>
+
+            <div className="curriculum-coverage">
+                <h2>Academic coverage</h2>
+                {visibleCoverage.length === 0 ? <p>No curriculum scope found.</p> : (
+                    <table className="topics-table">
+                        <thead><tr><th>Class</th><th>Term</th><th>Subject</th><th>Topics</th><th>Valid questions</th><th>Status</th></tr></thead>
+                        <tbody>{visibleCoverage.map((item) => (
+                            <tr key={`${item.classId}-${item.termId}-${item.subjectId}`}>
+                                <td>{item.className}</td>
+                                <td>{item.termName}</td>
+                                <td>{item.subjectName}</td>
+                                <td>{item.topics}</td>
+                                <td>{item.validQuestions}</td>
+                                <td>{item.examReady ? "Exam-ready" : item.validQuestions ? "Insufficient" : "Not populated"}</td>
+                            </tr>
+                        ))}</tbody>
+                    </table>
+                )}
             </div>
 
             {loading ? (

@@ -56,3 +56,12 @@ export function validateQuestionImport(input: QuestionImportInput): string[] {
 export function normalizeQuestionText(value: string): string {
   return value.trim().replace(/\s+/g, " ").toLowerCase();
 }
+
+export function questionScopeKey(
+  subjectId: string | undefined,
+  classId: string | null | undefined,
+  termId: string | null | undefined,
+  questionText: string,
+): string {
+  return `${subjectId ?? ""}|${classId ?? ""}|${termId ?? ""}|${normalizeQuestionText(questionText)}`;
+}

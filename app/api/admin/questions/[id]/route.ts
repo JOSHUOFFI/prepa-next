@@ -62,6 +62,25 @@ export async function PATCH(
       { error: errors.join(" ") || "Subject ID is required." },
       { status: 400 },
     );
+  if (!input.classId || !input.termId || !input.topicId)
+    return NextResponse.json(
+      { error: "Class, term, and topic are required." },
+      { status: 400 },
+    );
+  const { data: topic } = await access.admin
+    .from("topics")
+    .select("id")
+    .eq("id", input.topicId)
+    .eq("subject_id", input.subjectId)
+    .eq("class_id", input.classId)
+    .eq("term_id", input.termId)
+    .eq("is_active", true)
+    .maybeSingle();
+  if (!topic)
+    return NextResponse.json(
+      { error: "Topic does not match the selected academic scope." },
+      { status: 400 },
+    );
   const { error: questionError } = await access.admin
     .from("questions")
     .update({

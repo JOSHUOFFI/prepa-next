@@ -3,7 +3,7 @@ import * as XLSX from "xlsx";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { requireAdminApi } from "@/lib/supabase/admin-auth";
 import {
-  normalizeQuestionText,
+  questionScopeKey,
   validateQuestionImport,
   type QuestionImportInput,
 } from "@/services/question-import-validation";
@@ -18,12 +18,37 @@ type ImportRow = QuestionImportInput & {
   topicId?: string;
   topicName?: string;
   duplicate?: boolean;
+  missingTopic?: boolean;
   errors: string[];
 };
 
-async function parseFile(
-  request: Request,
-): Promise<{
+type MissingTopic = {
+  key: string;
+  name: string;
+  subjectId: string;
+  classId: string | null;
+  termId: string | null;
+};
+
+async function loadExistingQuestions(admin: SupabaseClient) {
+  const existing: {
+    subject_id: string;
+    class_id: string | null;
+    term_id: string | null;
+    question_text: string;
+  }[] = [];
+  for (let from = 0; ; from += 1000) {
+    const { data, error } = await admin
+      .from("questions")
+      .select("subject_id, class_id, term_id, question_text")
+      .range(from, from + 999);
+    if (error) throw error;
+    existing.push(...(data ?? []));
+    if ((data ?? []).length < 1000) return existing;
+  }
+}
+
+async function parseFile(request: Request): Promise<{
   rows: Record<string, unknown>[];
   confirm: boolean;
   createMissingTopics: boolean;
@@ -65,9 +90,7 @@ async function validateRows(
       .from("topics")
       .select("id, subject_id, name, class_id, term_id")
       .eq("is_active", true),
-    admin
-      .from("questions")
-      .select("subject_id, class_id, term_id, question_text"),
+    loadExistingQuestions(admin).then((data) => ({ data })),
   ]);
   const subjectList = (subjects ?? []) as Reference[];
   const classList = (classes ?? []) as Reference[];
@@ -128,24 +151,33 @@ async function validateRows(
         item.term_id === (termRow?.id ?? null),
     );
     if (!subjectRow) errors.push("Subject does not exist.");
-    if (!classRow && className) errors.push("Class does not exist.");
-    if (!termRow && termName) errors.push("Term does not exist.");
-    if (topicName && !topicRow) {
-      const scopeDesc = `${subjectRow?.name}${classRow ? ` → ${classRow.name}` : ""}${termRow ? ` → ${termRow.name}` : ""}`;
-      errors.push(`Topic "${topicName}" does not exist for ${scopeDesc}.`);
-    }
+    if (!className) errors.push("Class is required.");
+    else if (!classRow) errors.push("Class does not exist.");
+    if (!termName) errors.push("Term is required.");
+    else if (!termRow) errors.push("Term does not exist.");
+    if (!topicName) errors.push("Topic is required.");
+    const missingTopic = Boolean(topicName && !topicRow);
     if (
       optionEntries.length !==
       new Set(optionEntries.map((option) => option.text.toLowerCase())).size
     )
       errors.push("Option values are duplicated.");
-    const key = `${subjectRow?.id}|${classRow?.id}|${termRow?.id}|${normalizeQuestionText(input.questionText)}`;
+    const key = questionScopeKey(
+      subjectRow?.id,
+      classRow?.id,
+      termRow?.id,
+      input.questionText,
+    );
     const duplicate =
       seen.has(key) ||
       (existing ?? []).some(
         (item) =>
-          `${item.subject_id}|${item.class_id}|${item.term_id}|${normalizeQuestionText(item.question_text)}` ===
-          key,
+          questionScopeKey(
+            item.subject_id,
+            item.class_id,
+            item.term_id,
+            item.question_text,
+          ) === key,
       );
     if (duplicate)
       errors.push("Duplicate question in this upload or question bank.");
@@ -159,62 +191,63 @@ async function validateRows(
       topicId: topicRow?.id,
       topicName: topicName,
       duplicate,
+      missingTopic,
       errors,
     };
   });
 }
 
-function findMissingTopics(validated: ImportRow[]): {
-  topics: string[];
-  bySubject: Record<string, string[]>;
-} {
-  const missingMap = new Map<string, string>();
-  const bySubject: Record<string, string[]> = {};
+function findMissingTopics(validated: ImportRow[]): MissingTopic[] {
+  const missingMap = new Map<string, MissingTopic>();
 
   for (const row of validated) {
-    if (row.topicName && !row.topicId) {
-      const key = normalizeTopic(row.topicName);
-      // Store normalized key → original name. If duplicate normalized name, keep first
+    if (row.topicName && row.missingTopic && row.subjectId) {
+      const key = `${row.subjectId}|${row.classId ?? ""}|${row.termId ?? ""}|${normalizeTopic(row.topicName)}`;
       if (!missingMap.has(key)) {
-        missingMap.set(key, row.topicName);
+        missingMap.set(key, {
+          key,
+          name: row.topicName,
+          subjectId: row.subjectId,
+          classId: row.classId ?? null,
+          termId: row.termId ?? null,
+        });
       }
     }
   }
 
-  return {
-    topics: Array.from(missingMap.values()),
-    bySubject,
-  };
+  return Array.from(missingMap.values());
 }
 
 async function createMissingTopics(
-  missing: string[],
+  missing: MissingTopic[],
   admin: SupabaseClient,
-  subjectMapping: Record<string, string>,
-  classMapping: Record<string, string | null>,
-  termMapping: Record<string, string | null>,
 ): Promise<{ idMap: Record<string, string>; createdIds: string[] }> {
   const idMap: Record<string, string> = {};
   const createdIds: string[] = [];
 
-  for (const topicName of missing) {
+  for (const missingTopic of missing) {
     const { data: topic, error } = await admin
       .from("topics")
       .insert({
-        name: topicName.trim(),
-        subject_id: subjectMapping[topicName] || "",
-        class_id: classMapping[topicName] || null,
-        term_id: termMapping[topicName] || null,
+        name: missingTopic.name.trim(),
+        subject_id: missingTopic.subjectId,
+        class_id: missingTopic.classId,
+        term_id: missingTopic.termId,
         is_active: true,
       })
       .select("id")
       .single();
 
     if (error || !topic) {
-      throw new Error(`Failed to create topic "${topicName}".`);
+      await Promise.all(
+        createdIds.map((createdId) =>
+          admin.from("topics").delete().eq("id", createdId),
+        ),
+      );
+      throw new Error(`Failed to create topic "${missingTopic.name}".`);
     }
 
-    idMap[normalizeTopic(topicName)] = topic.id;
+    idMap[missingTopic.key] = topic.id;
     createdIds.push(topic.id);
   }
 
@@ -233,47 +266,32 @@ export async function POST(request: Request) {
     const validated = await validateRows(parsed.rows, access.admin);
 
     if (!parsed.confirm) {
-      const { topics: missingTopics } = findMissingTopics(validated);
+      const missingTopics = findMissingTopics(validated);
       return NextResponse.json({
         total: validated.length,
         valid: validated.filter((row) => !row.errors.length),
         invalid: validated.filter((row) => row.errors.length && !row.duplicate),
         duplicates: validated.filter((row) => row.duplicate),
-        missingTopics: missingTopics,
+        missingTopics: missingTopics.map((topic) => topic.name),
       });
     }
 
     const valid = validated.filter((row) => !row.errors.length);
 
     // Detect missing topics and create them if requested
-    const { topics: missingTopics } = findMissingTopics(valid);
+    const missingTopics = findMissingTopics(valid);
+    if (missingTopics.length > 0 && !parsed.createMissingTopics) {
+      return NextResponse.json(
+        { error: "Confirm creation of the missing topics before importing." },
+        { status: 400 },
+      );
+    }
     let createdTopicCount = 0;
     let createdTopicIds: string[] = [];
     const topicIdMap: Record<string, string> = {};
 
     if (missingTopics.length > 0 && parsed.createMissingTopics) {
-      // Build mappings of topic name to subject/class/term
-      const subjectMapping: Record<string, string> = {};
-      const classMapping: Record<string, string | null> = {};
-      const termMapping: Record<string, string | null> = {};
-
-      for (const row of valid) {
-        if (row.topicName && !row.topicId && row.subjectId) {
-          if (!(normalizeTopic(row.topicName) in topicIdMap)) {
-            subjectMapping[row.topicName] = row.subjectId;
-            classMapping[row.topicName] = row.classId || null;
-            termMapping[row.topicName] = row.termId || null;
-          }
-        }
-      }
-
-      const result = await createMissingTopics(
-        missingTopics,
-        access.admin,
-        subjectMapping,
-        classMapping,
-        termMapping,
-      );
+      const result = await createMissingTopics(missingTopics, access.admin);
 
       Object.assign(topicIdMap, result.idMap);
       createdTopicIds = result.createdIds;
@@ -281,10 +299,10 @@ export async function POST(request: Request) {
 
       // Update topicId for rows that reference newly created topics
       for (const row of valid) {
-        if (row.topicName && !row.topicId) {
-          const normalizedName = normalizeTopic(row.topicName);
-          if (normalizedName in topicIdMap) {
-            row.topicId = topicIdMap[normalizedName];
+        if (row.topicName && row.missingTopic) {
+          const topicKey = `${row.subjectId ?? ""}|${row.classId ?? ""}|${row.termId ?? ""}|${normalizeTopic(row.topicName)}`;
+          if (topicKey in topicIdMap) {
+            row.topicId = topicIdMap[topicKey];
           }
         }
       }
