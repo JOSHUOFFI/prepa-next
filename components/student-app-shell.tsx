@@ -9,9 +9,10 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { ProfileAvatar } from "@/components/profile/profile-avatar";
 
-const studentRoutes = ["/dashboard", "/exam", "/results", "/classroom"];
+const studentRoutes = ["/dashboard", "/catalogue", "/exam", "/results", "/classroom"];
 const navigation = [
   { href: "/dashboard", label: "Overview", mark: "O" },
+  { href: "/catalogue", label: "Subjects", mark: "S" },
   { href: "/exam", label: "Take an exam", mark: "E" },
   { href: "/results", label: "My results", mark: "R" },
   { href: "/classroom", label: "Classroom", mark: "C" },

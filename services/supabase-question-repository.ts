@@ -26,6 +26,7 @@ type OptionRow = {
 export type SafeExamQuestionRequest = {
   /** Matches public.subjects.name exactly. */
   subject: string;
+  subjectId?: string;
   classLevel?: string;
   term?: string;
   /** Capped at 40, the current CBT maximum. */
@@ -49,14 +50,11 @@ function toPoints(value: number | string): number {
   return Number.isFinite(points) ? points : 1;
 }
 
-async function getSubjectId(subject: string): Promise<string | null> {
+async function getSubjectId(subject: string, subjectId?: string): Promise<string | null> {
   const supabase = createSupabaseAdminClient();
-  const { data, error } = await supabase
-    .from("subjects")
-    .select("id")
-    .eq("name", subject)
-    .eq("is_active", true)
-    .maybeSingle();
+  let query = supabase.from("subjects").select("id").eq("is_active", true);
+  query = subjectId ? query.eq("id", subjectId) : query.eq("name", subject);
+  const { data, error } = await query.maybeSingle();
 
   if (error) throw new Error(`Unable to load subject: ${error.message}`);
   return data?.id ?? null;
@@ -146,12 +144,13 @@ async function getOptionRows(questionIds: string[]): Promise<OptionRow[]> {
  */
 export async function loadSafeExamQuestions({
   subject,
+  subjectId,
   classLevel,
   term,
   questionCount = DEFAULT_EXAM_QUESTION_COUNT,
 }: SafeExamQuestionRequest): Promise<SafeExamQuestion[]> {
-  const subjectId = await getSubjectId(subject);
-  if (!subjectId) return [];
+  const resolvedSubjectId = await getSubjectId(subject, subjectId);
+  if (!resolvedSubjectId) return [];
 
   const normalizedCount = Number.isFinite(questionCount)
     ? Math.floor(questionCount)
@@ -160,7 +159,7 @@ export async function loadSafeExamQuestions({
     Math.max(normalizedCount, 0),
     DEFAULT_EXAM_QUESTION_COUNT,
   );
-  const questionRows = await getQuestionRows(subjectId, classLevel, term);
+  const questionRows = await getQuestionRows(resolvedSubjectId);
   const optionRows = await getOptionRows(questionRows.map(({ id }) => id));
   const optionsByQuestionId = new Map<string, OptionRow[]>();
 

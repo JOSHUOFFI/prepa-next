@@ -16,23 +16,17 @@ export async function GET(request: Request) {
       { status: 401 },
     );
 
-  const subject = new URL(request.url).searchParams.get("subject")?.trim();
-  const classLevel = new URL(request.url).searchParams
-    .get("classLevel")
-    ?.trim();
-  const term = new URL(request.url).searchParams.get("term")?.trim();
-  if (!subject || !classLevel || !term)
+  const params = new URL(request.url).searchParams;
+  const subjectId = params.get("subjectId")?.trim();
+  const subject = params.get("subject")?.trim();
+  if (!subjectId && !subject)
     return NextResponse.json(
-      { error: "Subject, class, and term are required." },
+      { error: "Subject is required." },
       { status: 400 },
     );
 
   try {
-    const questions = await loadSafeExamQuestions({
-      subject,
-      classLevel,
-      term,
-    });
+    const questions = await loadSafeExamQuestions({ subject: subject || "", subjectId });
     if (questions.length === 0) {
       return NextResponse.json(
         {

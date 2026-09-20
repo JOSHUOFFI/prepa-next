@@ -5,18 +5,16 @@ import { useRouter } from "next/navigation";
 import { examStorage } from "@/services/exam-storage";
 import { safeExamStorage } from "@/services/safe-exam-storage";
 import { legacyExamDurationMinutes } from "@/services/legacy-exam-fallback";
-import type { Class, ClassLevel, SafeExamQuestion, Subject, Term } from "@/types";
+import type { SafeExamQuestion, Subject } from "@/types";
 import { ProfileIdentity } from "@/components/profile/profile-identity";
 
 export function ExamSetup({
   profile,
-  classOptions,
-  termOptions,
+  initialSubjectId,
   subjects,
 }: {
-  profile: { fullName: string; classLevel?: ClassLevel };
-  classOptions: Class[];
-  termOptions: Term[];
+  profile: { fullName: string };
+  initialSubjectId?: string;
   subjects: Subject[];
 }) {
   const router = useRouter();
@@ -25,38 +23,39 @@ export function ExamSetup({
   const nameParts = profile.fullName.trim().split(/\s+/);
   const [firstName, setFirstName] = useState(nameParts[0] || "");
   const [lastName, setLastName] = useState(nameParts.slice(1).join(" "));
-  const [classLevel, setClassLevel] = useState<ClassLevel>(profile.classLevel ?? classOptions[0].value);
-  const [term, setTerm] = useState<Term>(termOptions[0]);
-  const [subject, setSubject] = useState(subjects[0]?.name || "");
+  const initialSubject = subjects.find(item => item.id === initialSubjectId) ?? subjects[0];
+  const [subject, setSubject] = useState(initialSubject?.name || "");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const selectedSubject = subjects.find(item => item.name === subject);
 
   async function startExam() {
     setError("");
-    if (!firstName.trim() || !lastName.trim() || !classLevel || !term || !subject) {
-      setError("Enter your name and choose a class, term, and subject before starting.");
+    if (!firstName.trim() || !lastName.trim() || !selectedSubject) {
+      setError("Enter your name and choose a subject before starting.");
       return;
     }
     setLoading(true);
     try {
-      const params = new URLSearchParams({ subject, classLevel, term });
+      const params = new URLSearchParams({ subjectId: selectedSubject.id || "", subject });
       const response = await fetch(`/api/exam/questions?${params.toString()}`, { cache: "no-store" });
       const payload = await response.json() as { code?: string; questions?: SafeExamQuestion[] };
       if (response.status === 422 && payload.code === "EXAM_UNAVAILABLE") {
-        setError("This exam is not available yet because there are no questions for this subject.");
+        setError("No questions are currently available for this subject. Please try another subject.");
         setLoading(false);
         return;
       }
       if (response.status === 422 && payload.code === "EXAM_INSUFFICIENT_QUESTIONS") {
-        setError("This exam is not available yet because there are not enough questions for this subject.");
+        setError("There are not enough questions currently available for this subject. Please try another subject.");
         setLoading(false);
         return;
       }
       if (!response.ok) throw new Error("Safe question route failed");
       if (!payload.questions?.length) throw new Error("No safe question pool");
       const questions = payload.questions.slice(0, 40);
-      const remoteAttempt = await safeExamStorage.createRemoteAttempt({ firstName, lastName, classLevel, term, subject, durationMinutes: legacyExamDurationMinutes }, questions);
-      safeExamStorage.createExam({ firstName, lastName, classLevel, term, subject, durationMinutes: legacyExamDurationMinutes }, questions, remoteAttempt.attemptId, remoteAttempt.startedAt, remoteAttempt.expiresAt);
+      const configuration = { firstName, lastName, subjectId: selectedSubject.id, subject, durationMinutes: legacyExamDurationMinutes };
+      const remoteAttempt = await safeExamStorage.createRemoteAttempt(configuration, questions);
+      safeExamStorage.createExam(configuration, questions, remoteAttempt.attemptId, remoteAttempt.startedAt, remoteAttempt.expiresAt);
     } catch {
       setError("We could not start the SAFE exam. Check internet connection and try again.");
       setLoading(false);
@@ -71,7 +70,7 @@ export function ExamSetup({
       <div className="section-heading">
         <p className="eyebrow">Computer Based Test</p>
         <h1>Start an examination</h1>
-        <p>Select your details and subject. The exam uses a randomized 40-question subject pool.</p>
+        <p>Choose a subject. The exam uses a randomized 40-question subject pool.</p>
       </div>
 
       {activeExam || safeActiveExam ? (
@@ -90,24 +89,12 @@ export function ExamSetup({
           Last name
           <input value={lastName} onChange={event => setLastName(event.target.value)} />
         </label>
-        <label>
-          Class
-          <select value={classLevel} onChange={event => setClassLevel(event.target.value as ClassLevel)}>
-            {classOptions.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}
-          </select>
-        </label>
-        <label>
-          Term
-          <select value={term} onChange={event => setTerm(event.target.value as Term)}>
-            {termOptions.map(item => <option key={item} value={item}>{item}</option>)}
-          </select>
-        </label>
         <label className="wide">
           Subject
           <select value={subject} onChange={event => setSubject(event.target.value)}>
             {subjects.map(item => (
-              <option key={item.name} value={item.name}>
-                {item.name} ({item.questionCount})
+              <option key={item.id || item.name} value={item.name}>
+                {item.name}
               </option>
             ))}
           </select>
@@ -115,7 +102,7 @@ export function ExamSetup({
       </div>
 
       <div className="exam-setup-footer">
-        <p>Up to 40 questions available for this subject.</p>
+        <p>Up to 40 questions will be selected from the subject pool.</p>
         <button className="btn btn-primary" onClick={startExam} disabled={loading}>{loading ? "Loading questions..." : "Start exam"}</button>
       </div>
       {error ? <p className="form-error">{error}</p> : null}

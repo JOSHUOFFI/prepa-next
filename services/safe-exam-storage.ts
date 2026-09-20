@@ -80,9 +80,8 @@ export const safeExamStorage = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        subjectId: configuration.subjectId,
         subject: configuration.subject,
-        classLevel: configuration.classLevel,
-        term: configuration.term,
         questions: questions.map((question, order) => ({
           id: question.id,
           order,
@@ -143,8 +142,6 @@ export const safeExamStorage = {
         startedAt: string;
         expiresAt: string;
         subject: string;
-        classLevel: string;
-        term: string;
         questions: SafeExamQuestion[];
         answers: ExamAnswer[];
       } | null;
@@ -153,8 +150,6 @@ export const safeExamStorage = {
     if (
       !attempt ||
       !attempt.subject ||
-      !attempt.classLevel ||
-      !attempt.term ||
       !attempt.questions.length
     )
       return null;
@@ -169,8 +164,6 @@ export const safeExamStorage = {
       configuration: {
         firstName: "",
         lastName: "",
-        classLevel: attempt.classLevel as ExamConfiguration["classLevel"],
-        term: attempt.term as ExamConfiguration["term"],
         subject: attempt.subject,
         durationMinutes: 30,
       },

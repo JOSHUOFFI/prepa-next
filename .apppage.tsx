@@ -1,24 +1,20 @@
-﻿import { ButtonLink } from "@/components/button-link";
+import { ButtonLink } from "@/components/button-link";
 
 const steps = [
   {
     title: "Choose",
-    icon: "01",
     description: "Select the subject you want to focus on and begin with a clear study target.",
   },
   {
     title: "Practice",
-    icon: "02",
     description: "Work through a structured CBT-style session designed for focused preparation.",
   },
   {
     title: "Submit",
-    icon: "03",
     description: "Finish the session and move straight into a review-ready experience.",
   },
   {
     title: "Improve",
-    icon: "04",
     description: "Use your results to guide the next revision step and build better habits over time.",
   },
 ];
@@ -80,7 +76,7 @@ export default function HomePage() {
     <main className="landing-page">
       <section className="landing-hero" id="top">
         <div className="landing-hero__copy">
-          <p className="landing-kicker">PrePa · A JoLight Academy product</p>
+          <p className="landing-kicker">PrePa CBT practice</p>
           <h1>Build exam confidence with focused, subject-based preparation.</h1>
           <p>
             PrePa is a digital study platform for students who want a clearer, more structured way to practise,
@@ -102,25 +98,15 @@ export default function HomePage() {
         <div className="product-preview" aria-label="Representative PrePa product interface preview">
           <div className="product-preview__top">
             <span>PrePa</span>
-            <span>JoLight Academy</span>
+            <span>Subject practice</span>
           </div>
           <div className="product-preview__body">
-            <div className="story-visual__device-header">
-              <span className="story-visual__dot" />
-              <span className="story-visual__dot" />
-              <span className="story-visual__dot" />
-            </div>
-            <div className="story-visual__device-content">
-              <div className="story-visual__meta-row">
-                <span>Question 04 of 20</span>
-                <span>English</span>
-              </div>
-              <h2>Which option best completes the statement?</h2>
-              <div className="product-preview__options">
-                <span><b>A</b> First answer option</span>
-                <span className="is-selected"><b>B</b> Selected answer option</span>
-                <span><b>C</b> Another answer option</span>
-              </div>
+            <p>Question 04 of 20</p>
+            <h2>Which option best completes the statement?</h2>
+            <div className="product-preview__options">
+              <span><b>A</b> First answer option</span>
+              <span className="is-selected"><b>B</b> Selected answer option</span>
+              <span><b>C</b> Another answer option</span>
             </div>
           </div>
           <aside className="product-preview__result">
@@ -144,8 +130,7 @@ export default function HomePage() {
 
         <div className="landing-value__items">
           {steps.map((step, index) => (
-            <article key={step.title} className="story-step-card">
-              <div className="story-step-card__icon" aria-hidden="true">{step.icon}</div>
+            <article key={step.title}>
               <span>0{index + 1}</span>
               <h3>{step.title}</h3>
               <p>{step.description}</p>
@@ -223,13 +208,29 @@ export default function HomePage() {
 
       <section className="landing-brand-story" id="about">
         <div className="landing-brand-story__content">
-          <p className="landing-brand-story__badge">PrePa · A JoLight Academy product</p>
-          <p className="eyebrow">Built with purpose</p>
-          <h2>PrePa is designed to make exam preparation more practical and more personal.</h2>
+          <p className="eyebrow">Built by JoLight Academy</p>
+          <h2>PrePa is developed with purpose by JoLight Academy.</h2>
           <p>
-            Developed under JoLight Academy, PrePa brings together clear subject paths, structured CBT practice, and a
-            more focused way for students to prepare with confidence.
+            PrePa is an EdTech product created under JoLight Academy to support students with a more practical and
+            structured approach to digital exam preparation.
           </p>
+        </div>
+      </section>
+
+      <section className="landing-founder" aria-labelledby="founder-heading">
+        <div className="landing-founder__card">
+          <div className="landing-founder__portrait" aria-hidden="true">
+            DJ
+          </div>
+
+          <div className="landing-founder__info">
+            <p className="eyebrow">Founder</p>
+            <h3 id="founder-heading">David Joshua � Founder, JoLight Academy</h3>
+            <p>
+              David Joshua leads the product direction behind PrePa, bringing together technology, education, and a
+              practical approach to building useful learning experiences.
+            </p>
+          </div>
         </div>
       </section>
 

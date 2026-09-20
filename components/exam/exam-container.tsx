@@ -235,7 +235,7 @@ export function ExamContainer() {
         <div>
           <p className="eyebrow">{state.configuration.isRetry ? "Retry examination" : "Live examination"}</p>
           <h1>{state.configuration.subject}</h1>
-          <p>{state.student.name} - {state.configuration.classLevel} - {state.configuration.term}</p>
+          <p>{state.student.name}</p>
         </div>
         <ExamTimer remainingSeconds={remainingSeconds} />
       </header>

@@ -24,6 +24,7 @@ export interface Class {
 }
 
 export interface Subject {
+  id?: string;
   name: string;
   group: string;
   hasQuestions: boolean;
@@ -110,8 +111,9 @@ export type QuestionBank = Record<string, Question[]>;
 export interface ExamConfiguration {
   firstName: string;
   lastName: string;
-  classLevel: ClassLevel;
-  term: Term;
+  classLevel?: ClassLevel;
+  term?: Term;
+  subjectId?: string;
   subject: string;
   durationMinutes: number;
   isRetry?: boolean;

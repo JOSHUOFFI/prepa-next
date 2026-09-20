@@ -102,16 +102,20 @@ export async function GET(request: Request) {
       .select("name")
       .eq("id", attempt.subject_id)
       .maybeSingle(),
-    supabase
-      .from("classes")
-      .select("name")
-      .eq("id", attempt.class_id)
-      .maybeSingle(),
-    supabase
-      .from("terms")
-      .select("name")
-      .eq("id", attempt.term_id)
-      .maybeSingle(),
+    attempt.class_id
+      ? supabase
+          .from("classes")
+          .select("name")
+          .eq("id", attempt.class_id)
+          .maybeSingle()
+      : Promise.resolve({ data: null }),
+    attempt.term_id
+      ? supabase
+          .from("terms")
+          .select("name")
+          .eq("id", attempt.term_id)
+          .maybeSingle()
+      : Promise.resolve({ data: null }),
   ]);
   const totalPoints = (snapshots ?? []).reduce(
     (total, snapshot) => total + Number(snapshot.points),
@@ -134,8 +138,8 @@ export async function GET(request: Request) {
         submittedAt: attempt.submitted_at,
         studentName: profile?.full_name ?? "Student",
         subject: subject?.name ?? "",
-        classLevel: classRow?.name ?? "",
-        term: term?.name ?? "",
+        classLevel: classRow?.name ?? undefined,
+        term: term?.name ?? undefined,
         correctAnswers: (answers ?? []).filter(
           (answer) => answer.is_correct === true,
         ).length,

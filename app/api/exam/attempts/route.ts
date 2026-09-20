@@ -19,9 +19,8 @@ export async function POST(request: Request) {
     );
 
   let body: {
+    subjectId?: string;
     subject?: string;
-    classLevel?: string;
-    term?: string;
     questions?: AttemptQuestionInput[];
   };
   try {
@@ -33,9 +32,7 @@ export async function POST(request: Request) {
     );
   }
   if (
-    !body.subject ||
-    !body.classLevel ||
-    !body.term ||
+    (!body.subjectId && !body.subject) ||
     !Array.isArray(body.questions) ||
     body.questions.length === 0 ||
     body.questions.length > 40
@@ -47,40 +44,24 @@ export async function POST(request: Request) {
   }
 
   const admin = createSupabaseAdminClient();
-  const [subjectResult, classResult, termResult] = await Promise.all([
-    admin
-      .from("subjects")
-      .select("id")
-      .eq("name", body.subject)
-      .eq("is_active", true)
-      .maybeSingle(),
-    admin
-      .from("classes")
-      .select("id, name")
-      .eq("name", body.classLevel)
-      .maybeSingle(),
-    admin.from("terms").select("id").eq("name", body.term).maybeSingle(),
-  ]);
-  const { data: subject, error: subjectError } = subjectResult;
-  const { data: classRow, error: classError } = classResult;
-  const { data: termRow, error: termError } = termResult;
-  if (subjectError || classError || termError) {
+  let subjectQuery = admin.from("subjects").select("id").eq("is_active", true);
+  subjectQuery = body.subjectId
+    ? subjectQuery.eq("id", body.subjectId)
+    : subjectQuery.eq("name", body.subject || "");
+  const { data: subject, error: subjectError } = await subjectQuery.maybeSingle();
+  if (subjectError) {
     console.error("SAFE exam reference lookup failed", {
       operation: "create_safe_exam_attempt",
       userId: user.id,
       subject: body.subject,
-      classLevel: body.classLevel,
-      term: body.term,
-      errors: [subjectError, classError, termError]
-        .filter(Boolean)
-        .map((error) => error?.message),
+      error: subjectError.message,
     });
     return NextResponse.json(
       { error: "Unable to validate exam configuration." },
       { status: 500 },
     );
   }
-  if (!subject || !termRow || !classRow)
+  if (!subject)
     return NextResponse.json(
       { error: "Exam reference data is invalid." },
       { status: 400 },
@@ -110,8 +91,6 @@ export async function POST(request: Request) {
       operation: "create_safe_exam_attempt",
       userId: user.id,
       subject: body.subject,
-      classLevel: body.classLevel,
-      term: body.term,
       requestedQuestionCount: questionIds.length,
       error: questionError.message,
     });
@@ -125,21 +104,6 @@ export async function POST(request: Request) {
       { error: "Exam question set is invalid." },
       { status: 400 },
     );
-  if (
-    questionRows.some(
-      (question) =>
-        !(
-          (question.class_id === classRow.id &&
-            question.term_id === termRow.id) ||
-          (question.class_id === null && question.term_id === null)
-        ),
-    )
-  )
-    return NextResponse.json(
-      { error: "Exam question set is outside the selected academic scope." },
-      { status: 400 },
-    );
-
   const startedAt = new Date();
   const expiresAt = new Date(
     startedAt.getTime() + EXAM_DURATION_MINUTES * 60 * 1000,
@@ -149,8 +113,8 @@ export async function POST(request: Request) {
     .insert({
       student_id: user.id,
       subject_id: subject.id,
-      class_id: classRow.id,
-      term_id: termRow.id,
+      class_id: null,
+      term_id: null,
       started_at: startedAt.toISOString(),
       expires_at: expiresAt.toISOString(),
       total_questions: questionIds.length,
@@ -192,8 +156,6 @@ export async function POST(request: Request) {
       userId: user.id,
       attemptId: attempt.id,
       subject: body.subject,
-      classLevel: body.classLevel,
-      term: body.term,
       requestedQuestionCount: questionIds.length,
       error: snapshotError.message,
     });
@@ -232,22 +194,12 @@ export async function GET() {
     .limit(1)
     .maybeSingle();
   if (!attempt) return NextResponse.json({ attempt: null });
-  const [{ data: subject }, { data: classRow }, { data: term }] =
+  const [{ data: subject }] =
     await Promise.all([
       admin
         .from("subjects")
         .select("name")
         .eq("id", attempt.subject_id)
-        .maybeSingle(),
-      admin
-        .from("classes")
-        .select("name")
-        .eq("id", attempt.class_id)
-        .maybeSingle(),
-      admin
-        .from("terms")
-        .select("name")
-        .eq("id", attempt.term_id)
         .maybeSingle(),
     ]);
   const { data: snapshots } = await admin
@@ -302,8 +254,8 @@ export async function GET() {
         startedAt: attempt.started_at,
         expiresAt: attempt.expires_at,
         subject: subject?.name,
-        classLevel: classRow?.name?.replace(/\s+/g, ""),
-        term: term?.name,
+        classLevel: undefined,
+        term: undefined,
         totalQuestions: attempt.total_questions,
         questions: safeQuestions,
         answers: answers ?? [],
