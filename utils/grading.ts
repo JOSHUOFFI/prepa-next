@@ -5,7 +5,7 @@ const gradeScale = [
   { min: 70, grade: "A", message: "Excellent work" },
   { min: 60, grade: "B", message: "Very good job" },
   { min: 50, grade: "C", message: "Good effort" },
-  { min: 40, grade: "D", message: "Pass" },
+  { min: 40, grade: "D", message: "Pass, you can do much  more better" },
   { min: 0, grade: "F", message: "Needs improvement, better luck buddy..." }
 ];
 

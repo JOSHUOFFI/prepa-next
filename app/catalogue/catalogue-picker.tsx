@@ -8,6 +8,8 @@ export type CatalogueSubject = {
     catalogue_key: string;
     display_name: string;
     category: string;
+    education_level?: "jss" | "sss" | null;
+    subject_field?: string | null;
     production_subject_id: string | null;
     availability_status: string;
     selection_group: string | null;
@@ -24,13 +26,27 @@ const categoryLabels: Record<string, string> = {
     trade_vocational: "Trade & vocational",
 };
 
-const seniorSectionLabels: Record<string, string> = {
+const sectionLabels: Record<string, string> = {
+    core_general: "Core / General",
+    religion: "Religion",
+    language: "Languages",
+    trade_vocational: "Trade / Vocational",
+    core_compulsory: "Core & Compulsory",
     science: "Science",
-    arts: "Arts",
-    commercial: "Commercial",
+    arts_humanities: "Arts",
+    commercial_business: "Commercial",
 };
 
 const sortSubjects = (subjects: CatalogueSubject[]) => [...subjects].sort((a, b) => a.display_name.localeCompare(b.display_name, undefined, { sensitivity: "base" }));
+
+const groupSubjectsByField = (subjects: CatalogueSubject[], fieldOrder: string[]) =>
+    fieldOrder
+        .map(field => ({
+            field,
+            label: sectionLabels[field] ?? field,
+            subjects: sortSubjects(subjects.filter(subject => subject.subject_field === field)),
+        }))
+        .filter(section => section.subjects.length > 0);
 
 function SubjectCard({
     subject,
@@ -81,11 +97,12 @@ export function CataloguePicker({
     const router = useRouter();
     const [selectedSubjectId, setSelectedSubjectId] = useState<string | null>(null);
 
-    const juniorSubjects = useMemo(() => sortSubjects(subjects), [subjects]);
+    const juniorSections = useMemo(
+        () => groupSubjectsByField(subjects.filter(subject => subject.education_level === "jss"), ["core_general", "religion", "language", "trade_vocational"]),
+        [subjects],
+    );
     const seniorSections = useMemo(
-        () => ["science", "arts", "commercial"]
-            .map(key => ({ key, label: seniorSectionLabels[key], subjects: sortSubjects(subjects.filter(subject => subject.category === key)) }))
-            .filter(section => section.subjects.length > 0),
+        () => groupSubjectsByField(subjects.filter(subject => subject.education_level === "sss"), ["core_compulsory", "science", "arts_humanities", "commercial_business", "trade_vocational"]),
         [subjects],
     );
     const languageRule = subjects.some(subject => subject.selection_group === "nigerian_language" && subject.selection_rule === "exactly_one");
@@ -96,9 +113,9 @@ export function CataloguePicker({
         <main className="catalogue-page">
             <header className="catalogue-hero">
                 <div>
-                    <p className="eyebrow">JSS 1 - JSS 3</p>
+                    <p className="eyebrow">JSS 1–3 / SS 1–3</p>
                     <h1>Choose your subject</h1>
-                    <p>Explore the PrePa subject catalogue and start a focused practice exam when your subject is ready.</p>
+                    <p>Start with the level you are in, then choose the right subject field before continuing.</p>
                 </div>
                 <div className="catalogue-hero__summary" aria-label={`${availableCount} of ${subjects.length} subjects available`}>
                     <strong>{availableCount}<span>/{subjects.length}</span></strong>
@@ -117,26 +134,35 @@ export function CataloguePicker({
                 <section className="catalogue-empty"><h2>No subjects available</h2><p>We are preparing the subject catalogue. Please check back soon.</p></section>
             ) : (
                 <div className="catalogue-tiered-layout">
-                    <section className="catalogue-tier" aria-labelledby="junior-heading">
-                        <h2 id="junior-heading" className="catalogue-tier__heading catalogue-tier__heading--junior">Junior</h2>
-                        <div className="catalogue-grid">
-                            {juniorSubjects.map(subject => (
-                                <SubjectCard
-                                    key={subject.catalogue_key}
-                                    subject={subject}
-                                    selected={subject.production_subject_id === selectedSubjectId}
-                                    onSelect={setSelectedSubjectId}
-                                />
-                            ))}
-                        </div>
-                    </section>
+                    {juniorSections.length > 0 ? (
+                        <section className="catalogue-tier" aria-labelledby="junior-heading">
+                            <h2 id="junior-heading" className="catalogue-tier__heading catalogue-tier__heading--junior">Junior Secondary</h2>
+                            <div className="catalogue-tier__senior-groups">
+                                {juniorSections.map(section => (
+                                    <div className="catalogue-tier__subsection" key={section.field}>
+                                        <h3 className="catalogue-tier__subheading">{section.label}</h3>
+                                        <div className="catalogue-grid">
+                                            {section.subjects.map(subject => (
+                                                <SubjectCard
+                                                    key={subject.catalogue_key}
+                                                    subject={subject}
+                                                    selected={subject.production_subject_id === selectedSubjectId}
+                                                    onSelect={setSelectedSubjectId}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    ) : null}
 
                     {seniorSections.length > 0 ? (
                         <section className="catalogue-tier" aria-labelledby="senior-heading">
-                            <h2 id="senior-heading" className="catalogue-tier__heading catalogue-tier__heading--senior">Senior</h2>
+                            <h2 id="senior-heading" className="catalogue-tier__heading catalogue-tier__heading--senior">Senior Secondary</h2>
                             <div className="catalogue-tier__senior-groups">
                                 {seniorSections.map(section => (
-                                    <div className="catalogue-tier__subsection" key={section.key}>
+                                    <div className="catalogue-tier__subsection" key={section.field}>
                                         <h3 className="catalogue-tier__subheading">{section.label}</h3>
                                         <div className="catalogue-grid">
                                             {section.subjects.map(subject => (
