@@ -4,15 +4,46 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Subject } from "@/types";
 
 const catalogueGroupLabels: Record<string, string> = {
-  core_general: "Junior Secondary • Core / General",
-  religion: "Junior Secondary • Religion",
-  language: "Junior Secondary • Languages",
-  trade_vocational: "Junior Secondary • Trade / Vocational",
-  core_compulsory: "Senior Secondary • Core & Compulsory",
-  science: "Senior Secondary • Science",
-  arts_humanities: "Senior Secondary • Arts",
-  commercial_business: "Senior Secondary • Commercial",
+  core_general: "Core / General",
+  religion: "Religion",
+  language: "Languages",
+  trade_vocational: "Trade / Vocational",
+  core_compulsory: "Core & Compulsory",
+  science: "Science",
+  arts_humanities: "Arts / Humanities",
+  commercial_business: "Commercial",
 };
+
+const educationLevelLabels: Record<string, string> = {
+  jss: "Junior Secondary",
+  sss: "Senior Secondary",
+};
+
+function getAvailabilityState(subject: { production_subject_id: string | null; availability_status: string | null; questionCount: number }) {
+  if (!subject.production_subject_id) {
+    return { isAvailable: false, label: "Coming soon" };
+  }
+
+  if (subject.questionCount < 40) {
+    return { isAvailable: false, label: "Coming soon" };
+  }
+
+  const status = String(subject.availability_status ?? "").toLowerCase();
+  const unavailableStatuses = [
+    "not_ready",
+    "source_review_required",
+    "scope_decision_required",
+    "mapping_required",
+    "pending",
+    "review_required",
+  ];
+
+  if (unavailableStatuses.includes(status)) {
+    return { isAvailable: false, label: "Coming soon" };
+  }
+
+  return { isAvailable: true, label: "Available" };
+}
 
 export const metadata = { title: "Exam setup" };
 
@@ -26,9 +57,10 @@ export default async function ExamPage({ searchParams }: { searchParams: Promise
     supabase.from("profiles").select("full_name, class_id").eq("id", user.id).maybeSingle(),
     supabase
       .from("catalogue_subjects")
-      .select("production_subject_id, display_name, education_level, subject_field, sort_order")
+      .select("catalogue_key, display_name, education_level, category, subject_field, production_subject_id, availability_status, sort_order, is_active")
       .eq("is_active", true)
-      .not("production_subject_id", "is", null)
+      .order("education_level")
+      .order("category")
       .order("sort_order"),
   ]);
 
@@ -37,25 +69,51 @@ export default async function ExamPage({ searchParams }: { searchParams: Promise
     throw catalogueError;
   }
 
-  const canonicalSubjectRows = new Map<string, (typeof subjectRows extends (infer T)[] ? T : never)>();
+  const mappedSubjectIds = (subjectRows ?? [])
+    .map(row => row.production_subject_id)
+    .filter((id): id is string => Boolean(id));
 
-  for (const row of subjectRows ?? []) {
-    const key = row.production_subject_id ?? row.display_name;
-    const existing = canonicalSubjectRows.get(key);
-    if (!existing || (row.production_subject_id && !existing.production_subject_id) || (!row.production_subject_id && !existing.production_subject_id && row.sort_order < existing.sort_order)) {
-      canonicalSubjectRows.set(key, row);
+  let questionCountsBySubjectId: Record<string, number> = {};
+
+  if (mappedSubjectIds.length > 0) {
+    const { data: questionRows, error: questionCountError } = await supabase
+      .from("questions")
+      .select("subject_id")
+      .in("subject_id", mappedSubjectIds)
+      .eq("is_active", true);
+
+    if (questionCountError) {
+      console.error("Exam subject question count load failed", questionCountError);
+    } else {
+      for (const row of questionRows ?? []) {
+        questionCountsBySubjectId[row.subject_id] = (questionCountsBySubjectId[row.subject_id] ?? 0) + 1;
+      }
     }
   }
 
-  const subjects: Subject[] = [...canonicalSubjectRows.values()].map(row => ({
-    id: row.production_subject_id ?? undefined,
-    name: row.display_name,
-    group:
-      catalogueGroupLabels[row.subject_field ?? ""] ??
-      (row.education_level === "jss" ? "Junior Secondary" : row.education_level === "sss" ? "Senior Secondary" : "Catalogue subject"),
-    hasQuestions: true,
-    questionCount: 0,
-  }));
+  const subjects: Subject[] = (subjectRows ?? []).map(row => {
+    const level = row.education_level === "jss" || row.education_level === "sss" ? row.education_level : "jss";
+    const questionCount = row.production_subject_id ? questionCountsBySubjectId[row.production_subject_id] ?? 0 : 0;
+    const availability = getAvailabilityState({
+      production_subject_id: row.production_subject_id,
+      availability_status: row.availability_status,
+      questionCount,
+    });
+
+    return {
+      id: row.production_subject_id ?? row.catalogue_key,
+      name: row.display_name,
+      group: `${educationLevelLabels[level]} • ${catalogueGroupLabels[row.subject_field ?? row.category ?? ""] ?? "Catalogue subject"}`,
+      hasQuestions: availability.isAvailable,
+      questionCount,
+      educationLevel: level,
+      category: catalogueGroupLabels[row.subject_field ?? row.category ?? ""] ?? "Catalogue subject",
+      catalogueKey: row.catalogue_key,
+      availabilityStatus: row.availability_status ?? "not_ready",
+      isAvailable: availability.isAvailable,
+      availabilityLabel: availability.label,
+    };
+  });
 
   return (
     <main className="page">
