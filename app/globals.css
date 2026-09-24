@@ -2737,7 +2737,10 @@ button:hover:not(:disabled),
   color: var(--text-primary);
   text-align: left;
   cursor: pointer;
-  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
 }
 .exam-subject-card:hover:not(:disabled) {
   transform: translateY(-1px);
