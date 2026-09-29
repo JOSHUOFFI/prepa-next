@@ -29,6 +29,7 @@ export interface Subject {
   group: string;
   hasQuestions: boolean;
   questionCount: number;
+  eligibleQuestionCount?: number;
   educationLevel?: "jss" | "sss";
   category?: string;
   catalogueKey?: string;

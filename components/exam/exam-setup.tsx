@@ -177,26 +177,28 @@ export function ExamSetup({
                       {category.items.map(subject => {
                         const subjectKey = getSubjectKey(subject);
                         const selected = selectedSubjectKey === subjectKey;
-                        const availabilityLabel = subject.availabilityLabel ?? (subject.isAvailable ? "Available" : "Coming soon");
-                        const questionSummary = subject.questionCount > 0
-                          ? `${subject.questionCount} question${subject.questionCount === 1 ? "" : "s"} available`
+                        const eligibleQuestionCount = subject.eligibleQuestionCount ?? subject.questionCount ?? 0;
+                        const isAvailable = eligibleQuestionCount > 0;
+                        const availabilityLabel = subject.availabilityLabel ?? (isAvailable ? "Available" : "Coming soon");
+                        const questionSummary = eligibleQuestionCount > 0
+                          ? `${eligibleQuestionCount} question${eligibleQuestionCount === 1 ? "" : "s"} available`
                           : "No questions available";
 
                         return (
                           <button
                             key={subjectKey}
                             type="button"
-                            className={`exam-subject-card ${selected ? "is-selected" : ""} ${subject.isAvailable ? "is-available" : "is-disabled"}`}
-                            disabled={loading || !subject.isAvailable}
+                            className={`exam-subject-card ${selected ? "is-selected" : ""} ${isAvailable ? "is-available" : "is-disabled"}`}
+                            disabled={loading || !isAvailable}
                             aria-pressed={selected}
                             onClick={() => setSelectedSubjectKey(subjectKey)}
                           >
                             <span className="exam-subject-name">{subject.name}</span>
                             <span className="exam-subject-meta">
                               {subject.category ?? "Catalogue subject"}
-                              {subject.questionCount > 0 ? ` • ${questionSummary}` : ""}
+                              {eligibleQuestionCount > 0 ? ` • ${questionSummary}` : ""}
                             </span>
-                            <span className={`exam-subject-status ${subject.isAvailable ? "status-available" : "status-disabled"}`}>
+                            <span className={`exam-subject-status ${isAvailable ? "status-available" : "status-disabled"}`}>
                               {availabilityLabel}
                             </span>
                           </button>
@@ -213,12 +215,12 @@ export function ExamSetup({
       <div className="exam-setup-footer">
         <p>
           {selectedSubject
-            ? selectedSubject.questionCount > 0
-              ? `${selectedSubject.name} selected. ${selectedSubject.questionCount} question${selectedSubject.questionCount === 1 ? "" : "s"} available.`
+            ? (selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0) > 0
+              ? `${selectedSubject.name} selected. ${(selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0)} question${(selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0) === 1 ? "" : "s"} available.`
               : `${selectedSubject.name} selected. No questions available.`
             : "Choose a subject to continue."}
         </p>
-        <button className="btn btn-primary" onClick={startExam} disabled={loading || !selectedSubject || !selectedSubject.isAvailable}>
+        <button className="btn btn-primary" onClick={startExam} disabled={loading || !selectedSubject || !((selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0) > 0)}>
           {loading ? "Loading questions..." : "Start exam"}
         </button>
       </div>

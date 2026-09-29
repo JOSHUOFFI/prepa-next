@@ -20,7 +20,7 @@ const educationLevelLabels: Record<string, string> = {
   sss: "Senior Secondary",
 };
 
-function getAvailabilityState(subject: { production_subject_id: string | null; availability_status: string | null; questionCount: number }) {
+function getAvailabilityState(subject: { production_subject_id: string | null; questionCount: number }) {
   if (!subject.production_subject_id || subject.questionCount <= 0) {
     return { isAvailable: false, label: "Coming soon" };
   }
@@ -100,7 +100,6 @@ export default async function ExamPage({ searchParams }: { searchParams: Promise
     const questionCount = row.production_subject_id ? questionCountsBySubjectId[row.production_subject_id] ?? 0 : 0;
     const availability = getAvailabilityState({
       production_subject_id: row.production_subject_id,
-      availability_status: row.availability_status,
       questionCount,
     });
 
@@ -110,6 +109,7 @@ export default async function ExamPage({ searchParams }: { searchParams: Promise
       group: `${educationLevelLabels[level]} • ${catalogueGroupLabels[row.subject_field ?? row.category ?? ""] ?? "Catalogue subject"}`,
       hasQuestions: availability.isAvailable,
       questionCount,
+      eligibleQuestionCount: questionCount,
       educationLevel: level,
       category: catalogueGroupLabels[row.subject_field ?? row.category ?? ""] ?? "Catalogue subject",
       catalogueKey: row.catalogue_key,
