@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { loadSafeExamQuestions } from "@/services/supabase-question-repository";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(request: Request) {
   const supabase = await createSupabaseServerClient();
   const {
@@ -28,9 +31,9 @@ export async function GET(request: Request) {
       return NextResponse.json(
         {
           code: "EXAM_UNAVAILABLE",
-          error: "There are no eligible questions for this subject.",
+          error: "This subject needs at least 40 valid eligible questions to start an exam.",
         },
-        { status: 422 },
+        { status: 422, headers: { "Cache-Control": "no-store" } },
       );
     }
     return NextResponse.json(

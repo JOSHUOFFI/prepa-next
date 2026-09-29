@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { examStorage } from "@/services/exam-storage";
 import { safeExamStorage } from "@/services/safe-exam-storage";
 import { legacyExamDurationMinutes } from "@/services/legacy-exam-fallback";
+import { isPlayableExamQuestionCount } from "@/services/exam-readiness";
 import type { SafeExamQuestion, Subject } from "@/types";
 import { ProfileIdentity } from "@/components/profile/profile-identity";
 
@@ -92,7 +93,8 @@ export function ExamSetup({
       return;
     }
 
-    if (!selectedSubject.isAvailable || !selectedSubject.id) {
+    const eligibleQuestionCount = selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0;
+    if (!isPlayableExamQuestionCount(eligibleQuestionCount) || !selectedSubject.id) {
       setError("This subject is not currently available for exam. Please choose another subject.");
       return;
     }
@@ -127,7 +129,7 @@ export function ExamSetup({
       <div className="section-heading">
         <p className="eyebrow">Computer Based Test</p>
         <h1>Start an examination</h1>
-        <p>Choose a subject. Exams use up to 40 randomized questions from the available question pool.</p>
+        <p>Choose a subject. Exams use 40 randomized questions from a validated question pool.</p>
       </div>
 
       {activeExam || safeActiveExam ? (
@@ -178,11 +180,11 @@ export function ExamSetup({
                         const subjectKey = getSubjectKey(subject);
                         const selected = selectedSubjectKey === subjectKey;
                         const eligibleQuestionCount = subject.eligibleQuestionCount ?? subject.questionCount ?? 0;
-                        const isAvailable = eligibleQuestionCount > 0;
-                        const availabilityLabel = subject.availabilityLabel ?? (isAvailable ? "Available" : "Coming soon");
+                        const isAvailable = isPlayableExamQuestionCount(eligibleQuestionCount);
+                        const availabilityLabel = isAvailable ? "Available" : "Coming soon";
                         const questionSummary = eligibleQuestionCount > 0
                           ? `${eligibleQuestionCount} question${eligibleQuestionCount === 1 ? "" : "s"} available`
-                          : "No questions available";
+                          : "Fewer than 40 valid questions";
 
                         return (
                           <button
@@ -215,12 +217,12 @@ export function ExamSetup({
       <div className="exam-setup-footer">
         <p>
           {selectedSubject
-            ? (selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0) > 0
+            ? isPlayableExamQuestionCount(selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0)
               ? `${selectedSubject.name} selected. ${(selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0)} question${(selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0) === 1 ? "" : "s"} available.`
-              : `${selectedSubject.name} selected. No questions available.`
+              : `${selectedSubject.name} selected. ${selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0} valid questions; 40 are required to start.`
             : "Choose a subject to continue."}
         </p>
-        <button className="btn btn-primary" onClick={startExam} disabled={loading || !selectedSubject || !((selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0) > 0)}>
+        <button className="btn btn-primary" onClick={startExam} disabled={loading || !selectedSubject || !isPlayableExamQuestionCount(selectedSubject.eligibleQuestionCount ?? selectedSubject.questionCount ?? 0)}>
           {loading ? "Loading questions..." : "Start exam"}
         </button>
       </div>

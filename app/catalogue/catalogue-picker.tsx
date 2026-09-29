@@ -16,6 +16,8 @@ export type CatalogueSubject = {
     selection_rule: string;
     sort_order: number;
     is_active: boolean;
+    eligibleQuestionCount: number;
+    isExamAvailable: boolean;
 };
 
 const categoryLabels: Record<string, string> = {
@@ -57,7 +59,7 @@ function SubjectCard({
     selected: boolean;
     onSelect: (subjectId: string | null) => void;
 }) {
-    const available = Boolean(subject.production_subject_id);
+    const available = subject.isExamAvailable;
 
     return (
         <button
@@ -77,7 +79,7 @@ function SubjectCard({
             <div className="catalogue-card__body">
                 <p className="catalogue-card__category">{categoryLabels[subject.category] ?? "Subject"}</p>
                 <h3>{subject.display_name}</h3>
-                <p>{available ? "Ready for a subject-only practice exam." : "This subject is being prepared for PrePa."}</p>
+                <p>{available ? `${subject.eligibleQuestionCount} eligible questions for a subject-only practice exam.` : "This subject is being prepared for PrePa."}</p>
             </div>
             <span className={`catalogue-card__action${available ? "" : " catalogue-card__action--muted"}`}>
                 {available ? "Select" : "Coming soon"}

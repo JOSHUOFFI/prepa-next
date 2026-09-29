@@ -1,7 +1,8 @@
 import { ExamSetup } from "@/components/exam/exam-setup";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { isEligibleQuestionOptionSet } from "@/services/supabase-question-repository";
+import { loadExamSubjectReadiness } from "@/services/supabase-question-repository";
+import { isPlayableExamQuestionCount } from "@/services/exam-readiness";
 import type { Subject } from "@/types";
 
 const catalogueGroupLabels: Record<string, string> = {
@@ -20,8 +21,8 @@ const educationLevelLabels: Record<string, string> = {
   sss: "Senior Secondary",
 };
 
-function getAvailabilityState(subject: { production_subject_id: string | null; questionCount: number }) {
-  if (!subject.production_subject_id || subject.questionCount <= 0) {
+function getAvailabilityState(subject: { production_subject_id: string | null; eligibleQuestionCount: number }) {
+  if (!subject.production_subject_id || !isPlayableExamQuestionCount(subject.eligibleQuestionCount)) {
     return { isAvailable: false, label: "Coming soon" };
   }
 
@@ -29,6 +30,8 @@ function getAvailabilityState(subject: { production_subject_id: string | null; q
 }
 
 export const metadata = { title: "Exam setup" };
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function ExamPage({ searchParams }: { searchParams: Promise<{ subjectId?: string }> }) {
   const supabase = await createSupabaseServerClient();
@@ -56,51 +59,17 @@ export default async function ExamPage({ searchParams }: { searchParams: Promise
     .map(row => row.production_subject_id)
     .filter((id): id is string => Boolean(id));
 
-  const questionCountsBySubjectId: Record<string, number> = {};
-
-  if (mappedSubjectIds.length > 0) {
-    const { data: questionRows, error: questionCountError } = await supabase
-      .from("questions")
-      .select("id, subject_id")
-      .in("subject_id", mappedSubjectIds)
-      .eq("is_active", true);
-
-    if (questionCountError) {
-      console.error("Exam subject question count load failed", questionCountError);
-    } else {
-      const questionIds = (questionRows ?? []).map(row => row.id);
-      if (questionIds.length > 0) {
-        const { data: optionRows, error: optionError } = await supabase
-          .from("question_options")
-          .select("question_id, option_text, is_correct")
-          .in("question_id", questionIds);
-
-        if (optionError) {
-          console.error("Exam subject option validation failed", optionError);
-        } else {
-          const optionsByQuestionId = new Map<string, Array<{ option_text?: string | null; is_correct?: boolean | null }>>();
-          for (const option of optionRows ?? []) {
-            const options = optionsByQuestionId.get(option.question_id) ?? [];
-            options.push(option);
-            optionsByQuestionId.set(option.question_id, options);
-          }
-
-          for (const question of questionRows ?? []) {
-            const options = optionsByQuestionId.get(question.id) ?? [];
-            if (!isEligibleQuestionOptionSet(options)) continue;
-            questionCountsBySubjectId[question.subject_id] = (questionCountsBySubjectId[question.subject_id] ?? 0) + 1;
-          }
-        }
-      }
-    }
-  }
+  const readinessBySubjectId = await loadExamSubjectReadiness(mappedSubjectIds);
 
   const subjects: Subject[] = (subjectRows ?? []).map(row => {
     const level = row.education_level === "jss" || row.education_level === "sss" ? row.education_level : "jss";
-    const questionCount = row.production_subject_id ? questionCountsBySubjectId[row.production_subject_id] ?? 0 : 0;
+    const readiness = row.production_subject_id
+      ? readinessBySubjectId.get(row.production_subject_id)
+      : undefined;
+    const questionCount = readiness?.eligibleQuestionCount ?? 0;
     const availability = getAvailabilityState({
       production_subject_id: row.production_subject_id,
-      questionCount,
+      eligibleQuestionCount: questionCount,
     });
 
     return {
@@ -110,6 +79,7 @@ export default async function ExamPage({ searchParams }: { searchParams: Promise
       hasQuestions: availability.isAvailable,
       questionCount,
       eligibleQuestionCount: questionCount,
+      activeQuestionCount: readiness?.activeQuestionCount ?? 0,
       educationLevel: level,
       category: catalogueGroupLabels[row.subject_field ?? row.category ?? ""] ?? "Catalogue subject",
       catalogueKey: row.catalogue_key,

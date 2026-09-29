@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { isValidPlayableExamQuestionSet } from "@/services/supabase-question-repository";
 import type { SafeExamQuestion } from "@/types";
 
 const EXAM_DURATION_MINUTES = 30;
@@ -34,8 +35,7 @@ export async function POST(request: Request) {
   if (
     (!body.subjectId && !body.subject) ||
     !Array.isArray(body.questions) ||
-    body.questions.length === 0 ||
-    body.questions.length > 40
+    body.questions.length !== 40
   ) {
     return NextResponse.json(
       { error: "Invalid exam attempt." },
@@ -78,6 +78,12 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { error: "Exam question order is invalid." },
       { status: 400 },
+    );
+  }
+  if (!(await isValidPlayableExamQuestionSet(subject.id, questionIds))) {
+    return NextResponse.json(
+      { code: "EXAM_UNAVAILABLE", error: "The subject no longer has a valid playable question set." },
+      { status: 422 },
     );
   }
   const { data: questionRows, error: questionError } = await admin

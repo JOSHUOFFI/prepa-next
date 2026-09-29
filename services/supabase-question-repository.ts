@@ -1,4 +1,5 @@
 import type { SafeExamQuestion } from "@/types";
+import { isPlayableExamQuestionCount } from "@/services/exam-readiness";
 
 const QUESTION_PAGE_SIZE = 200;
 const OPTION_PAGE_SIZE = 400;
@@ -6,6 +7,7 @@ export const DEFAULT_EXAM_QUESTION_COUNT = 40;
 
 type QuestionRow = {
   id: string;
+  subject_id: string;
   question_text: string;
   points: number | string;
   class_id?: string | null;
@@ -56,6 +58,10 @@ export function isEligibleQuestionOptionSet(
   return correctAnswerCount === 1;
 }
 
+export function normalizeExamQuestionText(questionText: string): string {
+  return questionText.trim().replace(/\s+/g, " ").toLocaleLowerCase();
+}
+
 function shuffle<T>(items: readonly T[]): T[] {
   const shuffled = [...items];
   for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -89,56 +95,30 @@ async function getSubjectId(subject: string, subjectId?: string): Promise<string
 }
 
 async function getQuestionRows(
-  subjectId: string,
-  classLevel?: string,
-  term?: string,
-): Promise<QuestionRow[]> {
+  subjectIds: string[],
+): Promise<{ activeQuestionCounts: Record<string, number>; serveableQuestionRows: QuestionRow[] }> {
+  if (subjectIds.length === 0) return { activeQuestionCounts: {}, serveableQuestionRows: [] };
   const supabase = await getSupabaseAdminClient();
-  let classId: string | null = null;
-  let termId: string | null = null;
-  if (classLevel && term) {
-    const [{ data: classRow }, { data: termRow }] = await Promise.all([
-      supabase
-        .from("classes")
-        .select("id")
-        .eq("name", classLevel)
-        .maybeSingle(),
-      supabase.from("terms").select("id").eq("name", term).maybeSingle(),
-    ]);
-    classId = classRow?.id ?? null;
-    termId = termRow?.id ?? null;
-    if (!classId || !termId) return [];
-  }
-  const questions: QuestionRow[] = [];
+  const activeQuestionCounts: Record<string, number> = {};
+  const serveableQuestionRows: QuestionRow[] = [];
+  for (let from = 0; ; from += QUESTION_PAGE_SIZE) {
+    const { data, error } = await supabase
+      .from("questions")
+      .select("id, subject_id, question_text, points, class_id, term_id")
+      .in("subject_id", subjectIds)
+      .eq("is_active", true)
+      .order("id")
+      .range(from, from + QUESTION_PAGE_SIZE - 1);
 
-  async function loadScope(scoped: boolean): Promise<QuestionRow[]> {
-    const scopedQuestions: QuestionRow[] = [];
-    for (let from = 0; ; from += QUESTION_PAGE_SIZE) {
-      let query = supabase
-        .from("questions")
-        .select("id, question_text, points, class_id, term_id")
-        .eq("subject_id", subjectId)
-        .eq("is_active", true);
-      query = scoped
-        ? query.eq("class_id", classId!).eq("term_id", termId!)
-        : query.is("class_id", null).is("term_id", null);
-      const { data, error } = await query
-        .order("id")
-        .range(from, from + QUESTION_PAGE_SIZE - 1);
-
-      if (error) throw new Error(`Unable to load questions: ${error.message}`);
-      const page = (data ?? []) as QuestionRow[];
-      scopedQuestions.push(...page);
-      if (page.length < QUESTION_PAGE_SIZE) break;
+    if (error) throw new Error(`Unable to load questions: ${error.message}`);
+    const page = (data ?? []) as QuestionRow[];
+    for (const question of page) {
+      activeQuestionCounts[question.subject_id] = (activeQuestionCounts[question.subject_id] ?? 0) + 1;
+      if (question.class_id === null && question.term_id === null) serveableQuestionRows.push(question);
     }
-    return scopedQuestions;
+    if (page.length < QUESTION_PAGE_SIZE) break;
   }
-
-  if (classId && termId) {
-    const scopedQuestions = await loadScope(true);
-    if (scopedQuestions.length > 0) return scopedQuestions;
-  }
-  return loadScope(false);
+  return { activeQuestionCounts, serveableQuestionRows };
 }
 
 async function getOptionRows(questionIds: string[]): Promise<OptionRow[]> {
@@ -147,23 +127,88 @@ async function getOptionRows(questionIds: string[]): Promise<OptionRow[]> {
   const supabase = await getSupabaseAdminClient();
   const options: OptionRow[] = [];
 
-  for (let from = 0; ; from += OPTION_PAGE_SIZE) {
-    const { data, error } = await supabase
-      .from("question_options")
-      .select("id, question_id, option_label, option_text, is_correct")
-      .in("question_id", questionIds)
-      .order("question_id")
-      .order("option_label")
-      .range(from, from + OPTION_PAGE_SIZE - 1);
+  for (let index = 0; index < questionIds.length; index += 100) {
+    const ids = questionIds.slice(index, index + 100);
+    for (let from = 0; ; from += OPTION_PAGE_SIZE) {
+      const { data, error } = await supabase
+        .from("question_options")
+        .select("id, question_id, option_label, option_text, is_correct")
+        .in("question_id", ids)
+        .order("question_id")
+        .order("option_label")
+        .range(from, from + OPTION_PAGE_SIZE - 1);
 
-    if (error)
-      throw new Error(`Unable to load question options: ${error.message}`);
-    const page = (data ?? []) as OptionRow[];
-    options.push(...page);
-    if (page.length < OPTION_PAGE_SIZE) break;
+      if (error)
+        throw new Error(`Unable to load question options: ${error.message}`);
+      const page = (data ?? []) as OptionRow[];
+      options.push(...page);
+      if (page.length < OPTION_PAGE_SIZE) break;
+    }
   }
 
   return options;
+}
+
+async function loadEligibleQuestionInventory(subjectIds: string[]) {
+  const { activeQuestionCounts, serveableQuestionRows } = await getQuestionRows(subjectIds);
+  const optionRows = await getOptionRows(serveableQuestionRows.map(({ id }) => id));
+  const optionsByQuestionId = new Map<string, OptionRow[]>();
+
+  for (const option of optionRows) {
+    const options = optionsByQuestionId.get(option.question_id) ?? [];
+    options.push(option);
+    optionsByQuestionId.set(option.question_id, options);
+  }
+
+  const eligibleQuestionsBySubjectId = new Map<string, Array<{ question: QuestionRow; options: OptionRow[] }>>();
+  const seenQuestionTextsBySubjectId = new Map<string, Set<string>>();
+  for (const question of serveableQuestionRows) {
+    const normalizedText = normalizeExamQuestionText(question.question_text);
+    if (!normalizedText) continue;
+    const options = optionsByQuestionId.get(question.id) ?? [];
+    if (!isEligibleQuestionOptionSet(options)) continue;
+    const seenTexts = seenQuestionTextsBySubjectId.get(question.subject_id) ?? new Set<string>();
+    if (seenTexts.has(normalizedText)) continue;
+    seenTexts.add(normalizedText);
+    seenQuestionTextsBySubjectId.set(question.subject_id, seenTexts);
+    const eligible = eligibleQuestionsBySubjectId.get(question.subject_id) ?? [];
+    eligible.push({ question, options });
+    eligibleQuestionsBySubjectId.set(question.subject_id, eligible);
+  }
+  return { activeQuestionCounts, eligibleQuestionsBySubjectId };
+}
+
+export async function loadExamSubjectReadiness(subjectIds: string[]) {
+  const readiness = new Map<string, { activeQuestionCount: number; eligibleQuestionCount: number }>();
+  for (const subjectId of subjectIds) readiness.set(subjectId, { activeQuestionCount: 0, eligibleQuestionCount: 0 });
+  if (subjectIds.length === 0) return readiness;
+
+  const supabase = await getSupabaseAdminClient();
+  const { data, error } = await supabase
+    .from("subjects")
+    .select("id")
+    .in("id", subjectIds)
+    .eq("is_active", true);
+  if (error) throw new Error(`Unable to validate exam subjects: ${error.message}`);
+
+  const activeSubjectIds = (data ?? []).map((subject) => subject.id);
+  const inventory = await loadEligibleQuestionInventory(activeSubjectIds);
+  for (const subjectId of activeSubjectIds) {
+    readiness.set(subjectId, {
+      activeQuestionCount: inventory.activeQuestionCounts[subjectId] ?? 0,
+      eligibleQuestionCount: inventory.eligibleQuestionsBySubjectId.get(subjectId)?.length ?? 0,
+    });
+  }
+  return readiness;
+}
+
+export async function isValidPlayableExamQuestionSet(subjectId: string, questionIds: string[]) {
+  if (questionIds.length !== DEFAULT_EXAM_QUESTION_COUNT || new Set(questionIds).size !== questionIds.length) return false;
+  const inventory = await loadEligibleQuestionInventory([subjectId]);
+  const eligibleQuestions = inventory.eligibleQuestionsBySubjectId.get(subjectId) ?? [];
+  if (!isPlayableExamQuestionCount(eligibleQuestions.length)) return false;
+  const eligibleIds = new Set(eligibleQuestions.map(({ question }) => question.id));
+  return questionIds.every((questionId) => eligibleIds.has(questionId));
 }
 
 /**
@@ -173,42 +218,20 @@ async function getOptionRows(questionIds: string[]): Promise<OptionRow[]> {
 export async function loadSafeExamQuestions({
   subject,
   subjectId,
-  classLevel,
-  term,
-  questionCount = DEFAULT_EXAM_QUESTION_COUNT,
 }: SafeExamQuestionRequest): Promise<SafeExamQuestion[]> {
   const resolvedSubjectId = await getSubjectId(subject, subjectId);
   if (!resolvedSubjectId) return [];
 
-  const questionRows = await getQuestionRows(resolvedSubjectId, classLevel, term);
-  const optionRows = await getOptionRows(questionRows.map(({ id }) => id));
-  const optionsByQuestionId = new Map<string, OptionRow[]>();
+  const inventory = await loadEligibleQuestionInventory([resolvedSubjectId]);
+  const eligibleQuestions = inventory.eligibleQuestionsBySubjectId.get(resolvedSubjectId) ?? [];
+  if (!isPlayableExamQuestionCount(eligibleQuestions.length)) return [];
 
-  for (const option of optionRows) {
-    const options = optionsByQuestionId.get(option.question_id) ?? [];
-    options.push(option);
-    optionsByQuestionId.set(option.question_id, options);
-  }
-
-  const eligibleQuestions = shuffle(
-    questionRows.filter((question) => {
-      const options = optionsByQuestionId.get(question.id) ?? [];
-      return isEligibleQuestionOptionSet(options);
-    }),
-  );
-
-  if (eligibleQuestions.length === 0) return [];
-
-  const requestedCount = calculateExamQuestionLimit(
-    Number.isFinite(questionCount) ? Number(questionCount) : eligibleQuestions.length,
-  );
-  const selectedQuestions = eligibleQuestions.slice(0, requestedCount);
-
-  return selectedQuestions.map((question) => ({
+  const selectedQuestions = shuffle(eligibleQuestions).slice(0, DEFAULT_EXAM_QUESTION_COUNT);
+  return selectedQuestions.map(({ question, options }) => ({
     id: question.id,
     text: question.question_text,
     points: toPoints(question.points),
-    options: shuffle(optionsByQuestionId.get(question.id) ?? []).map((option) => ({
+    options: shuffle(options).map((option) => ({
       id: option.id,
       label: option.option_label,
       text: option.option_text,

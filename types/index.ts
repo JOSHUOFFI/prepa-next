@@ -30,6 +30,7 @@ export interface Subject {
   hasQuestions: boolean;
   questionCount: number;
   eligibleQuestionCount?: number;
+  activeQuestionCount?: number;
   educationLevel?: "jss" | "sss";
   category?: string;
   catalogueKey?: string;

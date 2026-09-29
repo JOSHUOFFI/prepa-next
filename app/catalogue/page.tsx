@@ -1,6 +1,11 @@
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { CataloguePicker, type CatalogueSubject } from "./catalogue-picker";
+import { loadExamSubjectReadiness } from "@/services/supabase-question-repository";
+import { isPlayableExamQuestionCount } from "@/services/exam-readiness";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function CataloguePage() {
   const supabase = await createSupabaseServerClient();
@@ -28,8 +33,20 @@ export default async function CataloguePage() {
     throw error;
   }
 
-  const subjects = (data ?? []) as CatalogueSubject[];
-  const availableCount = subjects.filter(subject => subject.production_subject_id).length;
+  const catalogueSubjects = (data ?? []) as Omit<CatalogueSubject, "eligibleQuestionCount" | "isExamAvailable">[];
+  const subjectIds = catalogueSubjects.map(subject => subject.production_subject_id).filter((id): id is string => Boolean(id));
+  const readiness = await loadExamSubjectReadiness(subjectIds);
+  const subjects: CatalogueSubject[] = catalogueSubjects.map(subject => {
+    const eligibleQuestionCount = subject.production_subject_id
+      ? readiness.get(subject.production_subject_id)?.eligibleQuestionCount ?? 0
+      : 0;
+    return {
+      ...subject,
+      eligibleQuestionCount,
+      isExamAvailable: isPlayableExamQuestionCount(eligibleQuestionCount),
+    };
+  });
+  const availableCount = subjects.filter(subject => subject.isExamAvailable).length;
 
   return <CataloguePicker subjects={subjects} availableCount={availableCount} />;
 }

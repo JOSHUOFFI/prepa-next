@@ -4,7 +4,9 @@ import {
   DEFAULT_EXAM_QUESTION_COUNT,
   calculateExamQuestionLimit,
   isEligibleQuestionOptionSet,
+  normalizeExamQuestionText,
 } from "./supabase-question-repository";
+import { isPlayableExamQuestionCount, MIN_PLAYABLE_EXAM_QUESTIONS } from "./exam-readiness";
 
 test("malformed questions are never considered eligible", () => {
   const validOptions = [
@@ -34,9 +36,14 @@ test("malformed questions are never considered eligible", () => {
   );
 });
 
-test("subject availability uses the real question pool instead of a hard 40-question gate", () => {
+test("subject availability requires 40 eligible questions and caps exams at 40", () => {
   assert.equal(calculateExamQuestionLimit(0), 0);
   assert.equal(calculateExamQuestionLimit(1), 1);
   assert.equal(calculateExamQuestionLimit(25), 25);
   assert.equal(calculateExamQuestionLimit(80), DEFAULT_EXAM_QUESTION_COUNT);
+  assert.equal(MIN_PLAYABLE_EXAM_QUESTIONS, 40);
+  assert.equal(isPlayableExamQuestionCount(39), false);
+  assert.equal(isPlayableExamQuestionCount(40), true);
+  assert.equal(isPlayableExamQuestionCount(200), true);
+  assert.equal(normalizeExamQuestionText("  A   sample question?  "), "a sample question?");
 });
