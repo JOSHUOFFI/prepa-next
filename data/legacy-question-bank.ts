@@ -1562,55 +1562,65 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "E21",
-      text: "Choose the correctly spelled word:",
-      options: ["Accomodation", "Accommodation", "Acomodation", "Accomodation"],
+      text: "Which spelling correctly completes the phrase 'hotel ___'?",
+      options: [
+        "Accomodation",
+        "Accommodation",
+        "Acomodation",
+        "Accommodatoin",
+      ],
       answer: "Accommodation",
       points: 1,
-      questionText: "Choose the correctly spelled word:",
+      questionText:
+        "Which spelling correctly completes the phrase 'hotel ___'?",
       correctAnswer: "Accommodation",
       explanation:
         'Why "Accommodation" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Accommodation" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Accommodation" is the correct choice.\nWhy the other options are not correct:\n- "Accomodation" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Acomodation" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Accomodation" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
     },
     {
       id: "E22",
-      text: "Identify the correctly spelled word:",
+      text: "Which spelling is correct for the verb meaning 'to get or accept'?",
       options: ["Recieve", "Receive", "Receve", "Reseive"],
       answer: "Receive",
       points: 1,
-      questionText: "Identify the correctly spelled word:",
+      questionText:
+        "Which spelling is correct for the verb meaning 'to get or accept'?",
       correctAnswer: "Receive",
       explanation:
         'Why "Receive" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Receive" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Receive" is the correct choice.\nWhy the other options are not correct:\n- "Recieve" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Receve" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Reseive" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
     },
     {
       id: "E23",
-      text: "Choose the correctly spelled word:",
+      text: "Which spelling correctly completes the sentence: 'The ___ of the error delayed the work'?",
       options: ["Occurrence", "Occurence", "Ocurrence", "Ocurence"],
       answer: "Occurrence",
       points: 1,
-      questionText: "Choose the correctly spelled word:",
+      questionText:
+        "Which spelling correctly completes the sentence: 'The ___ of the error delayed the work'?",
       correctAnswer: "Occurrence",
       explanation:
         'Why "Occurrence" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Occurrence" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Occurrence" is the correct choice.\nWhy the other options are not correct:\n- "Occurence" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Ocurrence" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Ocurence" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
     },
     {
       id: "E24",
-      text: "Identify the correctly spelled word:",
+      text: "Which spelling correctly completes the instruction: 'Keep the two pieces ___'?",
       options: ["Separate", "Seperate", "Saparate", "Seperat"],
       answer: "Separate",
       points: 1,
-      questionText: "Identify the correctly spelled word:",
+      questionText:
+        "Which spelling correctly completes the instruction: 'Keep the two pieces ___'?",
       correctAnswer: "Separate",
       explanation:
         'Why "Separate" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Separate" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Separate" is the correct choice.\nWhy the other options are not correct:\n- "Seperate" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Saparate" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Seperat" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
     },
     {
       id: "E25",
-      text: "Choose the correctly spelled word:",
+      text: "Which spelling is correct for the noun meaning 'communication between groups'?",
       options: ["Liaison", "Liason", "Liaisonn", "Liazon"],
       answer: "Liaison",
       points: 1,
-      questionText: "Choose the correctly spelled word:",
+      questionText:
+        "Which spelling is correct for the noun meaning 'communication between groups'?",
       correctAnswer: "Liaison",
       explanation:
         'Why "Liaison" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Liaison" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Liaison" is the correct choice.\nWhy the other options are not correct:\n- "Liason" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Liaisonn" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Liazon" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
@@ -1649,33 +1659,36 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "E28",
-      text: "Choose the correctly spelled word:",
+      text: "Which spelling names work done to keep equipment in good condition?",
       options: ["Maintenance", "Maintainance", "Maintenence", "Maintennance"],
       answer: "Maintenance",
       points: 1,
-      questionText: "Choose the correctly spelled word:",
+      questionText:
+        "Which spelling names work done to keep equipment in good condition?",
       correctAnswer: "Maintenance",
       explanation:
         'Why "Maintenance" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Maintenance" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Maintenance" is the correct choice.\nWhy the other options are not correct:\n- "Maintainance" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Maintenence" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Maintennance" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
     },
     {
       id: "E29",
-      text: "Identify the correctly spelled word:",
+      text: "Which spelling names a set of written questions used to collect information?",
       options: ["Questionnaire", "Questionaire", "Questionair", "Questionnair"],
       answer: "Questionnaire",
       points: 1,
-      questionText: "Identify the correctly spelled word:",
+      questionText:
+        "Which spelling names a set of written questions used to collect information?",
       correctAnswer: "Questionnaire",
       explanation:
         'Why "Questionnaire" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Questionnaire" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Questionnaire" is the correct choice.\nWhy the other options are not correct:\n- "Questionaire" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Questionair" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Questionnair" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
     },
     {
       id: "E30",
-      text: "Choose the correctly spelled word:",
-      options: ["Privilege", "Priviledge", "Privilege", "Privelege"],
+      text: "Which spelling correctly completes the sentence: 'The award was a great ___'?",
+      options: ["Privilege", "Priviledge", "Privlege", "Privelege"],
       answer: "Privilege",
       points: 1,
-      questionText: "Choose the correctly spelled word:",
+      questionText:
+        "Which spelling correctly completes the sentence: 'The award was a great ___'?",
       correctAnswer: "Privilege",
       explanation:
         'Why "Privilege" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Privilege" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Privilege" is the correct choice.\nWhy the other options are not correct:\n- "Priviledge" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Privelege" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
@@ -2209,22 +2222,23 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "E71",
-      text: "Choose the correctly spelled word:",
+      text: "Which spelling names the chart that shows the days and months of a year?",
       options: ["Calendar", "Calender", "Calandat", "Calandar"],
       answer: "Calendar",
       points: 1,
-      questionText: "Choose the correctly spelled word:",
+      questionText:
+        "Which spelling names the chart that shows the days and months of a year?",
       correctAnswer: "Calendar",
       explanation:
         'Why "Calendar" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Calendar" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Calendar" is the correct choice.\nWhy the other options are not correct:\n- "Calender" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Calandat" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Calandar" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
     },
     {
       id: "E72",
-      text: "What is the plural of 'Criteria'?",
+      text: "What is the singular form of 'criteria'?",
       options: ["Criterias", "Criterion", "Criterions", "Criteria"],
       answer: "Criterion",
       points: 1,
-      questionText: "What is the plural of 'Criteria'?",
+      questionText: "What is the singular form of 'criteria'?",
       correctAnswer: "Criterion",
       explanation:
         'Why "Criterion" is correct:\n- The answer is correct because it is the option that best fits standard English grammar, vocabulary, or usage in this question.\n- English questions reward careful reading, especially attention to meaning, sentence structure, and accepted expression.\n- When the sentence or word is tested properly, "Criterion" is the only option that fits naturally and correctly.\n- That is why "Criterion" is the correct answer.\nWhy the other options are not correct:\n- "Criterias" is incorrect because it does not fit the grammar, meaning, or standard usage required by the question.\n- "Criterions" is incorrect because it does not fit the grammar, meaning, or standard usage required by the question.\n- "Criteria" is incorrect because it does not fit the grammar, meaning, or standard usage required by the question.',
@@ -2379,11 +2393,12 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "E86",
-      text: "Choose the correctly spelled word:",
+      text: "Which spelling correctly completes the sentence: 'I will ___ remember your help'?",
       options: ["Definitely", "Definately", "Definitly", "Definatly"],
       answer: "Definitely",
       points: 1,
-      questionText: "Choose the correctly spelled word:",
+      questionText:
+        "Which spelling correctly completes the sentence: 'I will ___ remember your help'?",
       correctAnswer: "Definitely",
       explanation:
         'Why "Definitely" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Definitely" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Definitely" is the correct choice.\nWhy the other options are not correct:\n- "Definately" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Definitly" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Definatly" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
@@ -2445,11 +2460,12 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "E92",
-      text: "Identify the correctly spelled word:",
+      text: "Which spelling correctly completes the sentence: 'Please ___ the source of the quotation'?",
       options: ["Acknowledge", "Aknowledge", "Acknowlege", "Acknowleje"],
       answer: "Acknowledge",
       points: 1,
-      questionText: "Identify the correctly spelled word:",
+      questionText:
+        "Which spelling correctly completes the sentence: 'Please ___ the source of the quotation'?",
       correctAnswer: "Acknowledge",
       explanation:
         'Why "Acknowledge" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Acknowledge" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Acknowledge" is the correct choice.\nWhy the other options are not correct:\n- "Aknowledge" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Acknowlege" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Acknowleje" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
@@ -2533,11 +2549,12 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "E100",
-      text: "Choose the correctly spelled word:",
+      text: "Which spelling names the surroundings in which people, plants and animals live?",
       options: ["Environment", "Enviroment", "Envirenment", "Envirunment"],
       answer: "Environment",
       points: 1,
-      questionText: "Choose the correctly spelled word:",
+      questionText:
+        "Which spelling names the surroundings in which people, plants and animals live?",
       correctAnswer: "Environment",
       explanation:
         'Why "Environment" is correct:\n- This is a spelling question. The correct answer is the one that follows standard English spelling exactly.\n- "Environment" is correct because its letters are arranged in the proper order without omission, substitution, or repetition.\n- Spelling questions test accuracy, so even one wrong letter makes an option incorrect.\n- That is why "Environment" is the correct choice.\nWhy the other options are not correct:\n- "Enviroment" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Envirenment" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.\n- "Envirunment" is incorrect because it contains a spelling mistake such as a missing letter, wrong letter, or incorrect arrangement of letters.',
@@ -6835,11 +6852,12 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "B6",
-      text: "Which of the following is absent in an animal cell?",
+      text: "Which structure is generally absent from a typical animal cell?",
       options: ["Nucleus", "Cell wall", "Cytoplasm", "Mitochondria"],
       answer: "Cell wall",
       points: 1,
-      questionText: "Which of the following is absent in an animal cell?",
+      questionText:
+        "Which structure is generally absent from a typical animal cell?",
       correctAnswer: "Cell wall",
       explanation:
         'Why "Cell wall" is correct:\n- Plant cells have a rigid cell wall made of cellulose, hemicellulose, and pectin outside their cell membrane that provides structural support and maintains shape. Animal cells lack this rigid outer layer—they have only a thin, flexible cell membrane. This fundamental difference reflects the different needs of plants and animals: plants are rooted in place and need structural rigidity to resist gravity and wind, while animals move freely and benefit from flexible cell boundaries. The absent cell wall makes animal cells more adaptable to shape changes needed for movement, amoeboid motion, and phagocytosis. Animal cells are also more prone to osmotic lysis if placed in hypotonic solutions because the lack of rigidity means the cell can swell until it bursts.\nWhy the other options are not correct:\n- "Nucleus" is wrong because animal cells have a nucleus; this membrane-bound organelle containing DNA is present in all animal cells and is essential for gene regulation.\n- "Cytoplasm" is wrong because animal cells have cytoplasm; this gel-like substance fills the cell and supports organelles, and is present in all living cells.\n- "Mitochondria" is wrong because animal cells have mitochondria; these energy-producing organelles are essential for ATP synthesis in animal cells.',
@@ -6948,11 +6966,11 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "B16",
-      text: "The end product of carbohydrate digestion is:",
+      text: "The main product of complete starch digestion is:",
       options: ["Amino acids", "Glucose", "Fatty acids", "Glycerol"],
       answer: "Glucose",
       points: 1,
-      questionText: "The end product of carbohydrate digestion is:",
+      questionText: "The main product of complete starch digestion is:",
       correctAnswer: "Glucose",
       explanation:
         'Why "Glucose" is correct:\n- Glucose is the monosaccharide end product of carbohydrate digestion to which all dietary polysaccharides (starch, cellulose) and disaccharides (sucrose, maltose, lactose) must ultimately be reduced. Carbohydrate digestion begins in the oral cavity with salivary amylase cleaving starch into maltose, continues in the small intestine with pancreatic amylase further hydrolyzing polysaccharides, and is completed by brush border enzymes (maltase, isomaltase, sucrase, lactase) releasing glucose monomers from disaccharides. Glucose monomers are absorbed through the intestinal epithelium via active transport (SGLT1 symporter) and facilitated diffusion (GLUT2), becoming immediately available for cellular uptake and glycolysis initiation. This enzymatic concentration on glucose across all carbohydrate sources reflects its universal role as the primary monosaccharide fuel for nearly all cell types\' oxidative metabolism and ATP generation.\nWhy the other options are not correct:\n- "Amino acids" are incorrect because amino acids are the end products of protein digestion through sequential action of pepsin, trypsin, and various exopeptidases; amino acids do not result from carbohydrate breakdown.\n- "Fatty acids" are incorrect because fatty acids result from triglyceride digestion through pancreatic lipase hydrolysis of ester bonds, producing glycerol and fatty acids; they are products of lipid digestion, not carbohydrate digestion.\n- "Glycerol" is incorrect because glycerol is the small molecule backbone of triglycerides produced during lipid digestion alongside fatty acids; glycerol does not result from carbohydrate digestion processes.',
@@ -7031,11 +7049,12 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "B23",
-      text: "The universal blood donor group is:",
+      text: "Ignoring Rh factor, which ABO blood group is the universal red-cell donor?",
       options: ["Group A", "Group B", "Group AB", "Group O"],
       answer: "Group O",
       points: 1,
-      questionText: "The universal blood donor group is:",
+      questionText:
+        "Ignoring Rh factor, which ABO blood group is the universal red-cell donor?",
       correctAnswer: "Group O",
       explanation:
         'Why "Group O" is correct:\n- Blood group O represents the ABO blood typing classification for erythrocytes lacking both A and B surface antigens (glycoproteins), making group O cells universally compatible as donor cells for recipients of any blood group (A, B, AB, or O) because recipient antibodies cannot recognize absence of antigens. The ABO blood group system is determined by highly polymorphic genes encoding glycosyltransferases that attach carbohydrate moieties to erythrocyte membranes; group A individuals synthesize the A antigen, group B synthesize the B antigen, group AB synthesize both antigens, and group O synthesize neither antigen on erythrocyte surfaces. In contrast, recipients naturally produce antibodies against non-self blood group antigens through immune exposure (anti-B antibodies in type A individuals, anti-A antibodies in type B individuals, no ABO antibodies in type AB individuals, anti-A and anti-B in type O individuals); group O cells lack both A and B antigens, preventing antibody recognition and hemolytic transfusion reactions. Group O is described as the universal donor because group O blood can be safely transfused to recipients of any ABO type; group AB+ is conversely the universal recipient, capable of receiving blood from any ABO/Rh type because group AB individuals lack anti-A and anti-B antibodies.\nWhy the other options are not correct:\n- "Group A" is incorrect because group A erythrocytes express the A antigen; recipients of groups B or O produce anti-A antibodies that would cause hemolytic transfusion reactions upon exposure, making group A blood unsuitable for universal donation.\n- "Group B" is incorrect because group B erythrocytes express the B antigen; recipients of groups A or O produce anti-B antibodies that would cause hemolytic transfusion reactions upon exposure, making group B blood unsuitable for universal donation.\n- "Group AB" is incorrect because group AB erythrocytes express both A and B antigens; recipients of groups A, B, or O produce anti-A and/or anti-B antibodies causing hemolytic transfusion reactions, making group AB blood unsuitable for universal donation (AB individuals can only receive AB blood as donors).',
@@ -7109,11 +7128,12 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "B30",
-      text: "The blood group known as universal recipient is:",
+      text: "Ignoring Rh factor, which ABO blood group is the universal red-cell recipient?",
       options: ["Group O", "Group AB", "Group A", "Group B"],
       answer: "Group AB",
       points: 1,
-      questionText: "The blood group known as universal recipient is:",
+      questionText:
+        "Ignoring Rh factor, which ABO blood group is the universal red-cell recipient?",
       correctAnswer: "Group AB",
       explanation:
         'Why "Group AB" is correct:\n- Blood group AB individuals possess erythrocytes expressing both A and B surface antigens (glycoproteins), enabling their immune system to recognize both A and B antigen-positive blood as "self," making AB individuals capable of receiving blood from any ABO blood type (universal recipients). AB individuals have naturally occurring in their sera no anti-A or anti-B antibodies because they do not recognize A or B antigens as foreign; antibodies against A and B surface antigens develop only in individuals whose native red blood cells lack those antigens (A individuals make anti-B, B individuals make anti-A, O individuals make both anti-A and anti-B). When transfused with blood from donors of different ABO types, AB recipients experience no hemolytic transfusion reactions or antibody-mediated erythrocyte destruction because recipient sera contain no antibodies attacking the donor erythrocyte antigens. However, AB individuals can only donate to other AB recipients (making AB- the rarest blood type in most populations), since recipients of blood groups A, B, and O all produce antibodies that would attack AB donor erythrocytes; the bidirectional incompatibility means compatibility flows in only one direction for AB donors (only to other AB recipients).\nWhy the other options are not correct:\n- "Group O" is incorrect because Group O individuals are universal donors (not recipients); group O erythrocytes lack both A and B antigens so group O blood can be safely transfused to recipients of any ABO type, but group O recipients can only receive group O blood (producing both anti-A and anti-B antibodies attacking non-group-O blood).\n- "Group A" is incorrect because Group A recipients can receive only group A or group O blood; group A recipients produce anti-B antibodies that attack group B or group AB erythrocytes, limiting acceptable donor blood types.\n- "Group B" is incorrect because Group B recipients can receive only group B or group O blood; group B recipients produce anti-A antibodies that attack group A or group AB erythrocytes, limiting acceptable donor blood types to exclude AB blood.',
@@ -7713,11 +7733,12 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "B82",
-      text: "The male gamete in plants is the:",
+      text: "The structure that carries the male gametes in a flowering plant is the:",
       options: ["Pollen grain", "Ovule", "Anther", "Stigma"],
       answer: "Pollen grain",
       points: 1,
-      questionText: "The male gamete in plants is the:",
+      questionText:
+        "The structure that carries the male gametes in a flowering plant is the:",
       correctAnswer: "Pollen grain",
       explanation:
         'Why "Pollen grain" is correct:\n- Pollen grains are the male gametes in flowering plants, produced in the anthers and containing the sperm cells needed for fertilization.\n- Each pollen grain develops from a microspore and contains two sperm nuclei that will fertilize the egg cell and central cell in the ovule.\n- Pollen grains are adapted for dispersal by wind, water, or animals, with protective outer walls that allow them to survive harsh conditions.\n- The transfer of pollen to the stigma initiates pollination, the first step in sexual reproduction in plants.\nWhy the other options are not correct:\n- "Ovule" is wrong because it is the female reproductive structure containing the egg cell, not the male gamete.\n- "Anther" is wrong because it is the part of the stamen that produces pollen grains, not the gamete itself.\n- "Stigma" is wrong because it is the receptive surface on the pistil that receives pollen, not the male gamete.',
@@ -8021,11 +8042,11 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "B109",
-      text: "The primary source of energy for all life on earth is:",
+      text: "The primary energy source for most ecosystems is the:",
       options: ["Water", "Sun", "Soil", "Air"],
       answer: "Sun",
       points: 1,
-      questionText: "The primary source of energy for all life on earth is:",
+      questionText: "The primary energy source for most ecosystems is the:",
       correctAnswer: "Sun",
       explanation:
         'Why "Sun" is correct:\n- The answer is correct because it matches the biological structure, process, function, or classification being tested.\n- Biology questions are easier when students connect each term to what it does in a living organism.\n- When the idea in the question is understood correctly, the right option is "Sun".\n- That is why "Sun" is the correct answer.\nWhy the other options are not correct:\n- "Water" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.\n- "Soil" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.\n- "Air" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.',
@@ -8060,11 +8081,12 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "B112",
-      text: "The relationship between a cow and the cattle egret is:",
+      text: "When cattle egrets catch insects disturbed by grazing cattle and the cattle are unaffected, the relationship is:",
       options: ["Mutualism", "Commensalism", "Parasitism", "Competition"],
       answer: "Commensalism",
       points: 1,
-      questionText: "The relationship between a cow and the cattle egret is:",
+      questionText:
+        "When cattle egrets catch insects disturbed by grazing cattle and the cattle are unaffected, the relationship is:",
       correctAnswer: "Commensalism",
       explanation:
         'Why "Commensalism" is correct:\n- The answer is correct because it matches the biological structure, process, function, or classification being tested.\n- Biology questions are easier when students connect each term to what it does in a living organism.\n- When the idea in the question is understood correctly, the right option is "Commensalism".\n- That is why "Commensalism" is the correct answer.\nWhy the other options are not correct:\n- "Mutualism" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.\n- "Parasitism" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.\n- "Competition" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.',
@@ -8550,22 +8572,23 @@ export const LEGACY_QUESTIONS_BY_SUBJECT = {
     },
     {
       id: "B155",
-      text: "Which gas do humans exhale during respiration?",
+      text: "Which waste gas produced by cellular respiration do humans exhale?",
       options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Methane"],
       answer: "Carbon dioxide",
       points: 1,
-      questionText: "Which gas do humans exhale during respiration?",
+      questionText:
+        "Which waste gas produced by cellular respiration do humans exhale?",
       correctAnswer: "Carbon dioxide",
       explanation:
         'Why "Carbon dioxide" is correct:\n- The answer is correct because it matches the biological structure, process, function, or classification being tested.\n- Biology questions are easier when students connect each term to what it does in a living organism.\n- When the idea in the question is understood correctly, the right option is "Carbon dioxide".\n- That is why "Carbon dioxide" is the correct answer.\nWhy the other options are not correct:\n- "Oxygen" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.\n- "Nitrogen" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.\n- "Methane" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.',
     },
     {
       id: "B156",
-      text: "The number of teeth in a normal adult human is:",
+      text: "A full set of adult human teeth typically contains:",
       options: ["28", "30", "32", "34"],
       answer: "32",
       points: 1,
-      questionText: "The number of teeth in a normal adult human is:",
+      questionText: "A full set of adult human teeth typically contains:",
       correctAnswer: "32",
       explanation:
         'Why "32" is correct:\n- The answer is correct because it matches the biological structure, process, function, or classification being tested.\n- Biology questions are easier when students connect each term to what it does in a living organism.\n- When the idea in the question is understood correctly, the right option is "32".\n- That is why "32" is the correct answer.\nWhy the other options are not correct:\n- "28" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.\n- "30" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.\n- "34" is incorrect because it refers to a different structure, process, organism, or biological function from the one described.',

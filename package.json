@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "migrate:questions": "tsx scripts/migrate-question-bank.ts"
+    "migrate:questions": "tsx scripts/migrate-question-bank.ts",
+    "seed:biology": "tsx scripts/seed-biology-question-bank.ts",
+    "seed:english": "tsx scripts/seed-english-question-bank.ts",
+    "seed:mathematics": "tsx scripts/seed-mathematics-question-bank.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",
