@@ -1,6 +1,7 @@
 import { ExamSetup } from "@/components/exam/exam-setup";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { isEligibleQuestionOptionSet } from "@/services/supabase-question-repository";
 import type { Subject } from "@/types";
 
 const catalogueGroupLabels: Record<string, string> = {
@@ -20,25 +21,7 @@ const educationLevelLabels: Record<string, string> = {
 };
 
 function getAvailabilityState(subject: { production_subject_id: string | null; availability_status: string | null; questionCount: number }) {
-  if (!subject.production_subject_id) {
-    return { isAvailable: false, label: "Coming soon" };
-  }
-
-  if (subject.questionCount < 40) {
-    return { isAvailable: false, label: "Coming soon" };
-  }
-
-  const status = String(subject.availability_status ?? "").toLowerCase();
-  const unavailableStatuses = [
-    "not_ready",
-    "source_review_required",
-    "scope_decision_required",
-    "mapping_required",
-    "pending",
-    "review_required",
-  ];
-
-  if (unavailableStatuses.includes(status)) {
+  if (!subject.production_subject_id || subject.questionCount <= 0) {
     return { isAvailable: false, label: "Coming soon" };
   }
 
@@ -73,20 +56,41 @@ export default async function ExamPage({ searchParams }: { searchParams: Promise
     .map(row => row.production_subject_id)
     .filter((id): id is string => Boolean(id));
 
-  let questionCountsBySubjectId: Record<string, number> = {};
+  const questionCountsBySubjectId: Record<string, number> = {};
 
   if (mappedSubjectIds.length > 0) {
     const { data: questionRows, error: questionCountError } = await supabase
       .from("questions")
-      .select("subject_id")
+      .select("id, subject_id")
       .in("subject_id", mappedSubjectIds)
       .eq("is_active", true);
 
     if (questionCountError) {
       console.error("Exam subject question count load failed", questionCountError);
     } else {
-      for (const row of questionRows ?? []) {
-        questionCountsBySubjectId[row.subject_id] = (questionCountsBySubjectId[row.subject_id] ?? 0) + 1;
+      const questionIds = (questionRows ?? []).map(row => row.id);
+      if (questionIds.length > 0) {
+        const { data: optionRows, error: optionError } = await supabase
+          .from("question_options")
+          .select("question_id, option_text, is_correct")
+          .in("question_id", questionIds);
+
+        if (optionError) {
+          console.error("Exam subject option validation failed", optionError);
+        } else {
+          const optionsByQuestionId = new Map<string, Array<{ option_text?: string | null; is_correct?: boolean | null }>>();
+          for (const option of optionRows ?? []) {
+            const options = optionsByQuestionId.get(option.question_id) ?? [];
+            options.push(option);
+            optionsByQuestionId.set(option.question_id, options);
+          }
+
+          for (const question of questionRows ?? []) {
+            const options = optionsByQuestionId.get(question.id) ?? [];
+            if (!isEligibleQuestionOptionSet(options)) continue;
+            questionCountsBySubjectId[question.subject_id] = (questionCountsBySubjectId[question.subject_id] ?? 0) + 1;
+          }
+        }
       }
     }
   }

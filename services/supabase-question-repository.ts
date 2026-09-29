@@ -1,6 +1,3 @@
-import "server-only";
-
-import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import type { SafeExamQuestion } from "@/types";
 
 const QUESTION_PAGE_SIZE = 200;
@@ -20,6 +17,7 @@ type OptionRow = {
   question_id: string;
   option_label: string;
   option_text: string;
+  is_correct?: boolean | null;
 };
 
 /** A question shape that is safe to send to an active exam browser. */
@@ -29,9 +27,34 @@ export type SafeExamQuestionRequest = {
   subjectId?: string;
   classLevel?: string;
   term?: string;
-  /** Capped at 40, the current CBT maximum. */
+  /** The final exam size is capped at 40 and limited by the valid pool size. */
   questionCount?: number;
 };
+
+export function calculateExamQuestionLimit(eligibleQuestionCount: number): number {
+  if (!Number.isFinite(eligibleQuestionCount)) return 0;
+  const normalizedCount = Math.max(0, Math.floor(eligibleQuestionCount));
+  return Math.min(normalizedCount, DEFAULT_EXAM_QUESTION_COUNT);
+}
+
+export function isEligibleQuestionOptionSet(
+  options: Array<{ option_text?: string | null; is_correct?: boolean | null }> = [],
+): boolean {
+  if (!Array.isArray(options) || options.length !== 4) return false;
+
+  const usableOptions = options.filter(
+    (option) =>
+      typeof option?.option_text === "string" &&
+      option.option_text.trim().length > 0,
+  );
+  if (usableOptions.length !== 4) return false;
+
+  const correctAnswerCount = usableOptions.filter(
+    (option) => option.is_correct === true,
+  ).length;
+
+  return correctAnswerCount === 1;
+}
 
 function shuffle<T>(items: readonly T[]): T[] {
   const shuffled = [...items];
@@ -50,8 +73,13 @@ function toPoints(value: number | string): number {
   return Number.isFinite(points) ? points : 1;
 }
 
+async function getSupabaseAdminClient() {
+  const { createSupabaseAdminClient } = await import("@/lib/supabase/admin");
+  return createSupabaseAdminClient();
+}
+
 async function getSubjectId(subject: string, subjectId?: string): Promise<string | null> {
-  const supabase = createSupabaseAdminClient();
+  const supabase = await getSupabaseAdminClient();
   let query = supabase.from("subjects").select("id").eq("is_active", true);
   query = subjectId ? query.eq("id", subjectId) : query.eq("name", subject);
   const { data, error } = await query.maybeSingle();
@@ -65,7 +93,7 @@ async function getQuestionRows(
   classLevel?: string,
   term?: string,
 ): Promise<QuestionRow[]> {
-  const supabase = createSupabaseAdminClient();
+  const supabase = await getSupabaseAdminClient();
   let classId: string | null = null;
   let termId: string | null = null;
   if (classLevel && term) {
@@ -116,13 +144,13 @@ async function getQuestionRows(
 async function getOptionRows(questionIds: string[]): Promise<OptionRow[]> {
   if (questionIds.length === 0) return [];
 
-  const supabase = createSupabaseAdminClient();
+  const supabase = await getSupabaseAdminClient();
   const options: OptionRow[] = [];
 
   for (let from = 0; ; from += OPTION_PAGE_SIZE) {
     const { data, error } = await supabase
       .from("question_options")
-      .select("id, question_id, option_label, option_text")
+      .select("id, question_id, option_label, option_text, is_correct")
       .in("question_id", questionIds)
       .order("question_id")
       .order("option_label")
@@ -152,14 +180,7 @@ export async function loadSafeExamQuestions({
   const resolvedSubjectId = await getSubjectId(subject, subjectId);
   if (!resolvedSubjectId) return [];
 
-  const normalizedCount = Number.isFinite(questionCount)
-    ? Math.floor(questionCount)
-    : DEFAULT_EXAM_QUESTION_COUNT;
-  const requestedCount = Math.min(
-    Math.max(normalizedCount, 0),
-    DEFAULT_EXAM_QUESTION_COUNT,
-  );
-  const questionRows = await getQuestionRows(resolvedSubjectId);
+  const questionRows = await getQuestionRows(resolvedSubjectId, classLevel, term);
   const optionRows = await getOptionRows(questionRows.map(({ id }) => id));
   const optionsByQuestionId = new Map<string, OptionRow[]>();
 
@@ -169,22 +190,28 @@ export async function loadSafeExamQuestions({
     optionsByQuestionId.set(option.question_id, options);
   }
 
-  const selectedQuestions = shuffle(
-    questionRows.filter(
-      (question) => (optionsByQuestionId.get(question.id)?.length ?? 0) > 0,
-    ),
-  ).slice(0, requestedCount);
+  const eligibleQuestions = shuffle(
+    questionRows.filter((question) => {
+      const options = optionsByQuestionId.get(question.id) ?? [];
+      return isEligibleQuestionOptionSet(options);
+    }),
+  );
+
+  if (eligibleQuestions.length === 0) return [];
+
+  const requestedCount = calculateExamQuestionLimit(
+    Number.isFinite(questionCount) ? Number(questionCount) : eligibleQuestions.length,
+  );
+  const selectedQuestions = eligibleQuestions.slice(0, requestedCount);
 
   return selectedQuestions.map((question) => ({
     id: question.id,
     text: question.question_text,
     points: toPoints(question.points),
-    options: shuffle(optionsByQuestionId.get(question.id) ?? []).map(
-      (option) => ({
-        id: option.id,
-        label: option.option_label,
-        text: option.option_text,
-      }),
-    ),
+    options: shuffle(optionsByQuestionId.get(question.id) ?? []).map((option) => ({
+      id: option.id,
+      label: option.option_label,
+      text: option.option_text,
+    })),
   }));
 }

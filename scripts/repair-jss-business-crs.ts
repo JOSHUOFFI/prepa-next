@@ -159,7 +159,8 @@ async function repairSubject(
 
     const options = Array.isArray(record.options)
       ? record.options.filter(
-          (option) => typeof option === "string" && option.trim().length > 0,
+          (option: unknown) =>
+            typeof option === "string" && option.trim().length > 0,
         )
       : [];
     if (options.length === 0) continue;

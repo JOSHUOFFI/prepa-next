@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import {
-  DEFAULT_EXAM_QUESTION_COUNT,
-  loadSafeExamQuestions,
-} from "@/services/supabase-question-repository";
+import { loadSafeExamQuestions } from "@/services/supabase-question-repository";
 
 export async function GET(request: Request) {
   const supabase = await createSupabaseServerClient();
@@ -32,15 +29,6 @@ export async function GET(request: Request) {
         {
           code: "EXAM_UNAVAILABLE",
           error: "There are no eligible questions for this subject.",
-        },
-        { status: 422 },
-      );
-    }
-    if (questions.length < DEFAULT_EXAM_QUESTION_COUNT) {
-      return NextResponse.json(
-        {
-          code: "EXAM_INSUFFICIENT_QUESTIONS",
-          error: `There are only ${questions.length} eligible questions; ${DEFAULT_EXAM_QUESTION_COUNT} are required.`,
         },
         { status: 422 },
       );

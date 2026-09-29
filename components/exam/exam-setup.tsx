@@ -107,14 +107,9 @@ export function ExamSetup({
         setLoading(false);
         return;
       }
-      if (response.status === 422 && payload.code === "EXAM_INSUFFICIENT_QUESTIONS") {
-        setError("There are not enough questions currently available for this subject. Please try another subject.");
-        setLoading(false);
-        return;
-      }
       if (!response.ok) throw new Error("Safe question route failed");
       if (!payload.questions?.length) throw new Error("No safe question pool");
-      const questions = payload.questions.slice(0, 40);
+      const questions = payload.questions.slice(0, Math.min(40, payload.questions.length));
       const configuration = { firstName, lastName, subjectId: selectedSubject.id, subject: selectedSubject.name, durationMinutes: legacyExamDurationMinutes };
       const remoteAttempt = await safeExamStorage.createRemoteAttempt(configuration, questions);
       safeExamStorage.createExam(configuration, questions, remoteAttempt.attemptId, remoteAttempt.startedAt, remoteAttempt.expiresAt);
@@ -132,7 +127,7 @@ export function ExamSetup({
       <div className="section-heading">
         <p className="eyebrow">Computer Based Test</p>
         <h1>Start an examination</h1>
-        <p>Choose a subject. The exam uses a randomized 40-question subject pool.</p>
+        <p>Choose a subject. Exams use up to 40 randomized questions from the available question pool.</p>
       </div>
 
       {activeExam || safeActiveExam ? (
@@ -183,6 +178,9 @@ export function ExamSetup({
                         const subjectKey = getSubjectKey(subject);
                         const selected = selectedSubjectKey === subjectKey;
                         const availabilityLabel = subject.availabilityLabel ?? (subject.isAvailable ? "Available" : "Coming soon");
+                        const questionSummary = subject.questionCount > 0
+                          ? `${subject.questionCount} question${subject.questionCount === 1 ? "" : "s"} available`
+                          : "No questions available";
 
                         return (
                           <button
@@ -194,7 +192,10 @@ export function ExamSetup({
                             onClick={() => setSelectedSubjectKey(subjectKey)}
                           >
                             <span className="exam-subject-name">{subject.name}</span>
-                            <span className="exam-subject-meta">{subject.category ?? "Catalogue subject"}</span>
+                            <span className="exam-subject-meta">
+                              {subject.category ?? "Catalogue subject"}
+                              {subject.questionCount > 0 ? ` • ${questionSummary}` : ""}
+                            </span>
                             <span className={`exam-subject-status ${subject.isAvailable ? "status-available" : "status-disabled"}`}>
                               {availabilityLabel}
                             </span>
@@ -211,7 +212,11 @@ export function ExamSetup({
 
       <div className="exam-setup-footer">
         <p>
-          {selectedSubject ? `${selectedSubject.name} selected.` : "Choose a subject to continue."}
+          {selectedSubject
+            ? selectedSubject.questionCount > 0
+              ? `${selectedSubject.name} selected. ${selectedSubject.questionCount} question${selectedSubject.questionCount === 1 ? "" : "s"} available.`
+              : `${selectedSubject.name} selected. No questions available.`
+            : "Choose a subject to continue."}
         </p>
         <button className="btn btn-primary" onClick={startExam} disabled={loading || !selectedSubject || !selectedSubject.isAvailable}>
           {loading ? "Loading questions..." : "Start exam"}
